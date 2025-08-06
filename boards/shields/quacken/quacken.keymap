@@ -18,10 +18,30 @@
         num_nav {
             display-name = "NumNav";
             bindings = <
-   &none &kp TAB    &kp HOME  &kp UP     &kp END     &kp PG_UP    &none &kp N7 &kp N8 &kp N9 &none  &none
-   &none &kp CAPS   &kp LEFT  &kp DOWN   &kp RIGHT   &kp PG_DN    &none &kp N4 &kp N5 &kp N6 &kp N0 &none
-   &none &kp K_UNDO &kp K_CUT &kp K_COPY &kp K_PASTE &kp K_REDO   &none &kp N1 &kp N2 &kp N3 &none  &none
-                                           &trans &trans &trans   &trans &trans &trans
+   &none &kp TAB    &kp HOME  &kp UP     &kp END     &kp PG_UP    &none  &kp N7 &kp N8 &kp N9 &none  &none
+   &none &kp CAPS   &kp LEFT  &kp DOWN   &kp RIGHT   &kp PG_DN    &none  &kp N4 &kp N5 &kp N6 &kp N0 &none
+   &none &kp K_UNDO &kp K_CUT &kp K_COPY &kp K_PASTE &kp K_REDO   &none  &kp N1 &kp N2 &kp N3 &none  &none
+                              &trans     &trans      &trans       &trans &trans &trans
+            >;
+        };
+
+        num_row {
+            display-name = "NumRow";
+            bindings = <
+   &none &kp EXCL  &kp AT    &kp HASH  &kp DLLR  &kp PRCNT       &kp CARET &kp AMPS  &kp STAR  &kp LPAR  &kp RPAR  &none
+   &none &kp N1    &kp N2    &kp N3    &kp N4    &kp N5          &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &none
+   &none &none     &none     &none     &none     &none           &none     &none     &none     &none     &none     &none
+                             &trans    &trans    &trans          &trans    &trans    &trans
+            >;
+        };
+
+        vim_nav {
+            display-name = "VimNav";
+            bindings = <
+   &none &kp CAPS   &kp C_AC_CLOSE &kp C_PREV &kp C_NEXT  &none       &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &none
+   &none &kp ESC    &kp C_AC_SAVE  &kp TAB    &kp TAB     &none       &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &none
+   &none &kp K_UNDO &kp K_CUT      &kp K_COPY &kp K_PASTE &none       &kp C_AC_ZOOM_IN &kp C_AC_SCROLL_DOWN  &kp C_AC_SCROLL_UP &kp C_AC_ZOOM_OUT &none &none
+                                   &trans     &trans      &trans      &trans   &trans    &trans
             >;
         };
     };

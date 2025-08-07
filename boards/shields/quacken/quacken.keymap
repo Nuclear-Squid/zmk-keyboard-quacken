@@ -1,0 +1,255 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+
+#define MS LSHFT
+#define MA LALT
+#define MC LCTL
+
+&sl { quick-release; };
+&sk { quick-release; };
+
+&caps_word {
+    continue-list = <COMMA FSLH>;
+};
+
+#define LAYER_BASE          0
+#define LAYER_ODK           1
+#define LAYER_ODK_SHIFT     2
+#define LAYER_EXTRA_SYMBOLS 3
+#define LAYER_VIM_NAV       4
+#define LAYER_NUM_ROW       5
+
+
+/ {
+    behaviors {
+        kp_q: key_press_q {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp Q>, <&kp RA(Y)>;
+            mods = <MOD_RALT>;
+        };
+
+        dot: key_press_dot {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp N>, <&kp RA(Q)>;
+            mods = <MOD_RALT>;
+        };
+
+        hrm: home_row_mod {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            require-prior-idle-ms = <125>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+
+        osm: one_shot_modifier {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings = <&macro_param_1to1>, <&macro_tap &sk MACRO_PLACEHOLDER>;
+        };
+
+        osl: one_shot_layer {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings = <&macro_param_1to1>, <&macro_tap &sl MACRO_PLACEHOLDER>;
+        };
+
+        ltsk: layer_tap_sticky_key {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&osm>;
+        };
+
+        // I mean, it wants everything at the same time
+        bls: bisexual_layer_switch {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&osl>;
+        };
+
+        thumb_lh: left_thumb_home {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&ltsk LAYER_VIM_NAV LSHFT>, <&lt LAYER_NUM_ROW SPACE>;
+            mods = <MOD_RALT>;
+            keep-mods = <MOD_RALT>;
+        };
+
+        thumb_lt: left_thumb_tucked {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&hrm LGUI ESCAPE>, <&bls LAYER_NUM_ROW LAYER_NUM_ROW>;
+            mods = <MOD_RALT>;
+        };
+
+        dead_key: dead_key {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&bls LAYER_ODK LAYER_ODK>, <&kp O>;
+            mods = <(MOD_LSFT|MOD_RSFT|MOD_RALT|MOD_LGUI)>;
+            keep-mods = <(MOD_LSFT|MOD_RSFT|MOD_RALT|MOD_LGUI|MOD_LCTL)>;
+        };
+
+        nsodk: no_shift_one_dead_key {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp O>, <&kp O>;
+            mods = <MOD_LSFT>;
+        };
+    };
+
+    macros {
+        odk: one_dead_key {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings
+                = <&macro_tap &nsodk>
+                , <&macro_param_1to1>
+                , <&macro_tap &kp MACRO_PLACEHOLDER>
+                ;
+        };
+
+        sodk: shifted_one_dead_key {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings
+                = <&macro_tap &nsodk>
+                , <&macro_press &kp LSHFT>
+                , <&macro_param_1to1>
+                , <&macro_tap &kp MACRO_PLACEHOLDER>
+                , <&macro_release &kp LSHFT>
+                ;
+        };
+    };
+
+    compos {
+        #define COMBO_TIMEOUT_MS 15
+        #define COMBO_LOCK_MS 150
+
+        compatible= "zmk,combos";
+
+        compose_sd {
+            key-positions = <11 12>;
+            bindings = <&kp NUBS>;
+            timeout-ms = <COMBO_TIMEOUT_MS>;
+            require-prior-idle-ms = <COMBO_LOCK_MS>;
+        };
+
+        enter_df {
+            key-positions = <12 13>;
+            bindings = <&kp ENTER>;
+            timeout-ms = <COMBO_TIMEOUT_MS>;
+            require-prior-idle-ms = <COMBO_LOCK_MS>;
+        };
+
+        escape_kj {
+            key-positions = <16 17>;
+            bindings = <&kp ESCAPE>;
+            timeout-ms = <COMBO_TIMEOUT_MS>;
+            require-prior-idle-ms = <COMBO_LOCK_MS>;
+        };
+
+        delete_word_lk {
+            key-positions = <17 18>;
+            bindings = <&kp LC(BSPC)>;
+            timeout-ms = <COMBO_TIMEOUT_MS>;
+            require-prior-idle-ms = <COMBO_LOCK_MS>;
+        };
+
+        /* _cv { */
+        /*     key-positions = <23 24>; */
+        /*     bindings = <&kp LC(BSPC)>; */
+        /*     timeout-ms = <COMBO_TIMEOUT_MS>; */
+        /*     require-prior-idle-ms = <COMBO_LOCK_MS>; */
+        /* }; */
+
+        caps_word_m_comma {
+            key-positions = <23 24>;
+            /* bindings = <&caps_word>; */
+            bindings = <&kp CAPSLOCK>;
+            timeout-ms = <COMBO_TIMEOUT_MS>;
+            require-prior-idle-ms = <COMBO_LOCK_MS>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            display-name = "Base";
+            bindings = <
+         &kp_q &kp W     &kp E     &kp R     &kp T      &dot &kp U     &kp I     &dead_key &kp P
+         &kp A &hrm MS S &hrm MC D &hrm MA F &kp G      &kp H &hrm MA J &hrm MC K &hrm MS L &kp SEMI
+               &kp X     &kp C     &kp V                &kp M &kp COMMA &kp DOT
+                    &thumb_lt  &thumb_lh           &hrm RALT SPACE &lt LAYER_NUM_ROW BSPC
+            >;
+        };
+
+        super_odk {
+            display-name = "SuperOneDeadKey";
+            bindings = <
+         &odk Q  &odk W  &odk E  &odk R  &kp Z     &odk N  &kp Y      &odk I      &odk O    &odk P
+         &odk A  &odk S  &odk D  &odk F  &kp B     &odk H  &odk J     &odk K      &odk L    &odk SEMI
+                 &odk Z  &odk C  &odk V                    &kp FSLH   &odk COMMA  &odk DOT
+                       &kp LALT  &osl LAYER_ODK_SHIFT       &odk SPACE  &kp RALT
+            >;
+        };
+
+        super_odk_shift {
+            display-name = "SuperOneDeadKeyShifted";
+            bindings = <
+         &sodk Q &sodk W &sodk E &sodk R &kp LS(Z) &sodk N &kp LS(Y)    &sodk I     &sodk O   &sodk P
+         &sodk A &sodk S &sodk D &sodk F &kp LS(B) &sodk H &sodk J      &sodk K     &sodk L   &sodk SEMI
+                 &sodk Z &sodk C &odk B                    &kp LS(FSLH) &sodk COMMA &sodk DOT
+                       &none     &none                     &odk SPACE &kp RALT
+            >;
+        };
+
+        extra_symbols {
+            display-name = "ExtraSymbols";
+            bindings = <
+         &none     &none &none &none     &none    &none &none     &none &none &none
+         &kp RA(Z) &none &none &kp RA(B) &none    &none &kp RA(N) &none &none &kp RA(FSLH)
+                   &none &none &none                    &none     &none &none
+                         &none &none                    &none &none
+            >;
+        };
+
+        vim_nav {
+            display-name = "VimNav";
+            bindings = <
+         &kp LC(A) &kp K_MUTE    &kp K_VOL_UP &kp K_VOL_DN  &kp Z    &kp HOME &kp PG_DN &kp PG_UP  &kp END   &none
+         &kp LC(Z) &hrm MS LC(S) &kp LS(TAB)  &kp TAB       &kp B    &kp LEFT &kp DOWN  &kp UP     &kp RIGHT &none
+                   &kp LC(X)     &kp LC(W)    &kp LC(V)                       &kp FSLH  &odk COMMA &odk DOT
+                                 &kp LALT      &kp LCTL                       &kp ENTER &kp RALT
+            >;
+        };
+
+        num_row {
+            display-name = "NumRow";
+            bindings = <
+         &kp LS(N1) &kp LS(N2) &kp LS(N3)   &kp RA(N) &kp RA(B)   &kp N  &none      &kp LS(RA(I))  &kp O    &kp P
+         &kp N1     &kp N2     &kp N3       &kp N4    &kp N5      &kp N6 &kp N7     &kp N8         &kp N9   &kp N0
+                    &kp RA(Z)  &kp RA(FSLH) &odk V                       &kp FSLH   &kp N          &kp DOT
+                               &kp SPACE    &kp LS(SPACE)                &odk SPACE &kp RALT
+            >;
+        };
+
+    };
+};

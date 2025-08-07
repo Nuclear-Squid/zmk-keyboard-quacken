@@ -6,6 +6,7 @@
 #define MC LCTL
 
 &sl { quick-release; };
+&sk { quick-release; };
 
 / {
     behaviors {
@@ -22,7 +23,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             flavor = "tap-preferred";
-            bindings = <&lt>, <&sk>;
+            bindings = <&mo>, <&sk>;
         };
 
         dead_key: dead_key {
@@ -50,7 +51,7 @@
          &kp Q &kp W     &kp E     &kp R     &kp T      &kp N &kp U     &kp I     &dead_key &kp P
          &kp A &hrm MS S &hrm MC D &hrm MA F &kp G      &kp H &hrm MA J &hrm MC K &hrm MS L &kp SEMI
                &kp X     &kp C     &kp V                &kp M &kp COMMA &kp DOT
-                     &mt LGUI ESC  &ltsk 2 LSHFT        &hrm RALT SPACE &lt 3 BSPC
+                     &mt LGUI ESC  &sk LSHFT        &hrm RALT SPACE &lt 3 BSPC
             >;
         };
 

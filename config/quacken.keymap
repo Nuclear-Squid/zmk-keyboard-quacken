@@ -1,1 +1,62 @@
-../boards/shields/quacken/quacken.keymap
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+
+/ {
+    /* odk: one_dead_key { */
+    /*     compatible = "zmk, */
+    /* }; */
+
+    macros {
+        odk: one_dead_key {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&macro_tap O>, <&macro_tap &kp MACRO_PLACEHOLDER>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            display-name = "Base";
+            bindings = <
+   &kp Z &kp Q &kp W &kp E &kp R &kp T   &kp N &kp U  &kp I     &kp O   &kp P    &kp FSLH
+         &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI
+               &kp X &kp C &kp V               &kp M  &kp COMMA &kp DOT
+               &kp LALT &kp LCTL                  &kp SPACE &kp RALT
+            >;
+        };
+
+        super_odk {
+            display-name = "SuperOneDeadKey";
+            bindings = <
+   &odk Z  &odk Q &odk W &odk E &odk R &odk T   &odk N &kp Y   &odk I     &odk O   &odk P    &odk FSLH
+           &odk A &odk S &odk D &odk F &kp B    &odk H &odk J  &odk K     &odk L   &odk SEMI
+                  &odk X &odk C &odk V                 &odk M  &odk COMMA &odk DOT
+                  &kp LALT &kp LCTL                    &odk SPACE &kp RALT
+            >;
+        };
+
+   /*      odk { */
+   /*          display-name = "OneDeadKey" */
+   /*              bindings = < */
+   /* &kp Z   &kp Q &kp W &kp E &kp R &kp T   &kp N &kp U  &kp I     &kp O   &kp P    &kp FSLH */
+   /*         &kp A &kp S &kp D &kp F &kp B   &kp H &kp J  &kp K     &kp L   &kp SEMI */
+   /*               &kp X &kp C &kp V               &kp M  &kp COMMA &kp DOT */
+   /*               &kp LALT &kp LCTL                  &kp SPACE &kp RALT */
+   /*              >; */
+   /*      }; */
+   /**/
+
+   /*      num_nav { */
+   /*          display-name = "Num-Nav"; */
+   /*          bindings = < */
+   /* &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC */
+   /* &kp LCTRL &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT */
+   /* &kp LSHFT &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC */
+   /*                &kp LALT &kp LCTL &kp LGUI   &mo 1 &kp SPACE &kp RALT */
+   /*          >; */
+   /*      }; */
+
+    };
+};

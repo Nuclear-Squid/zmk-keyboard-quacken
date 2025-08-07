@@ -1,28 +1,88 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
+#define MS LSHFT
+#define MA LALT
+#define MC LCTL
+
+&sl { quick-release; };
+
 / {
+    behaviors {
+        hrm: home_row_mod {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+
+        ltsk: layer_tap_sticky_key {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&lt>, <&sk>;
+        };
+
+        dead_key: dead_key {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&sl 1>, <&kp LS(O)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+    };
+
+    macros {
+        odk: one_dead_key {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&macro_tap &kp O>, <&macro_tap &kp MACRO_PLACEHOLDER>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             display-name = "Base";
             bindings = <
-   &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-   &kp ESC   &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp ENTER
-   &kp LSHFT &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp RSHIFT
-                  &kp LALT &kp LCTL &kp LGUI   &mo 1 &kp SPACE &kp RALT
+         &kp Q &kp W     &kp E     &kp R     &kp T      &kp N &kp U     &kp I     &dead_key &kp P
+         &kp A &hrm MS S &hrm MC D &hrm MA F &kp G      &kp H &hrm MA J &hrm MC K &hrm MS L &kp SEMI
+               &kp X     &kp C     &kp V                &kp M &kp COMMA &kp DOT
+                     &mt LGUI ESC  &ltsk 2 LSHFT        &hrm RALT SPACE &lt 3 BSPC
             >;
         };
 
-        num_nav {
-            display-name = "Num-Nav";
+        super_odk {
+            display-name = "SuperOneDeadKey";
             bindings = <
-   &kp TAB   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-   &kp LCTRL &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-   &kp LSHFT &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC
-                  &kp LALT &kp LCTL &kp LGUI   &mo 1 &kp SPACE &kp RALT
+         &odk Q &odk W &odk E &odk R &kp Z    &odk N &kp Y     &odk I     &odk O   &odk P
+         &odk A &odk S &odk D &odk F &kp B    &odk H &odk J    &odk K     &odk L   &odk SEMI
+                &odk Z &odk C &odk V                 &kp FSLH  &odk COMMA &odk DOT
+                &kp LALT &kp LCTL                    &odk SPACE &kp RALT
             >;
         };
+
+        vim_nav {
+            display-name = "VimNav";
+            bindings = <
+         &kp LC(A) &odk W    &odk E      &odk R  &kp Z    &kp HOME &kp PG_DN &kp PG_UP  &kp END   &none
+         &kp LC(Z) &kp LC(S) &kp LS(TAB) &kp TAB &kp B    &kp LEFT &kp DOWN  &kp UP     &kp RIGHT &none
+                   &kp LC(X) &kp LC(W)   &kp LC(V)                 &kp FSLH  &odk COMMA &odk DOT
+                   &kp LALT  &kp LCTL                    &kp ENTER &kp RALT
+            >;
+        };
+
+        num_row {
+            display-name = "NumRow";
+            bindings = <
+         &kp LS(1) &kp LS(2) &kp LS(3) &kp R &kp T    &kp N &kp Y    &kp I &kp O   &kp P
+         &kp 1     &kp 2     &kp 3     &kp 4 &kp 5    &kp 6 &kp 7    &kp 8 &kp 9   &kp 0
+                   &odk X    &odk C    &odk V               &kp FSLH &kp N &odk DOT
+                &kp LALT &kp LCTL                    &odk SPACE &kp RALT
+            >;
+        };
+
     };
 };

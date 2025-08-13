@@ -8,14 +8,35 @@
 &sl { quick-release; };
 &sk { quick-release; };
 
+&caps_word {
+    continue-list = <COMMA FSLH>;
+};
+
 / {
     behaviors {
         hrm: home_row_mod {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
+        };
+
+        osm: one_shot_modifier {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings = <&macro_param_1to1>, <&macro_tap &sk MACRO_PLACEHOLDER>;
+        };
+
+        osl: one_shot_layer {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings = <&macro_param_1to1>, <&macro_tap &sl MACRO_PLACEHOLDER>;
         };
 
         ltsk: layer_tap_sticky_key {
@@ -23,22 +44,106 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             flavor = "tap-preferred";
-            bindings = <&mo>, <&sk>;
+            bindings = <&mo>, <&osm>;
+        };
+
+        // I mean, it wants everything at the same time
+        bls: bisexual_layer_switch {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <300>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&osl>;
+        };
+
+        left_thumb: left_thumb_home {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&ltsk 3 LSHFT>, <&lt 4 SPACE>;
+            mods = <MOD_RALT>;
+            keep-mods = <MOD_RALT>;
         };
 
         dead_key: dead_key {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&sl 1>, <&kp LS(O)>;
-            mods = <(MOD_LSFT|MOD_RSFT)>;
+            bindings = <&bls 1 1>, <&kp O>;
+            mods = <(MOD_LSFT|MOD_RSFT|MOD_RALT|MOD_LGUI|MOD_LCTL)>;
+            keep-mods = <(MOD_LSFT|MOD_RSFT|MOD_RALT|MOD_LGUI|MOD_LCTL)>;
+        };
+
+        odk: one_dead_key {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&bodk>, <&sodk>;
+            mods = <MOD_LSFT>;
         };
     };
 
     macros {
-        odk: one_dead_key {
+        bodk: base_one_dead_key {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
-            bindings = <&macro_tap &kp O>, <&macro_tap &kp MACRO_PLACEHOLDER>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings
+                = <&macro_tap &kp O>
+                , <&macro_param_1to1>
+                , <&macro_tap &kp MACRO_PLACEHOLDER>
+                ;
+        };
+
+        sodk: shifted_one_dead_key {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings
+                = <&macro_release &kp LSHFT>
+                , <&macro_tap &kp O>
+                , <&macro_press &kp LSHFT>
+                , <&macro_param_1to1>
+                , <&macro_tap &kp MACRO_PLACEHOLDER>
+                , <&macro_release &kp LSHFT>
+                ;
+        };
+    };
+
+    compos {
+        compatible= "zmk,combos";
+        timeout-ms = <15>;
+        require-prior-idle-ms = <125>;
+
+        compose_sd {
+            key-positions = <11 12>;
+            bindings = <&kp NUBS>;
+        };
+
+        enter_df {
+            key-positions = <12 13>;
+            bindings = <&kp ENTER>;
+        };
+
+        escape_kj {
+            key-positions = <16 17>;
+            bindings = <&kp ESCAPE>;
+        };
+
+        delete_word_lk {
+            key-positions = <17 18>;
+            bindings = <&kp LC(BSPC)>;
+        };
+
+        /* _cv { */
+        /*     key-positions = <23 24>; */
+        /*     bindings = <&kp LC(BSPC)>; */
+        /*     timeout-ms = <15>; */
+        /*     require-prior-idle-ms = <125>; */
+        /* }; */
+
+        caps_word_m_comma {
+            key-positions = <23 24>;
+            bindings = <&caps_word>;
         };
     };
 
@@ -51,7 +156,7 @@
          &kp Q &kp W     &kp E     &kp R     &kp T      &kp N &kp U     &kp I     &dead_key &kp P
          &kp A &hrm MS S &hrm MC D &hrm MA F &kp G      &kp H &hrm MA J &hrm MC K &hrm MS L &kp SEMI
                &kp X     &kp C     &kp V                &kp M &kp COMMA &kp DOT
-                     &mt LGUI ESC  &sk LSHFT        &hrm RALT SPACE &lt 3 BSPC
+                    &hrm LGUI ESC  &left_thumb          &hrm RALT SPACE &lt 4 BSPC
             >;
         };
 
@@ -62,6 +167,16 @@
          &odk A &odk S &odk D &odk F &kp B    &odk H &odk J    &odk K     &odk L   &odk SEMI
                 &odk Z &odk C &odk V                 &kp FSLH  &odk COMMA &odk DOT
                 &kp LALT &kp LCTL                    &odk SPACE &kp RALT
+            >;
+        };
+
+        extra_symbols {
+            display-name = "ExtraSymbols";
+            bindings = <
+         &none &none &none &none &none    &none &none &none &none &none
+         &none &none &none &none &none    &none &none &none &none &none
+                &none &none &none                &none &none &none
+                      &none &none                &none &none
             >;
         };
 
@@ -78,10 +193,10 @@
         num_row {
             display-name = "NumRow";
             bindings = <
-         &kp LS(1) &kp LS(2) &kp LS(3) &kp R &kp T    &kp N &kp Y    &kp I &kp O   &kp P
-         &kp 1     &kp 2     &kp 3     &kp 4 &kp 5    &kp 6 &kp 7    &kp 8 &kp 9   &kp 0
-                   &odk X    &odk C    &odk V               &kp FSLH &kp N &odk DOT
-                &kp LALT &kp LCTL                    &odk SPACE &kp RALT
+         &kp LS(N1) &kp LS(N2) &kp LS(N3) &kp R  &kp T     &kp N  &kp Y     &kp I  &kp O    &kp P
+         &kp N1     &kp N2     &kp N3     &kp N4 &kp N5    &kp N6 &kp N7    &kp N8 &kp N9   &kp N0
+                    &odk X     &odk C     &odk V                  &kp FSLH  &kp N  &odk DOT
+                               &kp LALT   &kp LCTL                &odk SPACE &kp RALT
             >;
         };
 

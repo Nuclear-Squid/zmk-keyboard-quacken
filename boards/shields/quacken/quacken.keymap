@@ -72,40 +72,33 @@
             keep-mods = <(MOD_LSFT|MOD_RSFT|MOD_RALT|MOD_LGUI|MOD_LCTL)>;
         };
 
-        odk: one_dead_key {
+        nsodk: no_shift_one_dead_key {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&bodk>, <&sodk>;
+            bindings = <&kp O>, <&kp O>;
             mods = <MOD_LSFT>;
         };
     };
 
     macros {
-        bodk: base_one_dead_key {
+        odk: one_dead_key {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
             tap-ms = <0>;
             wait-ms = <0>;
             bindings
-                = <&macro_tap &kp O>
+                = <&macro_tap &nsodk>
                 , <&macro_param_1to1>
                 , <&macro_tap &kp MACRO_PLACEHOLDER>
                 ;
         };
 
-        sodk: shifted_one_dead_key {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
+        odk_os_shift: odk_one_shot_shift {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
             tap-ms = <0>;
             wait-ms = <0>;
-            bindings
-                = <&macro_release &kp LSHFT>
-                , <&macro_tap &kp O>
-                , <&macro_press &kp LSHFT>
-                , <&macro_param_1to1>
-                , <&macro_tap &kp MACRO_PLACEHOLDER>
-                , <&macro_release &kp LSHFT>
-                ;
+            bindings = <&macro_tap &osm LSHFT>, <&macro_tap &osl 1>;
         };
     };
 
@@ -164,9 +157,9 @@
             display-name = "SuperOneDeadKey";
             bindings = <
          &odk Q &odk W &odk E &odk R &kp Z    &odk N &kp Y     &odk I     &odk O   &odk P
-         &odk A &odk S &odk D &odk F &kp B    &odk H &odk J    &odk K     &odk L   &odk SEMI
+         &odk A &odk S &odk D &odk F &kp B    &odk H &odk J    &odk K     &odk L   &kp LSHFT
                 &odk Z &odk C &odk V                 &kp FSLH  &odk COMMA &odk DOT
-                &kp LALT &kp LCTL                    &odk SPACE &kp RALT
+                &kp LALT &odk_os_shift                  &odk SPACE &kp RALT
             >;
         };
 

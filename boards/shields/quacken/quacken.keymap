@@ -12,8 +12,30 @@
     continue-list = <COMMA FSLH>;
 };
 
+#define LAYER_BASE          0
+#define LAYER_ODK           1
+#define LAYER_ODK_SHIFT     2
+#define LAYER_EXTRA_SYMBOLS 3
+#define LAYER_VIM_NAV       4
+#define LAYER_NUM_ROW       5
+
+
 / {
     behaviors {
+        kp_q: key_press_q {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp Q>, <&kp RA(Y)>;
+            mods = <MOD_RALT>;
+        };
+
+        dot: key_press_dot {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp N>, <&kp RA(Q)>;
+            mods = <MOD_RALT>;
+        };
+
         hrm: home_row_mod {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -56,10 +78,18 @@
             bindings = <&mo>, <&osl>;
         };
 
-        left_thumb: left_thumb_home {
+        thumb_lh: left_thumb_home {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&ltsk 3 LSHFT>, <&lt 4 SPACE>;
+            bindings = <&ltsk LAYER_VIM_NAV LSHFT>, <&lt LAYER_NUM_ROW SPACE>;
+            mods = <MOD_RALT>;
+            keep-mods = <MOD_RALT>;
+        };
+
+        thumb_lt: left_thumb_tucked {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&hrm LGUI ESCAPE>, <&osl LAYER_EXTRA_SYMBOLS>;
             mods = <MOD_RALT>;
             keep-mods = <MOD_RALT>;
         };
@@ -67,7 +97,7 @@
         dead_key: dead_key {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&bls 1 1>, <&kp O>;
+            bindings = <&bls LAYER_ODK LAYER_ODK>, <&kp O>;
             mods = <(MOD_LSFT|MOD_RSFT|MOD_RALT|MOD_LGUI|MOD_LCTL)>;
             keep-mods = <(MOD_LSFT|MOD_RSFT|MOD_RALT|MOD_LGUI|MOD_LCTL)>;
         };
@@ -93,38 +123,50 @@
                 ;
         };
 
-        odk_os_shift: odk_one_shot_shift {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
+        sodk: shifted_one_dead_key {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
             tap-ms = <0>;
             wait-ms = <0>;
-            bindings = <&macro_tap &osm LSHFT>, <&macro_tap &osl 1>;
+            bindings
+                = <&macro_tap &nsodk>
+                , <&macro_press &kp LSHFT>
+                , <&macro_param_1to1>
+                , <&macro_tap &kp MACRO_PLACEHOLDER>
+                , <&macro_release &kp LSHFT>
+                ;
         };
     };
 
     compos {
         compatible= "zmk,combos";
-        timeout-ms = <15>;
-        require-prior-idle-ms = <125>;
 
         compose_sd {
             key-positions = <11 12>;
             bindings = <&kp NUBS>;
+            timeout-ms = <15>;
+            require-prior-idle-ms = <125>;
         };
 
         enter_df {
             key-positions = <12 13>;
             bindings = <&kp ENTER>;
+            timeout-ms = <15>;
+            require-prior-idle-ms = <125>;
         };
 
         escape_kj {
             key-positions = <16 17>;
             bindings = <&kp ESCAPE>;
+            timeout-ms = <15>;
+            require-prior-idle-ms = <125>;
         };
 
         delete_word_lk {
             key-positions = <17 18>;
             bindings = <&kp LC(BSPC)>;
+            timeout-ms = <15>;
+            require-prior-idle-ms = <125>;
         };
 
         /* _cv { */
@@ -137,6 +179,8 @@
         caps_word_m_comma {
             key-positions = <23 24>;
             bindings = <&caps_word>;
+            timeout-ms = <15>;
+            require-prior-idle-ms = <125>;
         };
     };
 
@@ -146,50 +190,60 @@
         default_layer {
             display-name = "Base";
             bindings = <
-         &kp Q &kp W     &kp E     &kp R     &kp T      &kp N &kp U     &kp I     &dead_key &kp P
+         &kp_q &kp W     &kp E     &kp R     &kp T      &dot &kp U     &kp I     &dead_key &kp P
          &kp A &hrm MS S &hrm MC D &hrm MA F &kp G      &kp H &hrm MA J &hrm MC K &hrm MS L &kp SEMI
                &kp X     &kp C     &kp V                &kp M &kp COMMA &kp DOT
-                    &hrm LGUI ESC  &left_thumb          &hrm RALT SPACE &lt 4 BSPC
+                    &thumb_lt  &thumb_lh           &hrm RALT SPACE &lt LAYER_NUM_ROW BSPC
             >;
         };
 
         super_odk {
             display-name = "SuperOneDeadKey";
             bindings = <
-         &odk Q &odk W &odk E &odk R &kp Z    &odk N &kp Y     &odk I     &odk O   &odk P
-         &odk A &odk S &odk D &odk F &kp B    &odk H &odk J    &odk K     &odk L   &kp LSHFT
-                &odk Z &odk C &odk V                 &kp FSLH  &odk COMMA &odk DOT
-                &kp LALT &odk_os_shift                  &odk SPACE &kp RALT
+         &odk Q  &odk W  &odk E  &odk R  &kp Z     &odk N  &kp Y      &odk I      &odk O    &odk P
+         &odk A  &odk S  &odk D  &odk F  &kp B     &odk H  &odk J     &odk K      &odk L    &odk SEMI
+                 &odk Z  &odk C  &odk V                    &kp FSLH   &odk COMMA  &odk DOT
+                       &kp LALT  &osl LAYER_ODK_SHIFT       &odk SPACE  &kp RALT
+            >;
+        };
+
+        super_odk_shift {
+            display-name = "SuperOneDeadKeyShifted";
+            bindings = <
+         &sodk Q &sodk W &sodk E &sodk R &kp LS(Z) &sodk N &kp LS(Y)    &sodk I     &sodk O   &sodk P
+         &sodk A &sodk S &sodk D &sodk F &kp LS(B) &sodk H &sodk J      &sodk K     &sodk L   &sodk SEMI
+                 &sodk Z &sodk C &sodk V                   &kp LS(FSLH) &sodk COMMA &sodk DOT
+                       &none     &none                     &odk SPACE &kp RALT
             >;
         };
 
         extra_symbols {
             display-name = "ExtraSymbols";
             bindings = <
-         &none &none &none &none &none    &none &none &none &none &none
-         &none &none &none &none &none    &none &none &none &none &none
-                &none &none &none                &none &none &none
-                      &none &none                &none &none
+         &none     &none &none &none     &none    &none &none     &none &none &none
+         &kp RA(Z) &none &none &kp RA(B) &none    &none &kp RA(N) &none &none &kp RA(FSLH)
+                   &none &none &none                    &none     &none &none
+                         &none &none                    &none &none
             >;
         };
 
         vim_nav {
             display-name = "VimNav";
             bindings = <
-         &kp LC(A) &odk W    &odk E      &odk R  &kp Z    &kp HOME &kp PG_DN &kp PG_UP  &kp END   &none
-         &kp LC(Z) &kp LC(S) &kp LS(TAB) &kp TAB &kp B    &kp LEFT &kp DOWN  &kp UP     &kp RIGHT &none
-                   &kp LC(X) &kp LC(W)   &kp LC(V)                 &kp FSLH  &odk COMMA &odk DOT
-                   &kp LALT  &kp LCTL                    &kp ENTER &kp RALT
+         &kp LC(A) &odk W        &odk E      &odk R  &kp Z    &kp HOME &kp PG_DN &kp PG_UP  &kp END   &none
+         &kp LC(Z) &hrm MS LC(S) &kp LS(TAB) &kp TAB &kp B    &kp LEFT &kp DOWN  &kp UP     &kp RIGHT &none
+                   &kp LC(X)     &kp LC(W)   &kp LC(V)                 &kp FSLH  &odk COMMA &odk DOT
+                   &kp LALT      &kp LCTL                    &kp ENTER &kp RALT
             >;
         };
 
         num_row {
             display-name = "NumRow";
             bindings = <
-         &kp LS(N1) &kp LS(N2) &kp LS(N3) &kp R  &kp T     &kp N  &kp Y     &kp I  &kp O    &kp P
-         &kp N1     &kp N2     &kp N3     &kp N4 &kp N5    &kp N6 &kp N7    &kp N8 &kp N9   &kp N0
-                    &odk X     &odk C     &odk V                  &kp FSLH  &kp N  &odk DOT
-                               &kp LALT   &kp LCTL                &odk SPACE &kp RALT
+         &kp LS(N1) &kp LS(N2) &kp LS(N3) &kp R  &kp T     &kp N  &kp Y      &kp I  &kp O    &kp P
+         &kp N1     &kp N2     &kp N3     &kp N4 &kp N5    &kp N6 &kp N7     &kp N8 &kp N9   &kp N0
+                    &odk X     &odk C     &odk V                  &kp FSLH   &kp N  &odk DOT
+                               &kp SPACE  &kp LS(SPACE)           &odk SPACE &kp RALT
             >;
         };
 

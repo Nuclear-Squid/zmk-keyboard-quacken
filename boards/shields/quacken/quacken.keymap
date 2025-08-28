@@ -89,7 +89,7 @@
         thumb_lt: left_thumb_tucked {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&hrm LGUI ESCAPE>, <&osl LAYER_EXTRA_SYMBOLS>;
+            bindings = <&hrm LGUI ESCAPE>, <&bls LAYER_NUM_ROW LAYER_NUM_ROW>;
             mods = <MOD_RALT>;
             keep-mods = <MOD_RALT>;
         };
@@ -240,10 +240,10 @@
         num_row {
             display-name = "NumRow";
             bindings = <
-         &kp LS(N1) &kp LS(N2) &kp LS(N3) &kp R  &kp T     &kp N  &kp Y      &kp I  &kp O    &kp P
-         &kp N1     &kp N2     &kp N3     &kp N4 &kp N5    &kp N6 &kp N7     &kp N8 &kp N9   &kp N0
-                    &odk X     &odk C     &odk V                  &kp FSLH   &kp N  &odk DOT
-                               &kp SPACE  &kp LS(SPACE)           &odk SPACE &kp RALT
+         &kp LS(N1) &kp LS(N2) &kp LS(N3)   &kp RA(N) &kp RA(B)   &kp N  &kp Y      &kp LS(RA(I))  &kp O    &kp P
+         &kp N1     &kp N2     &kp N3       &kp N4    &kp N5      &kp N6 &kp N7     &kp N8         &kp N9   &kp N0
+                    &kp RA(Z)  &kp RA(FLSH) &odk V                       &kp FSLH   &kp N          &kp DOT
+                               &kp SPACE    &kp LS(SPACE)                &odk SPACE &kp RALT
             >;
         };
 

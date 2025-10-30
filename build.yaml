@@ -17,5 +17,4 @@
 #     artifact-name: corne_left_with_logging
 #
 include:
-  - board: sparkfun_pro_micro_rp2040
-    shield: quacken
+  - board: quacken_v0

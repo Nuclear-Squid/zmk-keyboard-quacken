@@ -1,0 +1,9 @@
+file_format: "1"
+id: quacken_v0
+name: Quacken V0
+type: board
+arch: arm
+features:
+  - keys
+outputs:
+  - usb

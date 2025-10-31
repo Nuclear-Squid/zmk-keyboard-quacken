@@ -21,7 +21,9 @@
             intelhex
             west
         ]))
+
         ninja
+        dfu-util
       ];
     };
   };

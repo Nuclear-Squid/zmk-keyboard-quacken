@@ -1,3 +1,0 @@
-config BOARD_QUACKEN_V0
-    bool "Quacken V0"
-    depends on SOC_RP2040

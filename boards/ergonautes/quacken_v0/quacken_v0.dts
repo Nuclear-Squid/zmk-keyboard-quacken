@@ -23,7 +23,7 @@
             L(20) L(17) L(14) L(11) L(8) L(5)    R(17) R(14) R(11) R(8) R(5) R(2)
             L(19) L(16) L(13) L(10) L(7) L(4)    R(16) R(13) R(10) R(7) R(4) R(1)
             L(18) L(15) L(12) L( 9) L(6) L(3)    R(15) R(12) R( 9) R(6) R(3) R(0)
-                               L(2) L(1) L(0)    R(20) R(19) R(18)
+                               L(2) L(1) L(0)    R(18) R(19) R(20)
         >;
     };
 
@@ -127,6 +127,20 @@
             ;
     };
 
+    left_encoder: left_encoder {
+        compatible = "alps,ec11";
+        a-gpios = <&rp2040_gpio 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        b-gpios = <&rp2040_gpio 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+        steps = <80>;
+        status = "okay";
+    };
+
+    sensors: sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&left_encoder>;
+        triggers-per-rotation = <20>;
+    };
+
     physical_layout0: physical_layout_0 { // First physical layout, use different naming for other layouts
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
@@ -142,7 +156,15 @@ rp2040_gpio: &gpio0 {
 &pinctrl {
     i2c0_custom: i2c0_custom {
         group1 {
-            pinmux = <I2C0_SDA_P28>, <I2C0_SCL_P29>;
+            pinmux = <I2C0_SCL_P29>, <I2C0_SDA_P28>;
+            input-enable;
+            input-schmitt-enable;
+        };
+    };
+
+    i2c1_custom: i2c1_custom {
+        group1 {
+            pinmux = <I2C1_SCL_P27>, <I2C1_SDA_P26>;
             input-enable;
             input-schmitt-enable;
         };
@@ -155,15 +177,26 @@ rp2040_gpio: &gpio0 {
     pinctrl-0 = <&i2c0_custom>;
     pinctrl-names = "default";
 
-    io_exp_gpio: pcal6524@46 {
+    io_exp_gpio: pcal6524@23 {
         compatible = "nxp,pcal6524";
         status = "okay";
         ngpios = <24>;
         #gpio-cells = <2>;
         gpio-controller;
-        reg = <0x46>;
+        reg = <0x23>;
     };
 };
+
+/* &i2c1 { */
+/*     status = "okay"; */
+/*     clock-frequency = <I2C_BITRATE_STANDARD>; */
+/*     pinctrl-0 = <&i2c1_custom>; */
+/**/
+/*     cirque_left: cirque_left@55 { */
+/*         compatible = "cirque,pinnacle"; */
+/*         reg = <0x55>; */
+/*     }; */
+/* }; */
 
 &timer {
     status = "okay";

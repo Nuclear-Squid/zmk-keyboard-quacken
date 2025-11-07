@@ -5,9 +5,9 @@ manifest:
     # Additional modules containing boards/shields/custom code can be listed here as well
     # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
   projects:
-    - name: zmk
+    - name: petejohanson
       remote: zmkfirmware
-      revision: main
+      revision: core/move-to-zephyr-4-1
       import: app/west.yml
   self:
     path: config

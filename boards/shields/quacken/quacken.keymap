@@ -41,6 +41,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
+            require-prior-idle-ms = <125>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
@@ -97,7 +98,7 @@
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
             bindings = <&bls LAYER_ODK LAYER_ODK>, <&kp O>;
-            mods = <(MOD_LSFT|MOD_RSFT|MOD_RALT|MOD_LGUI|MOD_LCTL)>;
+            mods = <(MOD_LSFT|MOD_RSFT|MOD_RALT|MOD_LGUI)>;
             keep-mods = <(MOD_LSFT|MOD_RSFT|MOD_RALT|MOD_LGUI|MOD_LCTL)>;
         };
 
@@ -138,48 +139,52 @@
     };
 
     compos {
+        #define COMBO_TIMEOUT_MS 15
+        #define COMBO_LOCK_MS 150
+
         compatible= "zmk,combos";
 
         compose_sd {
             key-positions = <11 12>;
             bindings = <&kp NUBS>;
-            timeout-ms = <15>;
-            require-prior-idle-ms = <125>;
+            timeout-ms = <COMBO_TIMEOUT_MS>;
+            require-prior-idle-ms = <COMBO_LOCK_MS>;
         };
 
         enter_df {
             key-positions = <12 13>;
             bindings = <&kp ENTER>;
-            timeout-ms = <15>;
-            require-prior-idle-ms = <125>;
+            timeout-ms = <COMBO_TIMEOUT_MS>;
+            require-prior-idle-ms = <COMBO_LOCK_MS>;
         };
 
         escape_kj {
             key-positions = <16 17>;
             bindings = <&kp ESCAPE>;
-            timeout-ms = <15>;
-            require-prior-idle-ms = <125>;
+            timeout-ms = <COMBO_TIMEOUT_MS>;
+            require-prior-idle-ms = <COMBO_LOCK_MS>;
         };
 
         delete_word_lk {
             key-positions = <17 18>;
             bindings = <&kp LC(BSPC)>;
-            timeout-ms = <15>;
-            require-prior-idle-ms = <125>;
+            timeout-ms = <COMBO_TIMEOUT_MS>;
+            require-prior-idle-ms = <COMBO_LOCK_MS>;
         };
 
         /* _cv { */
         /*     key-positions = <23 24>; */
         /*     bindings = <&kp LC(BSPC)>; */
-        /*     timeout-ms = <15>; */
-        /*     require-prior-idle-ms = <125>; */
+        /*     timeout-ms = <COMBO_TIMEOUT_MS>; */
+        /*     require-prior-idle-ms = <COMBO_LOCK_MS>; */
         /* }; */
 
         caps_word_m_comma {
             key-positions = <23 24>;
-            bindings = <&caps_word>;
-            timeout-ms = <15>;
-            require-prior-idle-ms = <125>;
+            /* bindings = <&caps_word>; */
+            bindings = <&kp CAPSLOCK>;
+            timeout-ms = <COMBO_TIMEOUT_MS>;
+            require-prior-idle-ms = <COMBO_LOCK_MS>;
         };
     };
 
@@ -211,7 +216,7 @@
             bindings = <
          &sodk Q &sodk W &sodk E &sodk R &kp LS(Z) &sodk N &kp LS(Y)    &sodk I     &sodk O   &sodk P
          &sodk A &sodk S &sodk D &sodk F &kp LS(B) &sodk H &sodk J      &sodk K     &sodk L   &sodk SEMI
-                 &sodk Z &sodk C &sodk V                   &kp LS(FSLH) &sodk COMMA &sodk DOT
+                 &sodk Z &sodk C &odk B                    &kp LS(FSLH) &sodk COMMA &sodk DOT
                        &none     &none                     &odk SPACE &kp RALT
             >;
         };
@@ -229,17 +234,17 @@
         vim_nav {
             display-name = "VimNav";
             bindings = <
-         &kp LC(A) &odk W        &odk E      &odk R  &kp Z    &kp HOME &kp PG_DN &kp PG_UP  &kp END   &none
-         &kp LC(Z) &hrm MS LC(S) &kp LS(TAB) &kp TAB &kp B    &kp LEFT &kp DOWN  &kp UP     &kp RIGHT &none
-                   &kp LC(X)     &kp LC(W)   &kp LC(V)                 &kp FSLH  &odk COMMA &odk DOT
-                   &kp LALT      &kp LCTL                    &kp ENTER &kp RALT
+         &kp LC(A) &kp K_MUTE    &kp K_VOL_UP &kp K_VOL_DN  &kp Z    &kp HOME &kp PG_DN &kp PG_UP  &kp END   &none
+         &kp LC(Z) &hrm MS LC(S) &kp LS(TAB)  &kp TAB       &kp B    &kp LEFT &kp DOWN  &kp UP     &kp RIGHT &none
+                   &kp LC(X)     &kp LC(W)    &kp LC(V)                       &kp FSLH  &odk COMMA &odk DOT
+                                 &kp LALT      &kp LCTL                       &kp ENTER &kp RALT
             >;
         };
 
         num_row {
             display-name = "NumRow";
             bindings = <
-         &kp LS(N1) &kp LS(N2) &kp LS(N3)   &kp RA(N) &none       &kp N  &kp RA(B)  &kp LS(RA(I))  &kp O    &kp P
+         &kp LS(N1) &kp LS(N2) &kp LS(N3)   &kp RA(N) &kp RA(B)   &kp N  &none      &kp LS(RA(I))  &kp O    &kp P
          &kp N1     &kp N2     &kp N3       &kp N4    &kp N5      &kp N6 &kp N7     &kp N8         &kp N9   &kp N0
                     &kp RA(Z)  &kp RA(FSLH) &odk V                       &kp FSLH   &kp N          &kp DOT
                                &kp SPACE    &kp LS(SPACE)                &odk SPACE &kp RALT

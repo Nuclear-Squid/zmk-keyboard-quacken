@@ -1,5 +1,6 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include "../../../include/tap-hold-timings.dtsi"
 
 #define MS LSHFT
 #define MA LALT
@@ -19,6 +20,9 @@
 #define LAYER_VIM_NAV       4
 #define LAYER_NUM_ROW       5
 
+#define COMBO_TIMEOUT_MS 30
+#define COMBO_LOCK_MS 150
+
 
 / {
     behaviors {
@@ -36,31 +40,50 @@
             mods = <MOD_RALT>;
         };
 
-        hrm: home_row_mod {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            quick-tap-ms = <200>;
-            require-prior-idle-ms = <125>;
-            flavor = "tap-preferred";
-            bindings = <&kp>, <&kp>;
-        };
+        /* hrm: home_row_mod { */
+        /*     compatible = "zmk,behavior-hold-tap"; */
+        /*     #binding-cells = <2>; */
+        /*     tapping-term-ms = <200>; */
+        /*     quick-tap-ms = <200>; */
+        /*     require-prior-idle-ms = <125>; */
+        /*     flavor = "tap-preferred"; */
+        /*     bindings = <&kp>, <&kp>; */
+        /* }; */
 
-        osm: one_shot_modifier {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            tap-ms = <0>;
-            wait-ms = <0>;
-            bindings = <&macro_param_1to1>, <&macro_tap &sk MACRO_PLACEHOLDER>;
-        };
+        /* hrms: home_row_mod_safe { */
+        /*     compatible = "zmk,behavior-hold-tap"; */
+        /*     #binding-cells = <2>; */
+        /*     tapping-term-ms = <200>; */
+        /*     quick-tap-ms = <200>; */
+        /*     require-prior-idle-ms = <125>; */
+        /*     flavor = "tap-preferred"; */
+        /*     bindings = <&kp>, <&kp>; */
+        /* }; */
 
-        osl: one_shot_layer {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            tap-ms = <0>;
-            wait-ms = <0>;
-            bindings = <&macro_param_1to1>, <&macro_tap &sl MACRO_PLACEHOLDER>;
-        };
+        /* hrmq: home_row_mod_quick { */
+        /*     compatible = "zmk,behavior-hold-tap"; */
+        /*     #binding-cells = <2>; */
+        /*     tapping-term-ms = <150>; */
+        /*     quick-tap-ms = <200>; */
+        /*     flavor = "tap-preferred"; */
+        /*     bindings = <&kp>, <&kp>; */
+        /* }; */
+
+        /* osm: one_shot_modifier { */
+        /*     compatible = "zmk,behavior-macro-one-param"; */
+        /*     #binding-cells = <1>; */
+        /*     tap-ms = <0>; */
+        /*     wait-ms = <0>; */
+        /*     bindings = <&macro_param_1to1>, <&macro_tap &sk MACRO_PLACEHOLDER>; */
+        /* }; */
+
+        /* osl: one_shot_layer { */
+        /*     compatible = "zmk,behavior-macro-one-param"; */
+        /*     #binding-cells = <1>; */
+        /*     tap-ms = <0>; */
+        /*     wait-ms = <0>; */
+        /*     bindings = <&macro_param_1to1>, <&macro_tap &sl MACRO_PLACEHOLDER>; */
+        /* }; */
 
         ltsk: layer_tap_sticky_key {
             compatible = "zmk,behavior-hold-tap";
@@ -82,7 +105,7 @@
         thumb_lh: left_thumb_home {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&ltsk LAYER_VIM_NAV LSHFT>, <&lt LAYER_NUM_ROW SPACE>;
+            bindings = <&ltsk LAYER_VIM_NAV LSHFT>, <&hrlf LAYER_NUM_ROW SPACE>;
             mods = <MOD_RALT>;
             keep-mods = <MOD_RALT>;
         };
@@ -138,10 +161,7 @@
         };
     };
 
-    compos {
-        #define COMBO_TIMEOUT_MS 15
-        #define COMBO_LOCK_MS 150
-
+    combos {
         compatible= "zmk,combos";
 
         compose_sd {
@@ -149,6 +169,7 @@
             bindings = <&kp NUBS>;
             timeout-ms = <COMBO_TIMEOUT_MS>;
             require-prior-idle-ms = <COMBO_LOCK_MS>;
+            layers = <LAYER_BASE>;
         };
 
         enter_df {
@@ -156,6 +177,7 @@
             bindings = <&kp ENTER>;
             timeout-ms = <COMBO_TIMEOUT_MS>;
             require-prior-idle-ms = <COMBO_LOCK_MS>;
+            layers = <LAYER_BASE>;
         };
 
         escape_kj {
@@ -163,6 +185,7 @@
             bindings = <&kp ESCAPE>;
             timeout-ms = <COMBO_TIMEOUT_MS>;
             require-prior-idle-ms = <COMBO_LOCK_MS>;
+            layers = <LAYER_BASE>;
         };
 
         delete_word_lk {
@@ -170,6 +193,7 @@
             bindings = <&kp LC(BSPC)>;
             timeout-ms = <COMBO_TIMEOUT_MS>;
             require-prior-idle-ms = <COMBO_LOCK_MS>;
+            layers = <LAYER_BASE>;
         };
 
         /* _cv { */
@@ -177,6 +201,7 @@
         /*     bindings = <&kp LC(BSPC)>; */
         /*     timeout-ms = <COMBO_TIMEOUT_MS>; */
         /*     require-prior-idle-ms = <COMBO_LOCK_MS>; */
+        /*     layers = <LAYER_BASE>; */
         /* }; */
 
         caps_word_m_comma {
@@ -185,6 +210,7 @@
             bindings = <&kp CAPSLOCK>;
             timeout-ms = <COMBO_TIMEOUT_MS>;
             require-prior-idle-ms = <COMBO_LOCK_MS>;
+            layers = <LAYER_BASE>;
         };
     };
 
@@ -194,10 +220,11 @@
         default_layer {
             display-name = "Base";
             bindings = <
-         &kp_q &kp W     &kp E     &kp R     &kp T      &dot &kp U     &kp I     &dead_key &kp P
-         &kp A &hrm MS S &hrm MC D &hrm MA F &kp G      &kp H &hrm MA J &hrm MC K &hrm MS L &kp SEMI
-               &kp X     &kp C     &kp V                &kp M &kp COMMA &kp DOT
-                    &thumb_lt  &thumb_lh           &hrm RALT SPACE &lt LAYER_NUM_ROW BSPC
+         &kp_q &kp W     &kp E       &kp R       &kp T      &dot  &kp U       &kp I      &dead_key  &kp P
+         /* &kp A &hrm MS S &hrms MC D &hrms MA F &kp G      &kp H &hrms MA J &hrms MC K &hrm MS L &kp SEMI */
+         &kp A &hrm MS S &hrmFd MC D &hrmFd MA F &kp G      &kp H &hrmFd MA J &hrmFd MC K &hrm MS L &kp SEMI
+               &kp X     &kp C       &kp V                  &kp M &kp COMMA   &kp DOT
+                         &thumb_lt  &thumb_lh             &hrmF RALT SPACE &lt LAYER_NUM_ROW BSPC
             >;
         };
 
@@ -235,7 +262,7 @@
             display-name = "VimNav";
             bindings = <
          &kp LC(A) &kp K_MUTE    &kp K_VOL_UP &kp K_VOL_DN  &kp Z    &kp HOME &kp PG_DN &kp PG_UP  &kp END   &none
-         &kp LC(Z) &hrm MS LC(S) &kp LS(TAB)  &kp TAB       &kp B    &kp LEFT &kp DOWN  &kp UP     &kp RIGHT &none
+         &kp LC(Z) &hrm MS LC(S) &kp LS(TAB)  &kp TAB       &tog 6   &kp LEFT &kp DOWN  &kp UP     &kp RIGHT &none
                    &kp LC(X)     &kp LC(W)    &kp LC(V)                       &kp FSLH  &odk COMMA &odk DOT
                                  &kp LALT      &kp LCTL                       &kp ENTER &kp RALT
             >;
@@ -248,6 +275,16 @@
          &kp N1     &kp N2     &kp N3       &kp N4    &kp N5      &kp N6 &kp N7     &kp N8         &kp N9   &kp N0
                     &kp RA(Z)  &kp RA(FSLH) &odk V                       &kp FSLH   &kp N          &kp DOT
                                &kp SPACE    &kp LS(SPACE)                &odk SPACE &kp RALT
+            >;
+        };
+
+        gaming {
+            display-name = "Base";
+            bindings = <
+         &kp_q &kp W &kp E &kp R &kp T      &dot  &kp U &kp I &dead_key &kp P
+         &kp A &kp S &kp D &kp F &kp G      &kp H &kp J &kp K &kp L &kp SEMI
+               &kp X &kp C &kp V                  &kp M &kp COMMA &kp DOT
+                    &thumb_lt  &thumb_lh           &kp SPACE &lt LAYER_NUM_ROW BSPC
             >;
         };
 

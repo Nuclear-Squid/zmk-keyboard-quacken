@@ -1,0 +1,104 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+
+// Timing is key.
+#define HRM // comment this line to disable home-row mods
+#define TAPPING_TERM 300
+#include "timing.h"
+
+// Layout-specific actions and symbols.
+#define CMD RC // PC
+// #define CMD RG // Mac
+
+// This is a sane default for most US layouts:
+#include "actions.h"
+#include "symbols.h"
+
+// Other layouts can adjust accordingly:
+// #include "actions_ergol.h"
+// #include "symbols_ergol.h"
+// #include "actions_azerty.h"
+// #include "symbols_azerty.h"
+
+/ {
+  keymap {
+    compatible = "zmk,keymap";
+
+    // 0. Base layer -- keep the QWERTY key codes to use your OS keyboard layout
+    //               -- the Space Cadet layer-tap on the right can be replaced by an AltGr/Enter mod-tap
+    //               -- adjust the homerow mods with the #define statements above
+    default_layer {
+      display-name = "Base";
+      bindings = <
+        &kp RBKT   &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I     &kp O   &kp P      &kp LBKT
+        &kp TILDE  &kp A  HRM_S  HRM_D  HRM_F  &kp G        &kp H  HRM_J  HRM_K     HRM_L   &kp SEMI   &kp SQT
+        &kp LSHIFT &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH   &kp RSHIFT
+               &bsk LSHIFT LSHIFT  &sc 4 BSPC  &sc 2 ESC    &sc 2 ENTER  &lt 4 SPACE  &bsl 1 1
+      >;
+    };
+
+    // 1. Symbols layer -- with Ergol, basically just an AltGr layer with custom thumb keys
+    //                  -- can be redefined for non-AltGr layouts such as QWERTY-ANSI
+    symbols_layer {
+      display-name = "Symbols";
+      bindings = <
+        &trans  S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &trans
+        &trans  S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &trans
+        &trans  S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &trans
+                             &trans  &kp SPACE  &bsl 2 2      &trans  &kp RALT  &trans
+      >;
+    };
+
+    // 2. NumRow layer -- bring the numbers to the homerow, keep shift+numbers for shortcuts and symbols
+    //                 -- space becomes shift+space, which is a no-break space with some OS layouts (e.g. Ergol)
+    //                 -- best used along with the VimNav layer
+    num_row_layer {
+      display-name = "NumRow";
+      bindings = <
+        &trans  &kp RS(N1) &kp RS(N2) &kp RS(N3) &kp RS(N4) &kp RS(N5)       &kp LS(N6) &kp LS(N7) &kp LS(N8) &kp LS(N9) &kp LS(N0) &trans
+        &trans  &kp N1     &kp N2     &kp N3     &kp N4     &kp N5           &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &trans
+        &trans  &none      &none      &none      &none      &none            S_MINUS    S_COMMA    S_DOT      S_COLON    S_FSLH     &trans
+                                      &trans  &kp RS(SPACE) &trans           &trans  &kp LS(SPACE) &trans
+      >;
+    };
+
+    // 3. NumNav layer -- inverted T arrow cluster on the left hand, numpad on the right hand
+    //                 -- can be the only extra layer you need if you're not too picky with number+symbols n-grams
+    //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergol here)
+    num_nav_layer {
+      display-name = "NumNav";
+      bindings = <
+        &trans  &kp TAB  &kp HOME &kp UP   &kp END   &kp PG_UP    &none    &kp KP_N7 &kp KP_N8 &kp KP_N9  S_FSLH     &trans
+        &trans  &kp CAPS &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN    S_MINUS  &kp KP_N4 &kp KP_N5 &kp KP_N6  &kp KP_N0  &trans
+        &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_SHTAB      S_COMMA  &kp KP_N1 &kp KP_N2 &kp KP_N3  S_DOT      &trans
+                                  &trans   &lt 5 DEL &trans       &trans   &mo 5     &trans
+      >;
+    };
+
+    // 4. VimNav layer -- HJKL arrow cluster on the right hand
+    //                 -- best used along with the NumRow layer
+    //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergol here)
+    vim_nav_layer {
+      display-name = "VimNav";
+      bindings = <
+        &trans  &kp CAPS X_CLOSE  X_PREV   X_NEXT    &none        &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &trans
+        &trans  X_ALL    X_SAVE   X_SHTAB  &kp TAB   &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &trans
+        &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_REDO       &none    &none     &none     &none     &none  &trans
+                                  &trans   &lt 5 DEL &trans       &trans   &mo 5     &trans
+      >;
+    };
+
+    // 5. Function layer -- F1..12 pad on the left hand, HRM on the right hand (with an additional Shift key)
+    //                   -- reset and bootloader reset on difficult thumb keys
+    //                   -- could be completed with other rare keys
+    function_layer {
+      display-name = "Function";
+      bindings = <
+        &trans  &kp F1  &kp F2  &kp F3  &kp F4  &none         &none &kp PAUSE_BREAK &kp PSCRN &kp SYSREQ &none      &trans
+        &trans  &kp F5  &kp F6  &kp F7  &kp F8  &none         &none &kp LALT        &kp RCTL  &kp RGUI   &kp RSHIFT &trans
+        &trans  &kp F9  &kp F10 &kp F11 &kp F12 &none         &none &none           &none     &none      &none      &trans
+                                &trans  &trans  &bootloader   &sys_reset  &trans  &trans
+      >;
+    };
+  };
+};

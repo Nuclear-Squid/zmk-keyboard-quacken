@@ -33,7 +33,7 @@
         &kp RBKT   &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I     &kp O   &kp P      &kp LBKT
         &kp TILDE  &kp A  HRM_S  HRM_D  HRM_F  &kp G        &kp H  HRM_J  HRM_K     HRM_L   &kp SEMI   &kp SQT
         &kp LSHIFT &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH   &kp RSHIFT
-               &bsk LSHIFT LSHIFT  &sc 4 BSPC  &sc 2 ESC    &sc 2 ENTER  &lt 4 SPACE  &bsl 1 1
+               &bsk LSHIFT LSHIFT  &sc 3 BSPC  &sc 2 ESC    &sc 2 ENTER  &lt 3 SPACE  &bsl 1 1
       >;
     };
 

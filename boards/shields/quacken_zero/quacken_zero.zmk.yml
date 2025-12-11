@@ -1,6 +1,6 @@
 file_format: "1"
-id: quacken
-name: Quacken
+id: quacken_zero
+name: Quacken Zreo
 type: shield
 url: https://github.com/Nuclear-Squid/Quacken
 requires: [pro_micro]

@@ -1,0 +1,9 @@
+file_format: "1"
+id: quacken_flex
+name: Quacken Flex
+type: board
+arch: arm
+features:
+  - keys
+outputs:
+  - usb

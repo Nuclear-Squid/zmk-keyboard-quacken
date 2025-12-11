@@ -1,3 +1,3 @@
 # No whitespace after the comma or in your keyboard name!
-config SHIELD_QUACKEN
+config SHIELD_QUACKEN_ZERO
     def_bool $(shields_list_contains,quacken)

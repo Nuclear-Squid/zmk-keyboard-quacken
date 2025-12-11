@@ -1,0 +1,5 @@
+board:
+  name: quacken_flex
+  vendor: ergonautes
+  socs:
+    - name: rp2040

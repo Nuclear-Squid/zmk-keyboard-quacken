@@ -11,12 +11,12 @@
 // #define CMD RG // Mac
 
 // This is a sane default for most US layouts:
-#include "actions.h"
-#include "symbols.h"
+// #include "actions.h"
+// #include "symbols.h"
 
 // Other layouts can adjust accordingly:
-// #include "actions_ergol.h"
-// #include "symbols_ergol.h"
+#include "actions_ergol.h"
+#include "symbols_ergol.h"
 // #include "actions_azerty.h"
 // #include "symbols_azerty.h"
 

@@ -1,7 +1,0 @@
-if BOARD_QUACKEN_V0
-    config ZMK_KEYBOARD_NAME
-        default "Quacken V0"
-
-    config RP2_FLASH_W25Q080
-        default y
-endif

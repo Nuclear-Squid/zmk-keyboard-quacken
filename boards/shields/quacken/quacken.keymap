@@ -131,7 +131,7 @@
             bindings = <&kp O>, <&kp O>;
             mods = <MOD_LSFT>;
         };
-    };
+    }; 
 
     macros {
         odk: one_dead_key {

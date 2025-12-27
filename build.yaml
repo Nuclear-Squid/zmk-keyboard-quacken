@@ -21,7 +21,11 @@
 include:
   - board: quacken_flex
     artifact-name: quacken_flex_hrm
-    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap -DDTS_EXTRA_CPPFLAGS="-DDUAL_KEYS=HOME_ROW_MODS"
+
+  - board: quacken_flex
+    artifact-name: quacken_flex_vim
+    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap -DDTS_EXTRA_CPPFLAGS="-DDUAL_KEYS=HOME_ROW_MODS_VIM"
 
   - board: sparkfun_pro_micro_rp2040
     shield: quacken_zero

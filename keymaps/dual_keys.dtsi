@@ -1,0 +1,108 @@
+#include "timing.dtsi"
+
+// clang-format off
+
+#define NO_DUAL_KEYS      1
+#define LAYER_TAPS        2
+#define HOME_ROW_MODS     3
+#define HOME_ROW_MODS_VIM 4
+
+#ifndef DUAL_KEYS
+  #define DUAL_KEYS HOME_ROW_MODS
+#endif
+
+/**
+ * Home-Row Mods
+ */
+
+#if (DUAL_KEYS == HOME_ROW_MODS) || (DUAL_KEYS == HOME_ROW_MODS_VIM)
+  #define HRM_S &hrm LGUI S
+  #define HRM_D &hrm LCTL D
+  #define HRM_F &hrm LALT F
+  #define HRM_J &hrm LALT J
+  #define HRM_K &hrm RCTL K
+  #define HRM_L &hrm RGUI L
+#else
+  #define HRM_S &kp S
+  #define HRM_D &kp D
+  #define HRM_F &kp F
+  #define HRM_J &kp J
+  #define HRM_K &kp K
+  #define HRM_L &kp L
+#endif
+
+#ifdef HRM_SHIFT
+  #define HRM_A    &hrm LSHIFT A
+  #define HRM_SEMI &hrm RSHIFT SEMI
+#else
+  #define HRM_A    &kp A
+  #define HRM_SEMI &kp SEMI
+#endif
+
+/**
+ * Thumb keys
+ */
+
+#ifdef LEFT_HAND_SPACE
+  #define LEFT_THUMB      &lt NUM_NAV_LAYER SPACE
+  #define RIGHT_THUMB     &magic_backspace
+  #define LEFT_THUMB_VIM  &lt NUM_NAV_LAYER SPACE
+  #define RIGHT_THUMB_VIM &magic_backspace_vim
+#else
+  #define LEFT_THUMB      &magic_backspace
+  #define RIGHT_THUMB     &lt NUM_NAV_LAYER SPACE
+  #define LEFT_THUMB_VIM  &magic_backspace_vim
+  #define RIGHT_THUMB_VIM &lt NUM_NAV_LAYER SPACE
+#endif
+
+#if DUAL_KEYS == NO_DUAL_KEYS
+  #define LEFT_THUMB_TUCK    &kp LALT
+  #define LEFT_THUMB_HOME    &kp LCTL
+  #define LEFT_THUMB_REACH   &kp LGUI
+  #define RIGHT_THUMB_REACH  &mo NUM_NAV_LAYER
+  #define RIGHT_THUMB_HOME   &kp SPACE
+  #define RIGHT_THUMB_TUCK   &mo SYMBOLS_LAYER
+#elif DUAL_KEYS == LAYER_TAPS
+  #error "TODO"
+  /* #define LEFT_THUMB_TUCK    &kp LALT */
+  /* #define LEFT_THUMB_HOME    &kp LCTL */
+  /* #define LEFT_THUMB_REACH   &kp LGUI */
+  /* #define RIGHT_THUMB_REACH  &mo NUM_NAV_LAYER */
+  /* #define RIGHT_THUMB_HOME   &kp SPACE */
+  /* #define RIGHT_THUMB_TUCK   &mo SYMBOLS_LAYER */
+#elif DUAL_KEYS == HOME_ROW_MODS
+  #define LEFT_THUMB_TUCK    &EZ_SK(LSHIFT)
+  #define LEFT_THUMB_HOME    LEFT_THUMB
+  #define LEFT_THUMB_REACH   &kp TAB
+  #define RIGHT_THUMB_REACH  &kp ENTER
+  #define RIGHT_THUMB_HOME   RIGHT_THUMB
+  #define RIGHT_THUMB_TUCK   &EZ_SL(SYMBOLS_LAYER)
+#elif DUAL_KEYS == HOME_ROW_MODS_VIM
+  #define LEFT_THUMB_TUCK    &EZ_SK(LSHIFT)
+  #define LEFT_THUMB_HOME    LEFT_THUMB_VIM
+  #define LEFT_THUMB_REACH   &lt NUM_ROW_LAYER TAB
+  #define RIGHT_THUMB_REACH  &lt NUM_ROW_LAYER ENTER
+  #define RIGHT_THUMB_HOME   RIGHT_THUMB_VIM
+  #define RIGHT_THUMB_TUCK   &EZ_SL(SYMBOLS_LAYER)
+#endif
+
+
+/ {
+  behaviors {
+    magic_backspace: magic_backspace {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&lt NUM_NAV_LAYER BACKSPACE>, <&lt NUM_NAV_LAYER SPACE>;
+      mods = <(MOD_LSFT|MOD_RALT)>;
+      keep-mods = <MOD_LSFT>;
+    };
+
+    magic_backspace_vim: magic_backspace_vim {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&lt VIM_NAV_LAYER BACKSPACE>, <&lt VIM_NAV_LAYER SPACE>;
+      mods = <(MOD_LSFT|MOD_RALT)>;
+      keep-mods = <MOD_LSFT>;
+    };
+  };
+};

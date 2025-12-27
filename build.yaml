@@ -1,22 +1,33 @@
-# This file describes the keymaps that will be built by the GitHub actions CI.
-# Each keymap is an "artefact", whose name goes as follows :
+# This file describes the keymaps that will be built by the GitHub Actions CI.
+# Each keymap is an "artefact", whose name goes as follows:
 #
-# `quacken_[board]_[dual_keys]_[lefty]_[shift]_[layout]`
+#   `quacken_[board]_[dual_keys]_[options]`
 #
-# - board (required): specifies the kind of board the firmware is meant for
+# - [board] (required): specifies the kind of board the firmware is meant for
 #   - flex (integrated rp2040 micro-controller, any version number)
 #   - zero (promicro, you’ll have to update the `board` field to have your actual promicro board)
-# - dual_keys (required): specifies the flavor of tap/hold keys used in the keympap
-#   - ez  (no dual keys, VERY simple config, recommended for anxious users)
-#   - lt  (layer taps on thumb keys, recommended for neophytes)
-#   - hrm (home-row-mods enabled and refactored thumb keys, recommended for intermediate users)
-#   - vim (same as `hrm`, but with separate layers for navigation and numbers, recommended for advanced users)
-# - lefty  (optionnal): if specified, put space on the left thumb instead of the right thumb.
-# - shift  (optionnal): if specified, add shift as a pinky home-row-mod. Usefull for shortcuts, NOT MEANT to type text
-# - layout (optionnal): if specified, change the underlying layout from qwerty to one of:
-#   - azerty
-#   - ergol
-#   - ...probably more in the future
+#
+# - [dual_keys] (required): specifies the flavor of tap/hold keys used in the keympap
+#   - `ez`: no dual keys, VERY simple config
+#     (recommended for absolute beginners)
+#   - `lt`: layer taps on thumb keys
+#     (recommended for beginner/intermediate users)
+#   - `hrm`: homerow-mods enabled and refactored thumb keys
+#     (recommended for intermediate/advanced users)
+#   - `vim`: same as `hrm`, but with two separate layers instead of `NavNum`:
+#     - VimNav: Vim-like navigation layer (e.g. arrows on HJKL)
+#     - NumRow: numbers on the homerow, shift+numbers on the top row
+#     (recommended for advanced users and Vim addicts)
+#
+# - [options] (not required):
+#   - `lefty`: space on the left thumb, backspace on the right thumb
+#     (might increse the workload of the left thumb too much)
+#   - `shift`: add shift as a pinky homerow-mod
+#     (useful for shortcuts, NOT MEANT to type text)
+#   - [layout]: change the underlying layout from qwerty to one of:
+#     - `azerty`
+#     - `ergol`
+#     - ... probably more in the future
 
 include:
   - board: quacken_flex

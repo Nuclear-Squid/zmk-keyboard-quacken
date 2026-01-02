@@ -8,7 +8,11 @@ TODO
 
 ## Build Locally (advanced users)
 
-This requires a local ZMK clone with its Zephyr toolchain:
+### ZMK Toolchain Setup
+
+We need a local ZMK clone with its Zephyr toolchain:
+
+https://zmk.dev/docs/development/local-toolchain/setup/native
 
 ```bash
 # clone ZMK
@@ -22,9 +26,15 @@ source .venv/bin/activate
 west init -l app
 west update
 
-# install dependencies
-uv pip instal zephyr/scripts/requirements-base.txt
+# install dependencies (useless?)
+uv pip install zephyr/scripts/requirements-base.txt
+
+# install Zephyr SDK (optionally in a separate folder)
+cd zephyr
+west sdk install
 ```
+
+### ZMK Firmware Build
 
 Once the ZMK/Zephyr toolchain is set, the firmware is built as follows:
 
@@ -35,6 +45,8 @@ west build -p \
   -S zmk-usb-logging \
   -- -DZMK_EXTRA_MODULES=/home/user/path/to/zmk-keyboard-quacken
 ```
+
+The firmware can be found in `zmk/app/build/zephyr/zmk.uf2`.
 
 Notes:
 

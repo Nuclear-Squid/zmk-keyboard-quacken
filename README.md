@@ -1,5 +1,7 @@
 # Quacken ZMK Module
 
+A Zephyr module to build a ZMK firmware for the Quacken.
+
 ## Build With GitHub (recommended)
 
 TODO
@@ -31,7 +33,10 @@ cd /path/to/zmk/app
 west build -p \
   -b quacken_flex \
   -S zmk-usb-logging \
-  -- -DZMK_EXTRA_MODULES=/path/to/zmk-keyboard-quacken
+  -- -DZMK_EXTRA_MODULES=/home/user/path/to/zmk-keyboard-quacken
 ```
 
-The `-S zmk-usb-logging` argument helps debugging but is not required.
+Notes:
+
+- do NOT use `~` in the path dir, you’d get a `not a valid zephyr module` error
+- the `-S zmk-usb-logging` argument helps debugging but is not required

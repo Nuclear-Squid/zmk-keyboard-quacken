@@ -1,24 +1,52 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-// Timing is key.
-#define HRM // comment this line to disable home-row mods
-#define TAPPING_TERM 300
-#include "timing.h"
 
-// Layout-specific actions and symbols.
+/**
+ * Timing is key.
+ */
+
+#define TAPPING_TERM 300
+#include "timing.dtsi"
+
+
+/**
+ * Uncomment some of the following `#define` to tweak the keymap
+ */
+
+// Home row mods (use at most one)
+// #define DUAL_KEYS NO_DUAL_KEYS
+// #define DUAL_KEYS LAYER_TAPS
+// #define DUAL_KEYS HOME_ROW_MODS  // (default value, if none are specified)
+// #define DUAL_KEYS HOME_ROW_MODS_VIM
+
+// Extra bits of config (maybe a bit debatable)
+// #define HRM_SHIFT  // Enable shift as a pinky HRM. Usefull for shortcuts, NOT MEANT to type text
+// #define LEFT_HAND_SPACE  // Swap space and backspace
+
+// Human readable constants for the layer indexes.
+// Make sure to update this table if you edit the order / amount
+// of layers in the keymap.
+#define BASE_LAYER     0
+#define SYMBOLS_LAYER  1
+#define NUM_ROW_LAYER  2
+#define NUM_NAV_LAYER  3
+#define VIM_NAV_LAYER  4
+#define FUNCTION_LAYER 5
+#define EXTRA_LAYER    6
+
+#include "dual_keys.dtsi"
+
+
+/**
+ * Layout-specific actions and symbols.
+ */
+
 #define CMD RC // PC
 // #define CMD RG // Mac
 
-// This is a sane default for most US layouts:
-// #include "actions.h"
-// #include "symbols.h"
+#include "aliases.h"
 
-// Other layouts can adjust accordingly:
-// #include "actions_ergol.h"
-// #include "symbols_ergol.h"
-#include "actions_azerty.h"
-#include "symbols_azerty.h"
 
 / {
   keymap {
@@ -27,13 +55,13 @@
     // 0. Base layer -- keep the QWERTY key codes to use your OS keyboard layout
     //               -- the Space Cadet layer-tap on the right can be replaced by an AltGr/Enter mod-tap
     //               -- adjust the homerow mods with the #define statements above
-    default_layer {
+    base_layer: base_layer {
       display-name = "Base";
       bindings = <
-        &trans    &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I     &kp O   &kp P      &trans
-        &kp RBKT  &kp A  HRM_S  HRM_D  HRM_F  &kp G        &kp H  HRM_J  HRM_K     HRM_L   &kp SEMI   &kp LBKT
-        &kp TILDE &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH   &osl 6
-              &bsk LSHIFT LSHIFT  &sc 4 BSPC  &sc 2 ESC    &sc 3 ENTER  &lt 4 SPACE  &bsl 1 1
+        &kp TAB    &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I     &kp O   &kp P      &kp BACKSPACE
+        &kp ESCAPE HRM_A  HRM_S  HRM_D  HRM_F  &kp G        &kp H  HRM_J  HRM_K     HRM_L   HRM_SEMI   &kp ENTER
+        &kp LSHIFT &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH   &kp RSHIFT
+        LEFT_THUMB_TUCK  LEFT_THUMB_HOME  LEFT_THUMB_REACH    RIGHT_THUMB_REACH  RIGHT_THUMB_HOME  RIGHT_THUMB_TUCK
       >;
     };
 
@@ -45,7 +73,7 @@
         &trans  S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &trans
         &trans  S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &trans
         &trans  S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &trans
-                             &trans  &kp SPACE  &bsl 2 2      &trans  &kp RALT  &trans
+                &trans  &kp SPACE  &EZ_SL(NUM_ROW_LAYER)     &trans  &kp RALT  &trans
       >;
     };
 
@@ -102,14 +130,14 @@
     };
 
     // 6. Extra layer -- in case your layout requires a few extra keys (behind a dead key?)
-    //                -- here's an example for AZERTY
-    extra_layer {
+    //                -- is often overloaded in alternative keymaps (like AZERTY for example)
+    extra_layer: extra_layer {
       display-name = "Extra";
       bindings = <
-        &trans    &kp N0  &kp N2  &kp N7  &kp RA(E) &trans     &trans  &kp SQT &trans  &trans  &trans       &trans
-        &trans    &kpc Q  &trans  &kpc E  &kp N6  &kp N8       &trans  &kpc U  &kpc I  &kpc O  &trans       &trans
-        &trans    &trans  &trans  &kp N9  &kp N5  &kp MINUS    &trans  &trans  &trans  &trans  &kp LS(FSLH) &kp LS(LBKT)
-                                  &trans  &kp N4  &trans       &trans  &kp N4  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans  &trans  &trans
+                                &trans  &trans  &trans     &trans  &trans  &trans
       >;
     };
   };

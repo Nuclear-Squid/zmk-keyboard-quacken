@@ -1,20 +1,49 @@
-# This file generates the GitHub Actions matrix.
-# For simple board + shield combinations, add them to the top level board and
-# shield arrays, for more control, add individual board + shield combinations
-# to the `include` property. You can also use the `cmake-args` property to
-# pass flags to the build command and `artifact-name` to assign a name to
-# distinguish build outputs from each other:
+# This file describes the keymaps that will be built by the GitHub Actions CI.
+# Each keymap is an "artefact", whose name goes as follows:
 #
-# board: [ "nice_nano_v2" ]
-# shield: [ "corne_left", "corne_right" ]
-# include:
-#   - board: bdn9_rev2
-#   - board: nice_nano_v2
-#     shield: reviung41
-#   - board: nice_nano_v2
-#     shield: corne_left
-#     cmake-args: -DCONFIG_ZMK_USB_LOGGING=y
-#     artifact-name: corne_left_with_logging
+#   `quacken_[variant]_[dual_keys]_[options]`
 #
+# - [variant] (required): specifies the keyboard variant the firmware is meant for
+#   - flex (integrated rp2040 micro-controller, any version number)
+#   - zero (promicro, you’ll have to update the `board` field to have your actual promicro board)
+#
+# - [dual_keys] (required): specifies the flavor of tap/hold keys used in the keympap
+#   - `ez`: no dual keys, VERY simple config
+#     (recommended for absolute beginners)
+#   - `lt`: layer taps on thumb keys
+#     (recommended for beginner/intermediate users)
+#   - `hrm`: homerow-mods enabled and refactored thumb keys
+#     (recommended for intermediate/advanced users)
+#   - `vim`: same as `hrm`, but with two separate layers instead of `NavNum`:
+#     - VimNav: Vim-like navigation layer (e.g. arrows on HJKL)
+#     - NumRow: numbers on the homerow, shift+numbers on the top row
+#     (recommended for advanced users and Vim addicts)
+#
+# - [options] (not required):
+#   - `lefty`: space on the left thumb, backspace on the right thumb
+#     (might increse the workload of the left thumb too much)
+#   - `shift`: add shift as a pinky homerow-mod
+#     (useful for shortcuts, NOT MEANT to type text)
+#   - [layout]: change the underlying layout from qwerty to one of:
+#     - `azerty`
+#     - `ergol`
+#     - ... probably more in the future
+
 include:
   - board: quacken_flex
+    artifact-name: quacken_flex_hrm
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DDUAL_KEYS=HOME_ROW_MODS"
+
+  - board: quacken_flex
+    artifact-name: quacken_flex_vim_shift
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DHRM_SHIFT -DDUAL_KEYS=HOME_ROW_MODS_VIM"
+
+  - board: sparkfun_pro_micro_rp2040
+    shield: quacken_zero
+    artifact-name: quacken_zero_hrm
+    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+

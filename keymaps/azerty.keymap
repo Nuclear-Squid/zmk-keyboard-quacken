@@ -1,0 +1,21 @@
+#include "quacken.keymap"
+
+&base_layer {
+  display-name = "Base";
+  bindings = <
+    &kp TAB    &kp Q  &kp W  &kp E  &kp R  &kp T        &kp Y  &kp U  &kp I     &kp O   &kp P      &kp BACKSPACE
+    &kp ESCAPE HRM_A  HRM_S  HRM_D  HRM_F  &kp G        &kp H  HRM_J  HRM_K     HRM_L   HRM_SEMI   &EZ_SL(EXTRA_LAYER)
+    &kp LSHIFT &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH   &kp RSHIFT
+    LEFT_THUMB_TUCK  LEFT_THUMB_HOME  LEFT_THUMB_REACH    RIGHT_THUMB_REACH  RIGHT_THUMB_HOME  RIGHT_THUMB_TUCK
+  >;
+};
+
+&extra_layer {
+  display-name = "DeadKey";
+  bindings = <
+    &trans    &kp N0  &kp N2  &kp N7  &kp RA(E) &trans     &trans  &kp SQT &trans  &trans  &trans       &trans
+    &trans    &kpc Q  &trans  &kpc E  &kp N6  &kp N8       &trans  &kpc U  &kpc I  &kpc O  &trans       &trans
+    &trans    &trans  &trans  &kp N9  &kp N5  &kp MINUS    &trans  &trans  &trans  &trans  &kp LS(FSLH) &kp LS(LBKT)
+                              &trans  &kp N4  &trans       &trans  &kp N4  &trans
+  >;
+};

@@ -1,9 +1,9 @@
 # This file describes the keymaps that will be built by the GitHub Actions CI.
 # Each keymap is an "artefact", whose name goes as follows:
 #
-#   `quacken_[board]_[dual_keys]_[options]`
+#   `quacken_[variant]_[dual_keys]_[options]`
 #
-# - [board] (required): specifies the kind of board the firmware is meant for
+# - [variant] (required): specifies the keyboard variant the firmware is meant for
 #   - flex (integrated rp2040 micro-controller, any version number)
 #   - zero (promicro, you’ll have to update the `board` field to have your actual promicro board)
 #

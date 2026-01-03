@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+KEEB_VARIANT=$1
+shift
+CPP_FLAGS=$*
+
+# uncomment the following line to enable USB logging
+# USB_LOGGING="-S zmk-usb-logging"
+
+# target: Quacken Flex or Quacken Zero
+TARGET=
+SHIELD=
+case $KEEB_VARIANT in
+flex)
+	TARGET="-b quacken_flex"
+	;;
+zero)
+	TARGET="-b sparkfun_pro_micro_rp2040"
+	SHIELD="-DSHIELD=quacken_zero"
+	;;
+*)
+	echo "Usage:"
+	echo "    $0 {flex,zero}"
+	exit 1
+	;;
+esac
+
+# ensure we have a symlink to a proper ZMK setup
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+if [ ! -d "$SCRIPT_DIR/zmk/app" ]; then
+	echo "Expecting a 'zmk' symlink to your local ZMK/Zephyr setup. Aborting."
+	exit 1
+fi
+
+# build
+cd "$SCRIPT_DIR/zmk/app"
+source ../.venv/bin/activate
+west build -p $TARGET $USB_LOGGING -- $SHIELD \
+	-DZMK_EXTRA_MODULES="$SCRIPT_DIR" \
+	-DKEYMAP_FILE="$SCRIPT_DIR/keymaps/quacken.keymap" \
+	-DDTS_EXTRA_CPPFLAGS="$CPP_FLAGS" && {
+
+	OUTPUT_FILE="zmk_quacken_$KEEB_VARIANT.uf2"
+	mv build/zephyr/zmk.uf2 "$SCRIPT_DIR/$OUTPUT_FILE"
+	echo
+	echo "Successfully generated: $OUTPUT_FILE"
+	echo "\\_o<"
+}

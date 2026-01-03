@@ -45,11 +45,7 @@
 #define CMD RC // PC
 // #define CMD RG // Mac
 
-#ifndef ALIASES_FILE_PATH
-  #include "aliases.h"
-#else
-  #include ALIASES_FILE_PATH
-#endif
+#include "aliases.h"
 
 
 / {

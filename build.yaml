@@ -30,20 +30,30 @@
 #     - ... probably more in the future
 
 include:
+
+    # dummy firmware, just making sure we can build for the RP2040
+  - board: sparkfun_pro_micro_rp2040
+    shield: tester_pro_micro
+    artifact-name: quacken_test
+    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+
+    # Quacken Zero + SparkFun RP2040, default config
+  - board: sparkfun_pro_micro_rp2040
+    shield: quacken_zero
+    artifact-name: quacken_zero_hrm
+    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+
+    # Quacken Flex, default config
   - board: quacken_flex
     artifact-name: quacken_flex_hrm
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
       -DDTS_EXTRA_CPPFLAGS="-DDUAL_KEYS=HOME_ROW_MODS"
 
+    # Quacken Flex, Vim config
   - board: quacken_flex
     artifact-name: quacken_flex_vim_shift
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
       -DDTS_EXTRA_CPPFLAGS="-DHRM_SHIFT -DDUAL_KEYS=HOME_ROW_MODS_VIM"
-
-  - board: sparkfun_pro_micro_rp2040
-    shield: quacken_zero
-    artifact-name: quacken_zero_hrm
-    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
 

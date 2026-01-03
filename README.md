@@ -100,7 +100,6 @@ west build -p \
   -DZMK_EXTRA_MODULES=/home/user/path/to/zmk-keyboard-quacken \
   -DKEYMAP_FILE=/home/user/path/to/zmk-keyboard-quacken/keymaps/quacken.keymap
 ```
-```
 
 The firmware can be found in `zmk/app/build/zephyr/zmk.uf2` and is ready to be [flashed](#flash).
 

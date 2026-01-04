@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+TARGET=$1
+shift
+CPP_FLAGS=$*
+
+# uncomment the following line to enable USB logging
+USB_LOGGING="-S zmk-usb-logging"
+
+# comment out the following line to enable incremental builds
+PRISTINE="-p"
+
+# uncomment the following line to test the HWMv2 branch
+SUFFIX="//zmk"
+
+# target: Quacken Flex or Quacken Zero
+# - Ergogen keebs rely on an MCU board, the keeb itself is just a shield
+# - keebs with an integrated MCU are custom boards and don’t use any shield
+BOARD=
+SHIELD=
+case $TARGET in
+flex)
+	BOARD="-b quacken_flex"
+	;;
+zero)
+	BOARD="-b sparkfun_pro_micro_rp2040$SUFFIX"
+	SHIELD="-DSHIELD=quacken_zero"
+	;;
+test)
+	BOARD="-b sparkfun_pro_micro_rp2040$SUFFIX"
+	SHIELD="-DSHIELD=tester_pro_micro" # 'naked60' would work as well
+	;;
+*)
+	echo "Usage:"
+	echo "    $0 TARGET [optional_C++_flags]"
+	echo "where TARGET can be:"
+	echo "    - flex: Quacken Flex 25.10+ / embedded RP2040"
+	echo "    - zero: Quacken Zero 25.07+ / SparkFun Pro Micro RP2040"
+	echo "    - test: dummy tester shield / SparkFun Pro Micro RP2040"
+	exit 1
+	;;
+esac
+
+# ensure we have a symlink to a proper ZMK setup
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+ZMK_APP_DIR=$SCRIPT_DIR/zmk/app
+if [ ! -d $ZMK_APP_DIR ]; then
+	echo "Expecting a 'zmk' symlink to your local ZMK/Zephyr setup. Aborting."
+	exit 1
+fi
+
+# build
+cd $ZMK_APP_DIR
+source ../.venv/bin/activate
+west build $PRISTINE $USB_LOGGING $BOARD -- $SHIELD \
+	-DZMK_EXTRA_MODULES="$SCRIPT_DIR" \
+	-DKEYMAP_FILE="$SCRIPT_DIR/keymaps/quacken.keymap" \
+	-DDTS_EXTRA_CPPFLAGS="$CPP_FLAGS" && {
+
+	OUTPUT_FILE="zmk_quacken_$TARGET.uf2"
+	mv build/zephyr/zmk.uf2 "$SCRIPT_DIR/$OUTPUT_FILE"
+	echo
+	echo "Successfully generated: $OUTPUT_FILE"
+	echo "                        \\_o<"
+	grep CONFIG_ZMK_USB $ZMK_APP_DIR/build/zephyr/.config
+}

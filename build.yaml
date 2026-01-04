@@ -36,7 +36,7 @@ include:
     cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
 
   - board: sparkfun_pro_micro_rp2040//zmk
-    shield: tester
+    shield: tester_pro_micro
     artifact-name: tester
     cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
 

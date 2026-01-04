@@ -42,9 +42,10 @@ especially for debugging purposes.
 
 ### Setup
 
-We need [a local ZMK clone with its Zephyr toolchain](https://zmk.dev/docs/development/local-toolchain/setup/native).
+We need [a local ZMK clone with its Zephyr toolchain][toolchain].
+This will use about 5GB of disk space.
 
-First [install all Zephyr dependencies]() — for Ubuntu it’d be:
+First [install all Zephyr dependencies][dependencies] — for Ubuntu it’d be:
 
 ```bash
 sudo apt install --no-install-recommends \
@@ -53,26 +54,28 @@ sudo apt install --no-install-recommends \
   xz-utils file make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
 ```
 
-Then proceed with ZMK:
+[toolchain]: https://zmk.dev/docs/development/local-toolchain/setup/native
+[dependencies]: https://docs.zephyrproject.org/latest/develop/getting_started/index.html#install-dependencies
+
+Make sure [uv](https://docs.astral.sh/uv/) is installed,
+then proceed with ZMK:
 
 ```bash
 # clone ZMK
 git clone https://github.com/zmkfirmware/zmk.git
 cd zmk
 
-# activate a venv and install west, this might take a while
+# activate a venv, install west + ZMK dependencies
 uv init
 uv add west
 source .venv/bin/activate
 west init -l app
-west update
+west update  # this installs Zephyr and other ZMK stuff (takes a while)
 
-# install dependencies
-uv pip install -r zephyr/scripts/requirements-base.txt
-
-# install Zephyr SDK (optionally in a separate folder), this takes a while
+# install Zephyr's dependencies and SDK
 cd zephyr
-west sdk install
+uv pip install -r scripts/requirements-base.txt
+west sdk install  # (this takes a while)
 ```
 
 When done, symlink the ZMK folder in the local `zmk-keyboard-quacken` folder,

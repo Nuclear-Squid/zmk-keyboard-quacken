@@ -1,7 +1,7 @@
-if SHIELD_MY_BOARD
+if SHIELD_QUACKEN_ZERO
 
 # Name must be less than 16 characters long!
-config SHIELD_QUACKEN_ZERO
+config ZMK_KEYBOARD_NAME
     default "Quacken Zero"
 
 endif

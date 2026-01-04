@@ -1,20 +1,25 @@
 #!/usr/bin/env bash
-KEEB_VARIANT=$1
+TARGET=$1
 shift
 CPP_FLAGS=$*
 
 # uncomment the following line to enable USB logging
 # USB_LOGGING="-S zmk-usb-logging"
 
+# comment out the following line to enable incremental builds
+PRISTINE="-p"
+
 # target: Quacken Flex or Quacken Zero
-TARGET=
+# - Ergogen keebs rely on an MCU board, the keeb itself is just a shield
+# - keebs with an integrated MCU are custom boards and don’t use any shield
+BOARD=
 SHIELD=
-case $KEEB_VARIANT in
+case $TARGET in
 flex)
-	TARGET="-b quacken_flex"
+	BOARD="-b quacken_flex"
 	;;
 zero)
-	TARGET="-b sparkfun_pro_micro_rp2040"
+	BOARD="-b sparkfun_pro_micro_rp2040"
 	SHIELD="-DSHIELD=quacken_zero"
 	;;
 *)
@@ -34,12 +39,12 @@ fi
 # build
 cd "$SCRIPT_DIR/zmk/app"
 source ../.venv/bin/activate
-west build -p $TARGET $USB_LOGGING -- $SHIELD \
+west build $PRISTINE $USB_LOGGING $BOARD -- $SHIELD \
 	-DZMK_EXTRA_MODULES="$SCRIPT_DIR" \
 	-DKEYMAP_FILE="$SCRIPT_DIR/keymaps/quacken.keymap" \
 	-DDTS_EXTRA_CPPFLAGS="$CPP_FLAGS" && {
 
-	OUTPUT_FILE="zmk_quacken_$KEEB_VARIANT.uf2"
+	OUTPUT_FILE="zmk_quacken_$TARGET.uf2"
 	mv build/zephyr/zmk.uf2 "$SCRIPT_DIR/$OUTPUT_FILE"
 	echo
 	echo "Successfully generated: $OUTPUT_FILE"

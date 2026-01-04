@@ -115,6 +115,8 @@ To enable USB logging, uncomment the `USB_LOGGING` line in the `build` script.
 
 After flashing, you can track the USB logs for every keypress on a serial monitor (e.g. `/dev/ttyACM0` on Linux).
 
+You may also comment out the `PRISTINE` line in the `build` script to enable incremental builds.
+
 
 ## Flash
 

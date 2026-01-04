@@ -10,7 +10,7 @@ USB_LOGGING="-S zmk-usb-logging"
 PRISTINE="-p"
 
 # uncomment the following line to test the HWMv2 branch
-# SUFFIX="//zmk"
+SUFFIX="//zmk"
 
 # target: Quacken Flex or Quacken Zero
 # - Ergogen keebs rely on an MCU board, the keeb itself is just a shield

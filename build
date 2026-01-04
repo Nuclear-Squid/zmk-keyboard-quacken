@@ -19,7 +19,7 @@ zero)
 	;;
 *)
 	echo "Usage:"
-	echo "    $0 {flex,zero}"
+	echo "    $0 {flex,zero} [optional_C++_flags]"
 	exit 1
 	;;
 esac

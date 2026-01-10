@@ -131,7 +131,7 @@
             bindings = <&kp O>, <&kp O>;
             mods = <MOD_LSFT>;
         };
-    }; 
+    };
 
     macros {
         odk: one_dead_key {
@@ -222,9 +222,9 @@
             bindings = <
          &kp_q &kp W     &kp E       &kp R       &kp T      &dot  &kp U       &kp I      &dead_key  &kp P
          /* &kp A &hrm MS S &hrms MC D &hrms MA F &kp G      &kp H &hrms MA J &hrms MC K &hrm MS L &kp SEMI */
-         &kp A &hrm MS S &hrmFd MC D &hrmFd MA F &kp G      &kp H &hrmFd MA J &hrmFd MC K &hrm MS L &kp SEMI
+         &kp A &hrm MS S &hrm MC D &hrm MA F &kp G      &kp H &hrm MA J &hrm MC K &hrm MS L &kp SEMI
                &kp X     &kp C       &kp V                  &kp M &kp COMMA   &kp DOT
-                         &thumb_lt  &thumb_lh             &hrmF RALT SPACE &lt LAYER_NUM_ROW BSPC
+                         &thumb_lt  &thumb_lh             &hrmf RALT SPACE &lt LAYER_NUM_ROW BSPC
             >;
         };
 
@@ -284,7 +284,7 @@
          &kp_q &kp W &kp E &kp R &kp T      &dot  &kp U &kp I &dead_key &kp P
          &kp A &kp S &kp D &kp F &kp G      &kp H &kp J &kp K &kp L &kp SEMI
                &kp X &kp C &kp V                  &kp M &kp COMMA &kp DOT
-                    &thumb_lt  &thumb_lh           &kp SPACE &lt LAYER_NUM_ROW BSPC
+                    &thumb_lt  &kp SPACE           &kp SPACE &lt LAYER_NUM_ROW BSPC
             >;
         };
 

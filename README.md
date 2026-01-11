@@ -43,9 +43,11 @@ especially for debugging purposes.
 ### Setup
 
 We need [a local ZMK clone with its Zephyr toolchain][toolchain].
-This will use about 5GB of disk space.
+This requires about 15GB of disk space: 10GB for the Zephyr SDK,
+5GB for ZMK/Zephyr and their dependencies.
 
-First [install all Zephyr dependencies][dependencies] — for Ubuntu it’d be:
+First [install all host Zephyr dependencies][dependencies]
+— for Ubuntu it’d be:
 
 ```bash
 sudo apt install --no-install-recommends \
@@ -114,11 +116,14 @@ The firmware (`zmk_quacken_{flex,zero}.uf2`) can be found in the current directo
 
 ### Debug
 
-To enable USB logging, uncomment the `USB_LOGGING` line in the `build` script.
-
-After flashing, you can track the USB logs for every keypress on a serial monitor (e.g. `/dev/ttyACM0` on Linux).
+To enable USB logging, uncomment the `USB_LOGGING` line in the `build` script:
+after flashing, you can track the USB logs for every keypress on a serial monitor (e.g. `/dev/ttyACM0` on Linux).
 
 You may also comment out the `PRISTINE` line in the `build` script to enable incremental builds.
+
+Note: local builds use the `zmk` tree, no matter what’s specified in the
+`config/west.yml` file (which is used by GitHub Actions). Remember to run a
+`west update` when modifying the `zmk` tree (e.g. checking out another branch/commit).
 
 
 ## Flash

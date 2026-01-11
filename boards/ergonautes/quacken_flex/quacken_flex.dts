@@ -1,7 +1,11 @@
 /dts-v1/;
 
+// seems ignored, but that's what we need
+#define PICO_FLASH_SPI_CLKDIV 3
+
 #include <raspberrypi/rpi_pico/rp2040.dtsi>
 #include <dt-bindings/zmk/matrix_transform.h>
+#include <arm/raspberrypi/rp2040-boot-mode-retention.dtsi>
 #include <zephyr/dt-bindings/pinctrl/rpi-pico-rp2040-pinctrl.h>
 
 / {
@@ -213,7 +217,7 @@ rp2040_gpio: &gpio0 {
 };
 
 zephyr_udc0: &usbd {
-  status = "okay";
+    status = "okay";
 };
 
 &flash0 {

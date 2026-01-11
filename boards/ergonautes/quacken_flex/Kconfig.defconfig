@@ -4,4 +4,7 @@ if BOARD_QUACKEN_FLEX
 
     config RP2_FLASH_W25Q080
         default y
+
+    # config SPI_NOR_SFDP_RUNTIME
+    #     default y
 endif

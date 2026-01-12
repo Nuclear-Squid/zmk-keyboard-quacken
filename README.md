@@ -42,9 +42,12 @@ especially for debugging purposes.
 
 ### Setup
 
-We need [a local ZMK clone with its Zephyr toolchain](https://zmk.dev/docs/development/local-toolchain/setup/native).
+We need [a local ZMK clone with its Zephyr toolchain][toolchain].
+This requires about 15GB of disk space: 10GB for the Zephyr SDK,
+5GB for ZMK/Zephyr and their dependencies.
 
-First [install all Zephyr dependencies]() — for Ubuntu it’d be:
+First [install all host Zephyr dependencies][dependencies]
+— for Ubuntu it’d be:
 
 ```bash
 sudo apt install --no-install-recommends \
@@ -53,94 +56,74 @@ sudo apt install --no-install-recommends \
   xz-utils file make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
 ```
 
-Then proceed with ZMK:
+[toolchain]: https://zmk.dev/docs/development/local-toolchain/setup/native
+[dependencies]: https://docs.zephyrproject.org/latest/develop/getting_started/index.html#install-dependencies
+
+Make sure [uv](https://docs.astral.sh/uv/) is installed,
+then proceed with ZMK:
 
 ```bash
 # clone ZMK
 git clone https://github.com/zmkfirmware/zmk.git
 cd zmk
 
-# activate a venv and install west, this might take a while
+# activate a venv, install west + ZMK dependencies
 uv init
 uv add west
 source .venv/bin/activate
 west init -l app
-west update
+west update  # this installs Zephyr and other ZMK stuff (takes a while)
 
-# install dependencies
-uv pip install -r zephyr/scripts/requirements-base.txt
-
-# install Zephyr SDK (optionally in a separate folder), this takes a while
+# install Zephyr's dependencies and SDK
 cd zephyr
-west sdk install
+uv pip install -r scripts/requirements-base.txt
+west sdk install  # (this takes a while)
+```
+
+When done, symlink the ZMK folder in the local `zmk-keyboard-quacken` folder,
+so that the build script can use this ZMK/Zephyr setup:
+
+```bash
+cd /path/to/zmk-keyboard-quacken
+ln -s /path/to/zmk .
 ```
 
 ### Build
 
-Once the ZMK/Zephyr toolchain is set, the Quacken Flex firmware is built as follows:
+Once the ZMK/Zephyr toolchain is set, the Quacken firmware is built as follows:
 
 ```bash
-cd /path/to/zmk/app
-source ../.venv/bin/activate
-
-west build -p \
-  -b quacken_flex \
-  -- \
-  -DZMK_EXTRA_MODULES=/home/user/path/to/zmk-keyboard-quacken \
-  -DKEYMAP_FILE=/home/user/path/to/zmk-keyboard-quacken/keymaps/quacken.keymap
+./build {flex,zero} [optional_C++_flags]
 ```
 
-For Quacken variants built on a Pro Micro, the board is the Pro Micro and the keyboard itself is a shield. Hence, the `west` command becomes:
+- `flex` or `zero` relates to the Quacken variant in use
+- `optional_C++_flags` enables keymap options defined in `build.yml`
+
+Examples:
 
 ```bash
-west build -p \
-  -b sparkfun_pro_micro_rp2040 \
-  -- \
-	-DSHIELD=quacken_zero \
-  -DZMK_EXTRA_MODULES=/home/user/path/to/zmk-keyboard-quacken \
-  -DKEYMAP_FILE=/home/user/path/to/zmk-keyboard-quacken/keymaps/quacken.keymap
+# build the default Quacken Zero firmware
+./build zero
+
+# build the default Quacken Flex firmware
+./build flex
+
+# build a Quacken Flex firmware with homerow-mods
+./build flex -DDUAL_KEYS=HOME_ROW_MODS
 ```
 
-The firmware can be found in `zmk/app/build/zephyr/zmk.uf2` and is ready to be [flashed](#flash).
-
-Notes:
-
-- the `KEYMAP_FILE` argument is specifically required for the Quacken, as it allows to have a single keymap file for all keyboard variants;
-- do NOT use `~` in the `ZMK_EXTRA_MODULES` path, you’d get a `not a valid zephyr module` error.
-
-### Build With Options
-
-`DTS_EXTRA_CPPFLAGS` can be used to pass specific keymap options, as defined in `buld.yml`:
-
-```bash
-cd /path/to/zmk/app
-source ../.venv/bin/activate
-
-west build -p \
-  -b quacken_flex \
-  -- \
-  -DZMK_EXTRA_MODULES=/home/user/path/to/zmk-keyboard-quacken \
-  -DKEYMAP_FILE=/home/user/path/to/zmk-keyboard-quacken/keymaps/quacken.keymap \
-  -DDTS_EXTRA_CPPFLAGS="-DDUAL_KEYS=HOME_ROW_MODS"
-```
+The firmware (`zmk_quacken_{flex,zero}.uf2`) can be found in the current directory and is ready to be [flashed](#flash).
 
 ### Debug
 
-To enable USB logging, add `-S zmk-usb-logging`:
+To enable USB logging, uncomment the `USB_LOGGING` line in the `build` script:
+after flashing, you can track the USB logs for every keypress on a serial monitor (e.g. `/dev/ttyACM0` on Linux).
 
-```bash
-cd /path/to/zmk/app
-source ../.venv/bin/activate
+You may also comment out the `PRISTINE` line in the `build` script to enable incremental builds.
 
-west build -p \
-  -b quacken_flex \
-  -S zmk-usb-logging \
-  -- \
-  -DZMK_EXTRA_MODULES=/home/user/path/to/zmk-keyboard-quacken \
-  -DKEYMAP_FILE=/home/user/path/to/zmk-keyboard-quacken/keymaps/quacken.keymap
-```
-
-After flashing, you can track the USB logs for every keypress on a serial monitor (e.g. `/dev/ttyACM0` on Linux).
+Note: local builds use the `zmk` tree, no matter what’s specified in the
+`config/west.yml` file (which is used by GitHub Actions). Remember to run a
+`west update` when modifying the `zmk` tree (e.g. checking out another branch/commit).
 
 
 ## Flash

@@ -245,3 +245,8 @@ zephyr_udc0: &usbd {
         };
     };
 };
+
+&xosc {
+    // XXX: Ensure the communication works even if the XOSC starts up slowly.
+    startup-delay-multiplier = <64>;
+};

@@ -213,15 +213,12 @@ rp2040_gpio: &gpio0 {
 };
 
 zephyr_udc0: &usbd {
-  status = "okay";
+    status = "okay";
 };
 
 &flash0 {
-    // XXX: The flash memory used (W25Q128JV) is a 128M-bit memory. I’ll *assume*
-    // that `DT_SIZE_M` is in bytes, but if not we may not fully utilise the
-    // flash memory on board.
-    // (To be fair, worst case senario this is 16M-bit = 2M-byte, and if you
-    // need more than that you’re probably doing something you shouldn’t)
+    // The onboard W25Q128JV flash is a 128M-bit memory (16MB).
+    // `DT_SIZE_M` below expects a size in MB (megabytes).
     reg = <0x10000000 DT_SIZE_M(16)>;
 
     partitions {
@@ -229,16 +226,14 @@ zephyr_udc0: &usbd {
         #address-cells = <1>;
         #size-cells = <1>;
 
-        /* Reserved memory for the second stage bootloader */
+        // Reserved memory for the second-stage bootloader
         second_stage_bootloader: partition@0 {
             reg = <0x00000000 0x100>;
             read-only;
         };
 
-        /*
-         * Usable flash. Starts at 0x100, after the bootloader. The partition
-         * size is 16MB minus the 0x100 bytes taken by the bootloader.
-         */
+        // Usable flash. Starts at 0x100, after the bootloader. The partition
+        // size is 16MB minus the 0x100 bytes taken by the bootloader.
         code_partition: partition@100 {
             reg = <0x100 (DT_SIZE_M(16) - 0x100)>;
             read-only;
@@ -247,6 +242,6 @@ zephyr_udc0: &usbd {
 };
 
 &xosc {
-    // XXX: Ensure the communication works even if the XOSC starts up slowly.
+    // Ensure the 12MHz oscillator has enough time to stabilize properly.
     startup-delay-multiplier = <64>;
 };

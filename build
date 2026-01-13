@@ -4,7 +4,7 @@ shift
 CPP_FLAGS=$*
 
 # uncomment the following line to enable USB logging
-USB_LOGGING="-S zmk-usb-logging"
+# USB_LOGGING="-S zmk-usb-logging"
 
 # comment out the following line to enable incremental builds
 PRISTINE="-p"
@@ -61,5 +61,5 @@ west build $PRISTINE $USB_LOGGING $BOARD -- $SHIELD \
 	echo
 	echo "Successfully generated: $OUTPUT_FILE"
 	echo "                        \\_o<"
-	grep CONFIG_ZMK_USB $ZMK_APP_DIR/build/zephyr/.config
+	# grep CONFIG_ZMK_USB $ZMK_APP_DIR/build/zephyr/.config
 }

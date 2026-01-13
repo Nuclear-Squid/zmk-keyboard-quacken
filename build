@@ -70,4 +70,5 @@ west build $PRISTINE $USB_LOGGING $BOARD -- $SHIELD \
 	echo
 	echo "Successfully generated: $OUTPUT_FILE"
 	echo "                        \\_o<"
+	# check $ZMK_APP_DIR/build/zephyr/.config
 }

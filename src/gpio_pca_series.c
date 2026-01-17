@@ -25,7 +25,7 @@
 
 #define LOG_LEVEL CONFIG_GPIO_LOG_LEVEL
 #include <zephyr/logging/log.h>
-LOG_MODULE_REGISTER(gpio_pca_series);
+LOG_MODULE_REGISTER(gpio_pca);
 
 /** Private debug macro, enable more error checking and print more log. */
 /* #define GPIO_NXP_PCA_SERIES_DEBUG */

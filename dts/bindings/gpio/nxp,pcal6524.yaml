@@ -1,0 +1,34 @@
+# This is a back-port of the PCAL6524 driver from Zephyr 4.
+#
+# Copyright 2024 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+description: NXP PCAL6524 I2C GPIO expander node
+compatible: nxp,pcal6524
+include: [gpio-controller.yaml, i2c-device.yaml]
+
+properties:
+  reset-gpios:
+    type: phandle-array
+    description:
+      Reset GPIO pin (active-low)
+      Left blank if the device does not have reset pin
+      or the pin is not connected in your application.
+
+  int-gpios:
+    type: phandle-array
+    description:
+      Interrupt GPIO pin (active-low open-drain)
+      Left blank if the pin is not connected in your
+      application.
+
+  "#gpio-cells":
+    const: 2
+
+  ngpios:
+    required: true
+    const: 24
+
+gpio-cells:
+  - pin
+  - flags

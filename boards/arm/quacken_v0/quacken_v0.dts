@@ -85,6 +85,22 @@ rp2040_gpio: &gpio0 {
     status = "okay";
 };
 
+&i2c0 {
+    status = "okay";
+    clock-frequency = <I2C_BITRATE_STANDARD>;
+    /* pinctrl-0 = <&i2c0_scl_p29 &i2c0_sda_p28>; */
+    /* pinctrl-names = "default"; */
+
+    io_exp_gpio: pcal6524@23 {
+        compatible = "nxp,pcal6524";
+        status = "okay";
+        ngpios = <24>;
+        #gpio-cells = <2>;
+        gpio-controller;
+        reg = <0x23>;
+    };
+};
+
 zephyr_udc0: &usbd {
   status = "okay";
 };

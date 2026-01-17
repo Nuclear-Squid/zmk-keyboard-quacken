@@ -7,7 +7,6 @@
 
         default_layer {
             display-name = "Base";
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
             bindings = <
    &kp TAB   &kp Q &kp W &kp E &kp R &kp T
    &kp ESC   &kp A &kp S &kp D &kp F &kp G

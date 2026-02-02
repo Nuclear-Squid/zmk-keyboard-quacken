@@ -217,12 +217,12 @@ zephyr_udc0: &usbd {
 };
 
 &flash0 {
-    // XXX: The flash memory used (W25Q128JV) is a 128M-bit memory. I’ll *assume*
-    // that `DT_SIZE_M` is in bytes, but if not we may not fully utilise the
-    // flash memory on board.
-    // (To be fair, worst case senario this is 16M-bit = 2M-byte, and if you
-    // need more than that you’re probably doing something you shouldn’t)
-    reg = <0x10000000 DT_SIZE_M(16)>;
+    // NOTE: The flash memory used by the Flex 26.01 and later is a W25Q16JVUX,
+    // which only has 2MB of memory. It’s the same as the Rpi Pico, so you should
+    // be fine, but if for whatever reason you don’t have enough progmem and own
+    // a Flex 25.1x, feel free to bump up that `2` to a `16`, as those modols had
+    // a (physically bigger) 16MB flash.
+    reg = <0x10000000 DT_SIZE_M(2)>;
 
     partitions {
         compatible = "fixed-partitions";

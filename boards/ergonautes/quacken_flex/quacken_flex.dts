@@ -173,7 +173,7 @@ rp2040_gpio: &gpio0 {
 
 &i2c0 {
     status = "okay";
-    clock-frequency = <I2C_BITRATE_FAST>;
+    clock-frequency = <I2C_BITRATE_STANDARD>;
     pinctrl-0 = <&i2c0_custom>;
     pinctrl-names = "default";
 

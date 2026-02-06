@@ -25,20 +25,20 @@
 // #define DUAL_KEYS NO_DUAL_KEYS
 // #define DUAL_KEYS LAYER_TAPS
 // #define DUAL_KEYS HOME_ROW_MODS  // (default value, if none are specified)
-// #define DUAL_KEYS HOME_ROW_MODS_VIM
 
 // Extra bits of config (maybe a bit debatable)
-// #define HRM_SHIFT  // Enable shift as a pinky HRM. Usefull for shortcuts, NOT MEANT to type text
+// #define HRM_SHIFT        // Enable shift as a pinky HRM. Usefull for shortcuts, NOT MEANT to type text
 // #define LEFT_HAND_SPACE  // Swap space and backspace
+// #define VIM_NAVIGATION   // Split num-nav layer in two layers dedicated to vim-style navigation and a numbers row, respectively
 
 // Human readable constants for the layer indexes.
 // Make sure to update this table if you edit the order / amount
 // of layers in the keymap.
 #define BASE_LAYER     0
 #define SYMBOLS_LAYER  1
-#define NUM_ROW_LAYER  2
+#define VIM_NAV_LAYER  2
 #define NUM_NAV_LAYER  3
-#define VIM_NAV_LAYER  4
+#define NUM_ROW_LAYER  4
 #define FUNCTION_LAYER 5
 
 // Potentially used by other keymaps deriving from this one, who may add extra layers.
@@ -87,20 +87,20 @@
         &trans  S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &trans
         &trans  S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &trans
         &trans  S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &trans
-                &trans  &kp SPACE  &EZ_SL(NUM_ROW_LAYER)     &trans  &kp RALT  &trans
+            &trans  &kp SPACE  &sc CHOSEN_NUM_LAYER ENTER     &trans  &kp RALT  &trans
       >;
     };
 
-    // 2. NumRow layer -- bring the numbers to the homerow, keep shift+numbers for shortcuts and symbols
-    //                 -- space becomes shift+space, which is a no-break space with some OS layouts (e.g. Ergol)
-    //                 -- best used along with the VimNav layer
-    num_row_layer: num_row_layer {
-      display-name = "NumRow";
+    // 2. VimNav layer -- HJKL arrow cluster on the right hand
+    //                 -- best used along with the NumRow layer
+    //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergol here)
+    vim_nav_layer: vim_nav_layer {
+      display-name = "VimNav";
       bindings = <
-        &trans  &kp RS(N1) &kp RS(N2) &kp RS(N3) &kp RS(N4) &kp RS(N5)       &kp LS(N6) &kp LS(N7) &kp LS(N8) &kp LS(N9) &kp LS(N0) &trans
-        &trans  &kp N1     &kp N2     &kp N3     &kp N4     &kp N5           &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &trans
-        &trans  &none      &none      &none      &none      &none            S_MINUS    S_COMMA    S_DOT      S_COLON    S_FSLH     &trans
-                                      &trans  &kp RS(SPACE) &trans           &trans  &kp LS(SPACE) &trans
+        &trans  &kp CAPS X_CLOSE  X_PREV   X_NEXT    &none        &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &trans
+        &trans  X_ALL    X_SAVE   X_SHTAB  &kp TAB   &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &trans
+        &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_REDO       &none    &none     &none     &none     &none  &trans
+        &kp CAPSLOCK   &lt FUNCTION_LAYER DEL &mo NUM_ROW_LAYER      &trans   &mo FUNCTION_LAYER  &kp RALT
       >;
     };
 
@@ -113,20 +113,21 @@
         &trans  &kp ESC  &kp HOME &kp UP   &kp END   &kp PG_UP    &none    &kp KP_N7 &kp KP_N8 &kp KP_N9  S_FSLH     &trans
         &trans  &kp CAPS &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN    S_MINUS  &kp KP_N4 &kp KP_N5 &kp KP_N6  &kp KP_N0  &trans
         &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_SHTAB      S_COMMA  &kp KP_N1 &kp KP_N2 &kp KP_N3  S_DOT      &trans
+               /* &kp CAPSLOCK  &lt FUNCTION_LAYER DEL  &kp LS(TAB)  &kp ESCAPE  &mo FUNCTION_LAYER  &kp RALT */
                &kp CAPSLOCK  &lt FUNCTION_LAYER DEL  &kp LS(TAB)  &kp ESCAPE  &mo FUNCTION_LAYER  &kp RALT
       >;
     };
 
-    // 4. VimNav layer -- HJKL arrow cluster on the right hand
-    //                 -- best used along with the NumRow layer
-    //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergol here)
-    vim_nav_layer: vim_nav_layer {
-      display-name = "VimNav";
+    // 4. NumRow layer -- bring the numbers to the homerow, keep shift+numbers for shortcuts and symbols
+    //                 -- space becomes shift+space, which is a no-break space with some OS layouts (e.g. Ergol)
+    //                 -- best used along with the VimNav layer
+    num_row_layer: num_row_layer {
+      display-name = "NumRow";
       bindings = <
-        &trans  &kp CAPS X_CLOSE  X_PREV   X_NEXT    &none        &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &trans
-        &trans  X_ALL    X_SAVE   X_SHTAB  &kp TAB   &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &trans
-        &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_REDO       &none    &none     &none     &none     &none  &trans
-               &kp CAPSLOCK   &lt FUNCTION_LAYER DEL &trans       &trans   &mo FUNCTION_LAYER  &kp RALT
+        &trans  &kp RS(N1) &kp RS(N2) &kp RS(N3) &kp RS(N4) &kp RS(N5)       &kp LS(N6) &kp LS(N7) &kp LS(N8) &kp LS(N9) &kp LS(N0) &trans
+        &trans  &kp N1     &kp N2     &kp N3     &kp N4     &kp N5           &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &trans
+        &trans  &none      &none      &none      &none      &none            S_MINUS    S_COMMA    S_DOT      S_COLON    S_FSLH     &trans
+                                      &trans  &kp RS(SPACE) &trans           &trans  &kp LS(SPACE) &trans
       >;
     };
 

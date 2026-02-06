@@ -4,10 +4,6 @@
  * Action Combos
  */
 
-#ifndef CMD
-#define CMD RC // assume PC shortcuts by default (Ctrl key)
-#endif
-
 #define X_UNDO  &kp CMD(Z)
 #define X_CUT   &kp CMD(X)
 #define X_COPY  &kp CMD(C)
@@ -31,8 +27,8 @@
 
 // first row
 #define S_CARET &kp CARET
-#define S_LT    &kp LT
-#define S_GT    &kp GT
+#define S_LT    &kp NUBS
+#define S_GT    &kp PIPE2
 #define S_DLLR  &kp DLLR
 #define S_PRCNT &kp PRCNT
 #define S_AT    &kp AT
@@ -61,8 +57,8 @@
 #define S_HASH  &kp HASH
 #define S_PIPE  &kp PIPE
 #define S_EXCL  &kp EXCL
-#define S_SEMI  &kp SEMI
-#define S_COLON &kp COLON
+#define S_SEMI  &kp LS(COMMA)
+#define S_COLON &kp LS(DOT)
 #define S_QMARK &kp QMARK
 
 // extra

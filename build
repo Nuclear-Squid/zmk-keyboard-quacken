@@ -52,8 +52,8 @@ fi
 cd $ZMK_APP_DIR
 source ../.venv/bin/activate
 west build $PRISTINE $USB_LOGGING $BOARD -- $SHIELD \
-	-DZMK_EXTRA_MODULES="$SCRIPT_DIR" \
 	-DKEYMAP_FILE="$SCRIPT_DIR/keymaps/quacken.keymap" \
+	-DZMK_EXTRA_MODULES="$SCRIPT_DIR" \
 	-DDTS_EXTRA_CPPFLAGS="$CPP_FLAGS" && {
 
 	OUTPUT_FILE="zmk_quacken_$TARGET.uf2"
@@ -61,5 +61,4 @@ west build $PRISTINE $USB_LOGGING $BOARD -- $SHIELD \
 	echo
 	echo "Successfully generated: $OUTPUT_FILE"
 	echo "                        \\_o<"
-	grep CONFIG_ZMK_USB $ZMK_APP_DIR/build/zephyr/.config
 }

@@ -2,38 +2,57 @@
 #include <dt-bindings/zmk/keys.h>
 
 
-/**
- * Timing is key.
- */
+/******************************************************************************
+ * Layout-specific actions and symbols.
+******************************************************************************/
 
-// Defines how long (in ms) a tap-hold must be held to be considered held. Keep
-// this value high if you are struggling wih home-row-mods.
+// Uncomment one of the folowing lines if using a non-QWERTY layout:
+
+// #define KB_LAYOUT_QWERTY_LAFAYETTE
+// #define KB_LAYOUT_AZERTY
+// #define KB_LAYOUT_ERGOL
+
+// Uncomment the folowing line if using a Mac:
+
+// #define MACOS
+
+#include "aliases.h"
+
+
+/******************************************************************************
+ * Timing is key.
+******************************************************************************/
+
+// Defines how long (in ms) a dual key must be held to be considered held.
+// Keep this value high if you are struggling wih home-row-mods.
+
 // #define TAPPING_TERM 300
 
 // When tapping then holding the same tap-hold, if the delay between the two
 // key presses is lower than `QUICK_TAP`, the tap-hold will hold the tap action
 // instead of the hold action. Don’t edit this value if you are confused.
+
 // #define QUICK_TAP 200
+
 #include "timing.dtsi"
 
 
-/**
- * Uncomment some of the following `#define` to tweak the keymap
- */
+/******************************************************************************
+ * Dual Keys
+******************************************************************************/
 
-// Home row mods (use at most one)
+// Uncomment one of the folowing lines to pick your preferred dual-key configuration:
+
+// #define DK_NONE
+// #define DK_LAYER_TAPS
+// #define DK_HOME_ROW_MODS  // (default behavior)
+
 // #define DUAL_KEYS NO_DUAL_KEYS
 // #define DUAL_KEYS LAYER_TAPS
-// #define DUAL_KEYS HOME_ROW_MODS  // (default value, if none are specified)
+// #define DUAL_KEYS HOME_ROW_MODS  // (default behavior, if none are specified)
 
-// Extra bits of config (maybe a bit debatable)
-// #define HRM_SHIFT        // Enable shift as a pinky HRM. Usefull for shortcuts, NOT MEANT to type text
-// #define LEFT_HAND_SPACE  // Swap space and backspace
-// #define VIM_NAVIGATION   // Split num-nav layer in two layers dedicated to vim-style navigation and a numbers row, respectively
-
-// Human readable constants for the layer indexes.
-// Make sure to update this table if you edit the order / amount
-// of layers in the keymap.
+// Human-readable constants for the layer indexes.
+// Make sure to update this table if you edit the order / number of layers in the keymap.
 #define BASE_LAYER     0
 #define SYMBOLS_LAYER  1
 #define VIM_NAV_LAYER  2
@@ -48,19 +67,30 @@
 #include "dual_keys.dtsi"
 
 
-/**
- * Layout-specific actions and symbols.
- */
+/******************************************************************************
+ * Other Options
+******************************************************************************/
 
-#define CMD RC // PC: Ctrl key
-// #define CMD RG // Mac: Cmd key
+// Uncomment the following line to plit the num-nav layer in two:
+//  - one layer for vim-style navigation keys (right) and GUI shortcuts (left)
+//  - one layer for a full numbers row + easy access to Shift+Number
 
-// Uncomment one of the following `#define` to select the keyboard layout used on your computer
-// #define KB_LAYOUT_QWERTY  // (default value, if none are specified)
-// #define KB_LAYOUT_AZERTY
-// #define KB_LAYOUT_ERGOL
-#include "aliases.h"
+// #define VIM_NAVIGATION
 
+// Uncomment the following line to enable shift as a pinky HRM.
+// Useful for combined shortcuts, but NOT MEANT to type text!
+
+// #define HRM_SHIFT
+
+// Uncomment the following line to (wap Space and Backspace.
+// Beware: this increases the left thumb load.
+
+// #define LEFT_HAND_SPACE
+
+
+/******************************************************************************
+ * Generic Keymap
+******************************************************************************/
 
 / {
   keymap {

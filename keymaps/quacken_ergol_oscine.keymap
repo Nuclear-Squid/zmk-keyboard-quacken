@@ -1,3 +1,5 @@
+#define KB_LAYOUT_ERGOL
+
 #include "quacken.keymap"
 
 #define ODK_LAYER       EXTRA_LAYERS_START_INDEX

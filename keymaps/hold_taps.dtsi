@@ -2,6 +2,28 @@
 
 // clang-format off
 
+/**
+ * Layers
+ */
+
+// Human-readable constants for the layer indexes.
+// Make sure to update this table if you edit the order / number of layers in the keymap.
+#define BASE_LAYER     0
+#define SYMBOLS_LAYER  1
+#define VIM_NAV_LAYER  2
+#define NUM_NAV_LAYER  3
+#define NUM_ROW_LAYER  4
+#define FUNCTION_LAYER 5
+
+// Potentially used by other keymaps deriving from this one, who may add extra layers.
+// Make sure this stays equal to <index_of_last_layer> + 1
+#define EXTRA_LAYERS_START_INDEX 6
+
+
+/**
+ * Dual Keys
+ */
+
 #define NO_DUAL_KEYS  1
 #define LAYER_TAPS    2
 #define HOME_ROW_MODS 3
@@ -9,11 +31,6 @@
 #ifndef DUAL_KEYS
   #define DUAL_KEYS HOME_ROW_MODS
 #endif
-
-
-/**
- * Home-Row Mods
- */
 
 #if DUAL_KEYS == HOME_ROW_MODS
   #define HRM_S &hrm LGUI S

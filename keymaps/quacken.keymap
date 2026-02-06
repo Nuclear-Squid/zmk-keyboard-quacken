@@ -20,51 +20,29 @@
 
 
 /******************************************************************************
- * Timing is key.
+ * Hold-Taps
 ******************************************************************************/
 
-// Defines how long (in ms) a dual key must be held to be considered held.
-// Keep this value high if you are struggling wih home-row-mods.
+// Uncomment one of the folowing lines to pick your preferred hold-tap configuration:
+
+// #define HT_NONE
+// #define HT_THUMB_TAPS
+// #define HT_HOME_ROW_MODS  // (default behavior)
+
+// Timing is key! Keep the default value if unsure.
+// This defines how long (in ms) a hold-tap key must be held to be considered
+// as a modifier or layer shift.
+// Keep this value high if you struggle wih home-row-mods.
 
 // #define TAPPING_TERM 300
 
 // When tapping then holding the same tap-hold, if the delay between the two
 // key presses is lower than `QUICK_TAP`, the tap-hold will hold the tap action
-// instead of the hold action. Don’t edit this value if you are confused.
+// instead of the hold action. Again, keep the default value if unsure.
 
 // #define QUICK_TAP 200
 
-#include "timing.dtsi"
-
-
-/******************************************************************************
- * Dual Keys
-******************************************************************************/
-
-// Uncomment one of the folowing lines to pick your preferred dual-key configuration:
-
-// #define DK_NONE
-// #define DK_LAYER_TAPS
-// #define DK_HOME_ROW_MODS  // (default behavior)
-
-// #define DUAL_KEYS NO_DUAL_KEYS
-// #define DUAL_KEYS LAYER_TAPS
-// #define DUAL_KEYS HOME_ROW_MODS  // (default behavior, if none are specified)
-
-// Human-readable constants for the layer indexes.
-// Make sure to update this table if you edit the order / number of layers in the keymap.
-#define BASE_LAYER     0
-#define SYMBOLS_LAYER  1
-#define VIM_NAV_LAYER  2
-#define NUM_NAV_LAYER  3
-#define NUM_ROW_LAYER  4
-#define FUNCTION_LAYER 5
-
-// Potentially used by other keymaps deriving from this one, who may add extra layers.
-// Make sure this stays equal to <index_of_last_layer> + 1
-#define EXTRA_LAYERS_START_INDEX 6
-
-#include "dual_keys.dtsi"
+#include "hold_taps.dtsi"
 
 
 /******************************************************************************
@@ -72,8 +50,10 @@
 ******************************************************************************/
 
 // Uncomment the following line to plit the num-nav layer in two:
-//  - one layer for vim-style navigation keys (right) and GUI shortcuts (left)
-//  - one layer for a full numbers row + easy access to Shift+Number
+//  - one layer for vim-style navigation (right) and GUI shortcuts (left)
+//  - one layer for a full number row + easy access to Shift+Number
+//  + Escape under the left thumb (direct access)
+// Highly recommended for Vim users, obviously. :-)
 
 // #define VIM_NAVIGATION
 
@@ -82,8 +62,8 @@
 
 // #define HRM_SHIFT
 
-// Uncomment the following line to (wap Space and Backspace.
-// Beware: this increases the left thumb load.
+// Uncomment the following line to swap Space and Backspace.
+// Beware: this increases the typing load of the left thumb.
 
 // #define LEFT_HAND_SPACE
 
@@ -91,6 +71,10 @@
 /******************************************************************************
  * Generic Keymap
 ******************************************************************************/
+
+// Note:
+// - symbol and action names are defined in `aliases*.h`
+// - thumb keys and homerow mods are defined in `mod_taps.dtsi`
 
 / {
   keymap {
@@ -143,7 +127,6 @@
         &trans  &kp ESC  &kp HOME &kp UP   &kp END   &kp PG_UP    &none    &kp KP_N7 &kp KP_N8 &kp KP_N9  S_FSLH     &trans
         &trans  &kp CAPS &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN    S_MINUS  &kp KP_N4 &kp KP_N5 &kp KP_N6  &kp KP_N0  &trans
         &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_SHTAB      S_COMMA  &kp KP_N1 &kp KP_N2 &kp KP_N3  S_DOT      &trans
-               /* &kp CAPSLOCK  &lt FUNCTION_LAYER DEL  &kp LS(TAB)  &kp ESCAPE  &mo FUNCTION_LAYER  &kp RALT */
                &kp CAPSLOCK  &lt FUNCTION_LAYER DEL  &kp LS(TAB)  &kp ESCAPE  &mo FUNCTION_LAYER  &kp RALT
       >;
     };

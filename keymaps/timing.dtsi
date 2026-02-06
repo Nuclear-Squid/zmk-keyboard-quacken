@@ -8,11 +8,11 @@
  */
 
 #ifndef TAPPING_TERM
-  #define TAPPING_TERM 300
+#define TAPPING_TERM 300
 #endif
 
 #ifndef QUICK_TAP
-  #define QUICK_TAP 200
+#define QUICK_TAP 200
 #endif
 
 #define EZ_SL(layer) bsl (layer) (layer)

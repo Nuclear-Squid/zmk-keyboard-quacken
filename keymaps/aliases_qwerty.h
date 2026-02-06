@@ -1,7 +1,5 @@
 #include <dt-bindings/zmk/keys.h>
 
-// clang-format off
-
 /**
  * Action Combos
  */

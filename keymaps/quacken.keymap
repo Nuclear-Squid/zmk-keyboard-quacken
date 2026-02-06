@@ -52,13 +52,13 @@
  * Layout-specific actions and symbols.
  */
 
-#define CMD RC // PC
-// #define CMD RG // Mac
+#define CMD RC // PC: Ctrl key
+// #define CMD RG // Mac: Cmd key
 
 // Uncomment one of the following `#define` to select the keyboard layout used on your computer
-// #define KEYBOARD_LAYOUT QWERTY  // (defaulte value, if none are specified)
-// #define KEYBOARD_LAYOUT AZERTY
-// #define KEYBOARD_LAYOUT ERGOL
+// #define KB_LAYOUT_QWERTY  // (default value, if none are specified)
+// #define KB_LAYOUT_AZERTY
+// #define KB_LAYOUT_ERGOL
 #include "aliases.h"
 
 

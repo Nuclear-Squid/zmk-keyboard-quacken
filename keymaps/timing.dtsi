@@ -8,13 +8,19 @@
  */
 
 #ifndef TAPPING_TERM
-#define TAPPING_TERM 300
+  #define TAPPING_TERM 300
+#endif
+
+#ifndef QUICK_TAP
+  #define QUICK_TAP 200
 #endif
 
 #define EZ_SL(layer) bsl (layer) (layer)
 #define EZ_SK(mod)   bsk (mod) (mod)
 &sl{ quick-release; }; // seems useless (works fine without)
 &sk{ quick-release; }; // must have (lots of false positives otherwise)
+&mt{ quick-tap-ms = <QUICK_TAP>; };
+&lt{ quick-tap-ms = <QUICK_TAP>; };
 
 / {
   behaviors {
@@ -22,6 +28,7 @@
       compatible = "zmk,behavior-hold-tap";
       #binding-cells = <2>;
       tapping-term-ms = <TAPPING_TERM>;
+      quick-tap-ms = <QUICK_TAP>;
       flavor = "tap-preferred";
       bindings = <&kp>, <&kp>;
     };
@@ -29,6 +36,7 @@
       compatible = "zmk,behavior-hold-tap";
       #binding-cells = <2>;
       tapping-term-ms = <TAPPING_TERM>;
+      quick-tap-ms = <QUICK_TAP>;
       flavor = "hold-preferred";
       bindings = <&mo>, <&kp>;
     };

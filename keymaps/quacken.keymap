@@ -6,7 +6,14 @@
  * Timing is key.
  */
 
-#define TAPPING_TERM 300
+// Defines how long (in ms) a tap-hold must be held to be considered held. Keep
+// this value high if you are struggling wih home-row-mods.
+// #define TAPPING_TERM 300
+
+// When tapping then holding the same tap-hold, if the delay between the two
+// key presses is lower than `QUICK_TAP`, the tap-hold will hold the tap action
+// instead of the hold action. Don’t edit this value if you are confused.
+// #define QUICK_TAP 200
 #include "timing.dtsi"
 
 
@@ -33,7 +40,10 @@
 #define NUM_NAV_LAYER  3
 #define VIM_NAV_LAYER  4
 #define FUNCTION_LAYER 5
-#define EXTRA_LAYER    6
+
+// Potentially used by other keymaps deriving from this one, who may add extra layers.
+// Make sure this stays equal to <index_of_last_layer> + 1
+#define EXTRA_LAYERS_START_INDEX 6
 
 #include "dual_keys.dtsi"
 
@@ -45,6 +55,10 @@
 #define CMD RC // PC
 // #define CMD RG // Mac
 
+// Uncomment one of the following `#define` to select the keyboard layout used on your computer
+// #define KEYBOARD_LAYOUT QWERTY  // (defaulte value, if none are specified)
+// #define KEYBOARD_LAYOUT AZERTY
+// #define KEYBOARD_LAYOUT ERGOL
 #include "aliases.h"
 
 
@@ -67,7 +81,7 @@
 
     // 1. Symbols layer -- with Ergol, basically just an AltGr layer with custom thumb keys
     //                  -- can be redefined for non-AltGr layouts such as QWERTY-ANSI
-    symbols_layer {
+    symbols_layer: symbols_layer {
       display-name = "Symbols";
       bindings = <
         &trans  S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &trans
@@ -80,7 +94,7 @@
     // 2. NumRow layer -- bring the numbers to the homerow, keep shift+numbers for shortcuts and symbols
     //                 -- space becomes shift+space, which is a no-break space with some OS layouts (e.g. Ergol)
     //                 -- best used along with the VimNav layer
-    num_row_layer {
+    num_row_layer: num_row_layer {
       display-name = "NumRow";
       bindings = <
         &trans  &kp RS(N1) &kp RS(N2) &kp RS(N3) &kp RS(N4) &kp RS(N5)       &kp LS(N6) &kp LS(N7) &kp LS(N8) &kp LS(N9) &kp LS(N0) &trans
@@ -93,51 +107,39 @@
     // 3. NumNav layer -- inverted T arrow cluster on the left hand, numpad on the right hand
     //                 -- can be the only extra layer you need if you're not too picky with number+symbols n-grams
     //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergol here)
-    num_nav_layer {
+    num_nav_layer: num_nav_layer {
       display-name = "NumNav";
       bindings = <
-        &trans  &kp TAB  &kp HOME &kp UP   &kp END   &kp PG_UP    &none    &kp KP_N7 &kp KP_N8 &kp KP_N9  S_FSLH     &trans
+        &trans  &kp ESC  &kp HOME &kp UP   &kp END   &kp PG_UP    &none    &kp KP_N7 &kp KP_N8 &kp KP_N9  S_FSLH     &trans
         &trans  &kp CAPS &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN    S_MINUS  &kp KP_N4 &kp KP_N5 &kp KP_N6  &kp KP_N0  &trans
         &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_SHTAB      S_COMMA  &kp KP_N1 &kp KP_N2 &kp KP_N3  S_DOT      &trans
-                                  &trans   &lt 5 DEL &trans       &trans   &mo 5     &trans
+               &kp CAPSLOCK  &lt FUNCTION_LAYER DEL  &kp LS(TAB)  &kp ESCAPE  &mo FUNCTION_LAYER  &kp RALT
       >;
     };
 
     // 4. VimNav layer -- HJKL arrow cluster on the right hand
     //                 -- best used along with the NumRow layer
     //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergol here)
-    vim_nav_layer {
+    vim_nav_layer: vim_nav_layer {
       display-name = "VimNav";
       bindings = <
         &trans  &kp CAPS X_CLOSE  X_PREV   X_NEXT    &none        &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &trans
         &trans  X_ALL    X_SAVE   X_SHTAB  &kp TAB   &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &trans
         &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_REDO       &none    &none     &none     &none     &none  &trans
-                                  &trans   &lt 5 DEL &trans       &trans   &mo 5     &trans
+               &kp CAPSLOCK   &lt FUNCTION_LAYER DEL &trans       &trans   &mo FUNCTION_LAYER  &kp RALT
       >;
     };
 
     // 5. Function layer -- F1..12 pad on the left hand, HRM on the right hand (with an additional Shift key)
     //                   -- reset and bootloader reset on difficult thumb keys
     //                   -- could be completed with other rare keys
-    function_layer {
+    function_layer: function_layer {
       display-name = "Function";
       bindings = <
         &trans  &kp F1  &kp F2  &kp F3  &kp F4  &none         &none &kp PAUSE_BREAK &kp PSCRN &kp SYSREQ &none      &trans
         &trans  &kp F5  &kp F6  &kp F7  &kp F8  &none         &none &kp LALT        &kp RCTL  &kp RGUI   &kp RSHIFT &trans
         &trans  &kp F9  &kp F10 &kp F11 &kp F12 &none         &none &none           &none     &none      &none      &trans
                                 &trans  &trans  &bootloader   &sys_reset  &trans  &trans
-      >;
-    };
-
-    // 6. Extra layer -- in case your layout requires a few extra keys (behind a dead key?)
-    //                -- is often overloaded in alternative keymaps (like AZERTY for example)
-    extra_layer: extra_layer {
-      display-name = "Extra";
-      bindings = <
-        &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans  &trans  &trans
-        &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans  &trans  &trans
-                                &trans  &trans  &trans     &trans  &trans  &trans
       >;
     };
   };

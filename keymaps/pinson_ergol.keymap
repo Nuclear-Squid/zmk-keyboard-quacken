@@ -1,0 +1,104 @@
+#include "quacken.keymap"
+
+#define ODK_LAYER       EXTRA_LAYERS_START_INDEX
+#define ODK_SHIFT_LAYER EXTRA_LAYERS_START_INDEX + 1
+#define EXTRA_SYM_LAYER EXTRA_LAYERS_START_INDEX + 2
+
+// Override the base layer to replace Ergo‑L’s OneDeadKey
+&base_layer {
+  display-name = "Base";
+  bindings = <
+    &kp TAB    &kp Q  &kp W  &kp E  &kp R  &kp T        &kp N  &kp U  &kp I     &dead_key &kp P      &kp BACKSPACE
+    &kp ESCAPE HRM_A  HRM_S  HRM_D  HRM_F  &kp G        &kp H  HRM_J  HRM_K     HRM_L     HRM_SEMI   &kp ENTER
+    &kp LSHIFT &kp Z  &kp X  &kp C  &kp V  &kp B        &kp Y  &kp M  &kp COMMA &kp DOT   &kp FSLH   &kp RSHIFT
+    LEFT_THUMB_TUCK  LEFT_THUMB_HOME  LEFT_THUMB_REACH    RIGHT_THUMB_REACH  RIGHT_THUMB_HOME  RIGHT_THUMB_TUCK
+  >;
+};
+
+// Override the symbols layer to add a sticky layer to the missing symbols
+&symbols_layer {
+  display-name = "Symbols";
+  bindings = <
+    &trans  S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &trans
+    &trans  S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &trans
+    &trans  S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &trans
+    &EZ_SL(EXTRA_SYM_LAYER)  &kp SPACE  &EZ_SL(NUM_ROW_LAYER)     &trans  &kp RALT  &trans
+  >;
+};
+
+/ {
+  behaviors {
+    // Swap out the standard dead key for a one-shot layer to override some of the keys
+    dead_key: dead_key {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&EZ_SL(ODK_LAYER)>, <&kp O>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+      keep-mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+
+    // Macro to tap Ergo‑L’s ODK before the specified key
+    odk: one_dead_key_macro {
+      compatible = "zmk,behavior-macro-one-param";
+      #binding-cells = <1>;
+      tap-ms = <0>;
+      wait-ms = <0>;
+      bindings
+        = <&macro_tap &kp O>
+        , <&macro_param_1to1>
+        , <&macro_tap &kp MACRO_PLACEHOLDER>
+        ;
+    };
+
+    // Same as `odk`, but adds Shift to the speicied key
+    odks: one_dead_key_shift_macro {
+      compatible = "zmk,behavior-macro-one-param";
+      #binding-cells = <1>;
+      tap-ms = <0>;
+      wait-ms = <0>;
+      bindings
+        = <&macro_tap &kp O>
+        , <&macro_press &kp LSHIFT>
+        , <&macro_param_1to1>
+        , <&macro_tap &kp MACRO_PLACEHOLDER>
+        , <&macro_release &kp LSHIFT>
+        ;
+    };
+  };
+
+  // Extra layers defned specifically for this keymap.
+  // They are appended at the end of the base keymap.
+  keymap {
+    compatible = "zmk,keymap";
+
+    one_dead_key {
+      display-name = "OneDeadKey";
+      bindings = <
+        &trans  &odk Q  &odk W  &odk E  &odk R  &kp Z      &odk N  &kp Y    &odk I     &odk O   &odk P    &trans
+        &trans  &odk A  &odk S  &odk D  &odk F  &kp B      &odk H  &odk J   &odk K     &odk L   &odk SEMI &trans
+        &trans  &trans  &odk Z  &odk C  &odk V  &trans     &trans  &kp FSLH &odk COMMA &odk DOT &trans    &trans
+           &EZ_SL(ODK_SHIFT_LAYER)  &odk SPACE  &trans     &trans  &odk SPACE  &trans
+      >;
+    };
+
+    shifted_one_dead_key {
+      display-name = "ShiftedOneDeadKey";
+      bindings = <
+        &trans   &odks Q  &odks W  &odks E  &odks R  &kp LS(Z)      &odks N  &kp LS(Y)    &odks I     &odks O   &odks P    &trans
+        &trans   &odks A  &odks S  &odks D  &odks F  &kp LS(B)      &odks H  &odks J      &odks K     &odks L   &odks SEMI &trans
+        &trans   &trans   &odks Z  &odks C  &odks V  &trans         &trans   &kp LS(FSLH) &odks COMMA &odks DOT &trans     &trans
+                            &trans   &odks SPACE  &trans      &trans   &odks SPACE  &trans
+      >;
+    };
+
+    extra_symbols {
+      display-name = "ExtraSymbols";
+      bindings = <
+        &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans  &trans  &trans
+        &trans  S_TILDE &trans  &trans  S_HASH  &trans     &trans  S_PIPE  &trans  &trans  S_QMARK &trans
+        &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans  &trans  &trans
+                                &trans  &trans  &trans     &trans  &trans  &trans
+      >;
+    };
+  };
+};

@@ -1,28 +1,28 @@
 # This file describes the keymaps that will be built by the GitHub Actions CI.
 # Each keymap is an "artefact", whose name goes as follows:
 #
-#   `quacken_[variant]_[dual_keys]_[options]`
+#   `quacken_[variant]_[layout]_[hold_taps]_[options]`
 #
 # - [variant] (required): specifies the keyboard variant the firmware is meant for
 #   - flex (integrated rp2040 micro-controller, any version number)
 #   - zero (promicro, you’ll have to update the `board` field to have your actual promicro board)
 #
-# - [dual_keys] (required): specifies the flavor of tap/hold keys used in the keympap
-#   - `ez`: no dual keys, VERY simple config
+# - [hold_taps]: specifies the flavor of tap/hold keys used in the keympap
+#   - `HT_NONE`: no hold-taps, VERY simple config
 #     (recommended for absolute beginners)
-#   - `lt`: layer taps on thumb keys
+#   - `HT_THUMB_TAPS`: hold-taps on thumb keys
 #     (recommended for beginner/intermediate users)
-#   - `hrm`: homerow-mods enabled and refactored thumb keys
+#   - `HT_HOME_ROW_MODS`: homerow-mods enabled and refactored thumb keys
 #     (recommended for intermediate/advanced users)
-#   - `vim`: same as `hrm`, but with two separate layers instead of `NavNum`:
+#
+# - [options]:
+#   - `VIM_NAVIGATION`: two separate layers instead of `NavNum`:
 #     - VimNav: Vim-like navigation layer (e.g. arrows on HJKL)
 #     - NumRow: numbers on the homerow, shift+numbers on the top row
-#     (recommended for advanced users and Vim addicts)
-#
-# - [options] (not required):
-#   - `lefty`: space on the left thumb, backspace on the right thumb
+#     (recommended for Vim addicts)
+#   - `LEFT_HAND_SPACE`: space on the left thumb, backspace on the right thumb
 #     (might increse the workload of the left thumb too much)
-#   - `shift`: add shift as a pinky homerow-mod
+#   - `HRM_SHIFT`: add shift as a pinky homerow-mod
 #     (useful for shortcuts, NOT MEANT to type text)
 #   - [layout]: change the underlying layout from qwerty to one of:
 #     - `azerty`
@@ -46,14 +46,12 @@ include:
     # Quacken Flex, default config
   - board: quacken_flex
     artifact-name: quacken_flex_hrm
-    cmake-args: >
-      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DDTS_EXTRA_CPPFLAGS="-DDUAL_KEYS=HOME_ROW_MODS"
+    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
 
-    # Quacken Flex, Vim config
+    # Quacken Flex, Ergol + Vim + hrm_shift config
   - board: quacken_flex
-    artifact-name: quacken_flex_vim_shift
+    artifact-name: quacken_flex_ergol_hrm_vim_shift
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DDTS_EXTRA_CPPFLAGS="-DHRM_SHIFT -DDUAL_KEYS=HOME_ROW_MODS_VIM"
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL -DVIM_NAVIGATION -DHRM_SHIFT"
 

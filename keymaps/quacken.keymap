@@ -1,7 +1,3 @@
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
-
-
 /******************************************************************************
  * Layout-specific actions and symbols.
 ******************************************************************************/
@@ -16,14 +12,12 @@
 
 // #define MACOS
 
-#include "aliases.h"
-
 
 /******************************************************************************
  * Hold-Taps
 ******************************************************************************/
 
-// Uncomment one of the folowing lines to pick your preferred hold-tap configuration:
+// Uncomment one of the folowing lines to pick your preferred hold-tap config:
 
 // #define HT_NONE
 // #define HT_THUMB_TAPS
@@ -41,8 +35,6 @@
 // instead of the hold action. Again, keep the default value if unsure.
 
 // #define QUICK_TAP 200
-
-#include "hold_taps.dtsi"
 
 
 /******************************************************************************
@@ -72,9 +64,8 @@
  * Generic Keymap
 ******************************************************************************/
 
-// Note:
-// - symbol and action names are defined in `aliases*.h`
-// - thumb keys and homerow mods are defined in `mod_taps.dtsi`
+#include "aliases.h"      // defines symbols and actions
+#include "hold_taps.dtsi" // defines thumb keys and homerow mods
 
 / {
   keymap {

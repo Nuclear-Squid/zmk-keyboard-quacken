@@ -21,18 +21,14 @@
 
 
 /**
- * Dual Keys
+ * Home Rew
  */
 
-#define NO_DUAL_KEYS  1
-#define LAYER_TAPS    2
-#define HOME_ROW_MODS 3
-
-#ifndef DUAL_KEYS
-  #define DUAL_KEYS HOME_ROW_MODS
+#if !defined HT_NONE && !defined HT_THUMB_TAPS && !defined HT_HOME_ROW_MODS
+#define HT_HOME_ROW_MODS
 #endif
 
-#if DUAL_KEYS == HOME_ROW_MODS
+#ifdef HT_HOME_ROW_MODS
   #define HRM_S &hrm LGUI S
   #define HRM_D &hrm LCTL D
   #define HRM_F &hrm LALT F
@@ -83,21 +79,21 @@
   #define RIGHT_THUMB_HRM &lt CHOSEN_NAV_LAYER SPACE
 #endif
 
-#if DUAL_KEYS == NO_DUAL_KEYS
+#ifdef HT_NONE
   #define LEFT_THUMB_TUCK    &kp LALT
   #define LEFT_THUMB_HOME    &kp LCTL
   #define LEFT_THUMB_REACH   &kp LGUI
   #define RIGHT_THUMB_REACH  &mo CHOSEN_NAV_LAYER
   #define RIGHT_THUMB_HOME   &kp SPACE
   #define RIGHT_THUMB_TUCK   &mo SYMBOLS_LAYER
-#elif DUAL_KEYS == LAYER_TAPS
+#elifdef HT_THUMB_TAPS
   #define LEFT_THUMB_TUCK    &EZ_SK(LSHIFT)
   #define LEFT_THUMB_HOME    LEFT_THUMB_LT
   #define LEFT_THUMB_REACH   &mt LGUI TAB
   #define RIGHT_THUMB_REACH  &mt LALT ENTER
   #define RIGHT_THUMB_HOME   RIGHT_THUMB_LT
   #define RIGHT_THUMB_TUCK   &EZ_SL(SYMBOLS_LAYER)
-#elif DUAL_KEYS == HOME_ROW_MODS
+#elifdef HT_HOME_ROW_MODS
   #define LEFT_THUMB_TUCK    &EZ_SK(LSHIFT)
   #define LEFT_THUMB_HOME    LEFT_THUMB_HRM
   #define LEFT_THUMB_REACH   &sc CHOSEN_HRM_LAYER TAB

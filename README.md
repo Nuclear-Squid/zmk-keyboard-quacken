@@ -3,7 +3,7 @@
 A Zephyr module to build your own ZMK firmware for the Quacken.
 
 
-## Build With GitHub Actions
+## Build With GitHub Actions (GHA)
 
 This is the recommended method for most users.
 
@@ -19,7 +19,7 @@ Your firmware will now be built automatically by GitHub’s CI:
 - check the `Actions` tab
 - wait for the latest action task to complete
 - click on this task
-- download the `.uf2` artifact matching your keyboard (`flex` or `zero`)
+- download the `zmk_quacken_{flex,zero}.uf2` artifact matching your keyboard model
 - [flash](#flash)
 
 ### Using github.com

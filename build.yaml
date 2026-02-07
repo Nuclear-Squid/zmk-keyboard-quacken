@@ -1,33 +1,28 @@
 # This file describes the keymaps that will be built by the GitHub Actions CI.
-# Each keymap is an "artefact", whose name goes as follows:
+# Most options are defined by CMake arguments, see definitions in keymaps/quacken.keymap.
+# Each keymap is an "artifact", whose name goes as follows:
 #
 #   `quacken_[variant]_[layout]_[hold_taps]_[options]`
 #
-# - [variant] (required): specifies the keyboard variant the firmware is meant for
-#   - flex (integrated rp2040 micro-controller, any version number)
+# - [variant]:
+#   - flex (integrated rp2040 micro-controller)
 #   - zero (promicro, you’ll have to update the `board` field to have your actual promicro board)
 #
-# - [hold_taps]: specifies the flavor of tap/hold keys used in the keympap
-#   - `HT_NONE`: no hold-taps, VERY simple config
-#     (recommended for absolute beginners)
-#   - `HT_THUMB_TAPS`: hold-taps on thumb keys
-#     (recommended for beginner/intermediate users)
-#   - `HT_HOME_ROW_MODS`: homerow-mods enabled and refactored thumb keys
-#     (recommended for intermediate/advanced users)
+# - [layout]: (qwerty when omitted)
+#   - `ergol`     (KB_LAYOUT_ERGOL)
+#   - `lafayette` (KB_LAYOUT_QWERTY_LAFAYETTE)
+#   - `azerty`    (KB_LAYOUT_AZERTY + specific keymap file)
+#   - ... probably more to come in the future
+#
+# - [hold_taps]: (hrm when omitted)
+#   - `ez`  (HT_NONE): no hold-taps, VERY simple config (recommended for absolute beginners)
+#   - `tt`  (HT_THUMB_TAPS): hold-taps on thumb keys (recommended for beginner/intermediate users)
+#   - `hrm` (HT_HOME_ROW_MODS): homerow-mods enabled and refactored thumb keys (default)
 #
 # - [options]:
-#   - `VIM_NAVIGATION`: two separate layers instead of `NavNum`:
-#     - VimNav: Vim-like navigation layer (e.g. arrows on HJKL)
-#     - NumRow: numbers on the homerow, shift+numbers on the top row
-#     (recommended for Vim addicts)
-#   - `LEFT_HAND_SPACE`: space on the left thumb, backspace on the right thumb
-#     (might increse the workload of the left thumb too much)
-#   - `HRM_SHIFT`: add shift as a pinky homerow-mod
-#     (useful for shortcuts, NOT MEANT to type text)
-#   - [layout]: change the underlying layout from qwerty to one of:
-#     - `azerty`
-#     - `ergol`
-#     - ... probably more in the future
+#   - `vim` (VIM_NAVIGATION): use two `VimNav` and `NumRow` layers instead of `NavNum`
+#   - `left` (LEFT_HAND_SPACE): space on the left thumb, backspace on the right thumb
+#   - `shift` (HRM_SHIFT): add shift as a pinky homerow-mod
 
 include:
 
@@ -40,18 +35,24 @@ include:
     # Quacken Zero + SparkFun RP2040, default config
   - board: sparkfun_pro_micro_rp2040
     shield: quacken_zero
-    artifact-name: quacken_zero_hrm
+    artifact-name: quacken_zero
     cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
 
     # Quacken Flex, default config
   - board: quacken_flex
-    artifact-name: quacken_flex_hrm
+    artifact-name: quacken_flex
     cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
 
     # Quacken Flex, Ergol + Vim + hrm_shift config
   - board: quacken_flex
-    artifact-name: quacken_flex_ergol_hrm_vim_shift
+    artifact-name: quacken_flex_ergol_vim_shift
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
       -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL -DVIM_NAVIGATION -DHRM_SHIFT"
 
+    # Quacken Flex, Azerty + thumb-taps config
+  - board: quacken_flex
+    artifact-name: quacken_flex_azerty_tt
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken_azerty.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_AZERTY -DHT_THUMB_TAPS"

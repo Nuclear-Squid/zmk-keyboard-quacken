@@ -32,10 +32,17 @@ test)
 *)
 	echo "Usage:"
 	echo "    $0 TARGET [optional_C++_flags]"
+	echo
 	echo "where TARGET can be:"
 	echo "    - flex: Quacken Flex 25.10+ / embedded RP2040"
 	echo "    - zero: Quacken Zero 25.07+ / SparkFun Pro Micro RP2040"
 	echo "    - test: dummy tester shield / SparkFun Pro Micro RP2040"
+	echo
+	echo "[optional_C++_flags] are defined in keymaps/quacken.keymap:"
+	echo "    - layout (qwerty by default): KB_LAYOUT_ERGOL, KB_LAYOUT_QWERTY_LAFAYETTE..."
+	echo "    - hold-taps (HRM by default): HT_NONE, HT_THUMB_TAPS, HT_HOME_ROW_MODS..."
+	echo "    - options: VIM_NAVIGATION, LEFT_HAND_SPACE, HRM_SHIFT..."
+	echo
 	exit 1
 	;;
 esac

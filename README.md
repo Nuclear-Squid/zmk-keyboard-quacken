@@ -19,7 +19,7 @@ Your firmware will now be built automatically by GitHub’s CI:
 - check the `Actions` tab
 - wait for the latest action task to complete
 - click on this task
-- download the `.uf2` artifact
+- download the `.uf2` artifact matching your keyboard (`flex` or `zero`)
 - [flash](#flash)
 
 ### Using github.com
@@ -97,7 +97,7 @@ Once the ZMK/Zephyr toolchain is set, the Quacken firmware is built as follows:
 ```
 
 - `flex` or `zero` relates to the Quacken variant in use
-- `optional_C++_flags` enables keymap options defined in `build.yml`
+- `optional_C++_flags` enables keymap options defined in `keymap/quacken.keymap`
 
 Examples:
 
@@ -108,8 +108,8 @@ Examples:
 # build the default Quacken Flex firmware
 ./build flex
 
-# build a Quacken Flex firmware with homerow-mods
-./build flex -DDUAL_KEYS=HOME_ROW_MODS
+# build a Quacken Flex firmware with thumb-taps instead of homerow-mods
+./build flex -DHT_THUMB_TAPS
 ```
 
 The firmware (`zmk_quacken_{flex,zero}.uf2`) can be found in the current directory and is ready to be [flashed](#flash).

@@ -24,45 +24,42 @@
 #   - `left` (LEFT_HAND_SPACE): space on the left thumb, backspace on the right thumb
 #   - `shift` (HRM_SHIFT): add shift as a pinky homerow-mod
 
-variables:
-  keymap: /__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-
 include:
 
     # dummy firmware, just making sure we can build for the RP2040
   - board: sparkfun_pro_micro_rp2040
     shield: tester_pro_micro
     artifact-name: quacken_test
-    cmake-args: -DKEYMAP_FILE=${keymap}
+    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
 
     # Quacken Zero + SparkFun RP2040, default config
   - board: sparkfun_pro_micro_rp2040
     shield: quacken_zero
     artifact-name: quacken_zero
-    cmake-args: -DKEYMAP_FILE=${keymap}
+    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
 
     # Quacken Flex, default config
   - board: quacken_flex
     artifact-name: quacken_flex
-    cmake-args: -DKEYMAP_FILE=${keymap}
+    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
 
     # Quacken Flex, Ergol + Vim + hrm_shift config
   - board: quacken_flex
     artifact-name: quacken_flex_ergol_vim_shift
     cmake-args: >
-      -DKEYMAP_FILE=${keymap}
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
       -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DVIM_NAVIGATION;-DHRM_SHIFT"
 
     # Quacken Flex, Azerty + thumb-taps config
   - board: quacken_flex
     artifact-name: quacken_flex_azerty_tt
     cmake-args: >
-      -DKEYMAP_FILE=${keymap}
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
       -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_AZERTY;-DHT_THUMB_TAPS"
 
     # Quacken Flex, Ergol + Ocsine config
   - board: quacken_flex
     artifact-name: quacken_flex_ergol_ocsine
     cmake-args: >
-      -DKEYMAP_FILE=${keymap}
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
       -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DCFG_OCSINE"

@@ -1,4 +1,6 @@
+#ifndef KB_LAYOUT_AZERTY
 #define KB_LAYOUT_AZERTY
+#endif
 
 #include "quacken.keymap"
 
@@ -15,7 +17,7 @@
 };
 
 / {
-  // Extra layers defined specifically for this keymap, appended end to the base keymap.
+  // Extra layers defined specifically for this keymap, appended to the base keymap.
   keymap {
     compatible = "zmk,keymap";
 

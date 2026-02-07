@@ -1,4 +1,6 @@
+#ifndef KB_LAYOUT_ERGOL
 #define KB_LAYOUT_ERGOL
+#endif
 
 #include "quacken.keymap"
 

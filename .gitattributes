@@ -1,0 +1,11 @@
+# C is a good fallback for DTS files
+*.keymap linguist-language=c
+*.dtsi   linguist-language=c
+*.dts    linguist-language=c
+
+# INI is a decent fallback for _defconfig files
+*_defconfig linguist-language=ini
+
+# stil looking for a Kconfig fallback...
+# https://www.kernel.org/doc/html/latest/kbuild/kconfig-language.html#kconfig-syntax
+# Kconfig.* linguist-language=?

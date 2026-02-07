@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 TARGET=$1
 shift
+IFS=";"
 CPP_FLAGS=$*
+IFS=" "
 
 # uncomment the following line to enable USB logging
 USB_LOGGING="-S zmk-usb-logging"
@@ -39,9 +41,9 @@ test)
 	echo "    - test: dummy tester shield / SparkFun Pro Micro RP2040"
 	echo
 	echo "[optional_C++_flags] are defined in keymaps/quacken.keymap:"
-	echo "    - layout (qwerty by default): KB_LAYOUT_ERGOL, KB_LAYOUT_QWERTY_LAFAYETTE..."
-	echo "    - hold-taps (HRM by default): HT_NONE, HT_THUMB_TAPS, HT_HOME_ROW_MODS..."
-	echo "    - options: VIM_NAVIGATION, LEFT_HAND_SPACE, HRM_SHIFT..."
+	echo "    - layout (qwerty by default): KB_LAYOUT_{ERGOL,AZERTY,QWERTY_LAFAYETTE...}"
+	echo "    - hold-taps (HRM by default): HT_{NONE,THUMB_TAPS,HOME_ROW_MODS}  "
+	echo "    - options: VIM_NAVIGATION, LEFT_HAND_SPACE, HRM_SHIFT, MACOS"
 	echo
 	exit 1
 	;;

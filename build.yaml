@@ -58,11 +58,11 @@ include:
     artifact-name: quacken_flex_azerty_tt
     cmake-args: >
       -DKEYMAP_FILE=${keymap}
-      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_AZERTY -DHT_THUMB_TAPS"
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_AZERTY;-DHT_THUMB_TAPS"
 
     # Quacken Flex, Ergol + Ocsine config
   - board: quacken_flex
     artifact-name: quacken_flex_ergol_ocsine
     cmake-args: >
       -DKEYMAP_FILE=${keymap}
-      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL -DCFG_OCSINE"
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DCFG_OCSINE"

@@ -61,7 +61,7 @@
 
 
 /******************************************************************************
- * Generic Keymap
+ * Keymap
 ******************************************************************************/
 
 #include "aliases.h"      // defines symbols and actions
@@ -149,3 +149,10 @@
     };
   };
 };
+
+// Some layouts require extra layers to fit on the Quacken.
+#ifdef KB_LAYOUT_AZERTY
+#include "extra_layers_azerty.h"
+#elif defined KB_LAYOUT_ERGOL && defined CFG_OCSINE
+#include "extra_layers_ergol_ocsine.h"
+#endif

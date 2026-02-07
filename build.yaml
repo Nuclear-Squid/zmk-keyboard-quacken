@@ -10,8 +10,8 @@
 #
 # - [layout]: (qwerty when omitted)
 #   - `ergol`     (KB_LAYOUT_ERGOL)
+#   - `azerty`    (KB_LAYOUT_AZERTY)
 #   - `lafayette` (KB_LAYOUT_QWERTY_LAFAYETTE)
-#   - `azerty`    (KB_LAYOUT_AZERTY + specific keymap file)
 #   - ... probably more to come in the future
 #
 # - [hold_taps]: (hrm when omitted)
@@ -54,5 +54,12 @@ include:
   - board: quacken_flex
     artifact-name: quacken_flex_azerty_tt
     cmake-args: >
-      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken_azerty.keymap
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
       -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_AZERTY -DHT_THUMB_TAPS"
+
+    # Quacken Flex, Ergol + Ocsine config
+  - board: quacken_flex
+    artifact-name: quacken_flex_ergol_ocsine
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL -DCFG_OCSINE"

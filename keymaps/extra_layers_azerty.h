@@ -1,9 +1,3 @@
-#ifndef KB_LAYOUT_AZERTY
-#define KB_LAYOUT_AZERTY
-#endif
-
-#include "quacken.keymap"
-
 #define DK_LAYER EXTRA_LAYERS_START_INDEX
 
 &base_layer {

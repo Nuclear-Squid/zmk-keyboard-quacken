@@ -1,9 +1,3 @@
-#ifndef KB_LAYOUT_ERGOL
-#define KB_LAYOUT_ERGOL
-#endif
-
-#include "quacken.keymap"
-
 #define ODK_LAYER       EXTRA_LAYERS_START_INDEX
 #define ODK_SHIFT_LAYER EXTRA_LAYERS_START_INDEX + 1
 #define EXTRA_SYM_LAYER EXTRA_LAYERS_START_INDEX + 2

@@ -26,6 +26,18 @@
  *   ~[]_# |!;:?
  */
 
+// numbers row
+#define S_N0    &kp LS(N0)
+#define S_N1    &kp LS(N1)
+#define S_N2    &kp LS(N2)
+#define S_N3    &kp LS(N3)
+#define S_N4    &kp LS(N4)
+#define S_N5    &kp LS(N5)
+#define S_N6    &kp LS(N6)
+#define S_N7    &kp LS(N7)
+#define S_N8    &kp LS(N8)
+#define S_N9    &kp LS(N9)
+
 // first row
 #define S_CARET &kp RA(N9)
 #define S_LT    &kp NUBS

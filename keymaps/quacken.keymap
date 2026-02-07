@@ -152,7 +152,7 @@
 
 // Some layouts require extra layers to fit on the Quacken.
 #ifdef KB_LAYOUT_AZERTY
-#include "extra_layers_azerty.h"
+#include "extra_layers_azerty.dtsi"
 #elif defined KB_LAYOUT_ERGOL && defined CFG_OCSINE
-#include "extra_layers_ergol_ocsine.h"
+#include "extra_layers_ergol_ocsine.dtsi"
 #endif

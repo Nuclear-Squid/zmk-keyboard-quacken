@@ -51,7 +51,7 @@ include:
     artifact-name: quacken_flex_ergol_vim_shift
     cmake-args: >
       -DKEYMAP_FILE=${keymap}
-      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL -DVIM_NAVIGATION -DHRM_SHIFT"
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DVIM_NAVIGATION;-DHRM_SHIFT"
 
     # Quacken Flex, Azerty + thumb-taps config
   - board: quacken_flex

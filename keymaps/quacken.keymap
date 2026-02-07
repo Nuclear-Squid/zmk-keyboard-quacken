@@ -1,3 +1,7 @@
+// This is an implementation of Selenium for the Quacken:
+// https://github.com/OneDeadKey/selenium
+
+
 /******************************************************************************
  * Layout-specific actions and symbols.
 ******************************************************************************/

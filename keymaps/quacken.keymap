@@ -36,9 +36,9 @@
 // #define TAPPING_TERM 300
 
 // This defines how quickly (in ms) you need to press and release a hold-tap
-// with the "hold-prefered" flavor for it to be considered a tap. These
-// hold-taps include the ones who don’t produce text when tapped.
-// Keep this value low if you press Enter or Escape by mistake too often
+// with the "hold-preferred" flavor for it to be considered a tap. These
+// hold-taps include the ones that don’t produce text when tapped.
+// Keep this value low if you press Enter or Escape by mistake too often.
 
 // #define SHORT_TAPPING_TERM 150
 

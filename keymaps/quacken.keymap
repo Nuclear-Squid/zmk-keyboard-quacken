@@ -164,8 +164,9 @@
   };
 };
 
-// Some layouts require extra layers to fit on the Quacken.
-// This file will automatically include them if the relevant options are
-// specified. Feel free to replace this include statement with whatever extra
-// layer file you want, if you plan on customising them.
-#include "extra_layers/resolver.h"
+
+#ifdef KB_LAYOUT_AZERTY
+  #include "azerty.dtsi"
+#elif defined KB_LAYOUT_ERGOL && defined CFG_GENERIC_HUMMINGBIRD
+  #include "ergol_hummingbird.dtsi"
+#endif

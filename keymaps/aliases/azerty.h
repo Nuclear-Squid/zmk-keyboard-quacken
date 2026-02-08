@@ -1,5 +1,8 @@
 #include <dt-bindings/zmk/keys.h>
 
+#define SHIFTED_NUMBERS
+#include "numbers.h"
+
 /**
  * Action Combos
  */
@@ -60,6 +63,3 @@
 // extra
 #define S_COMMA &kp M
 #define S_DOT   &kp LS(COMMA)
-
-#define SHIFTED_NUMBERS
-#include "numbers.h"

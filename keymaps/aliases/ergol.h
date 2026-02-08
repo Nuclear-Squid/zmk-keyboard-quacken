@@ -1,5 +1,7 @@
 #include <dt-bindings/zmk/keys.h>
 
+#include "numbers.h"
+
 /**
  * Action Combos
  */
@@ -60,5 +62,3 @@
 // extra
 #define S_COMMA &kp DOT
 #define S_DOT   &kp N
-
-#include "numbers.h"

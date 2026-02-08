@@ -76,7 +76,7 @@
   #define RIGHT_THUMB_HRM &magic_backspace
 #else
   #define LEFT_THUMB_LT   &mt LCTL BACKSPACE
-  #define RIGHT_THUMB_LT  &lt NAV_LAYER SPACE
+  #define RIGHT_THUMB_LT  &magic_space
   #define LEFT_THUMB_HRM  &sc NAV_LAYER BACKSPACE
   #define RIGHT_THUMB_HRM &lt NAV_LAYER SPACE
 #endif
@@ -110,17 +110,17 @@
     magic_backspace: magic_backspace {
       compatible = "zmk,behavior-mod-morph";
       #binding-cells = <0>;
-      bindings = <&sc NUM_NAV_LAYER BACKSPACE>, <&lt NUM_NAV_LAYER SPACE>;
+      bindings = <&sc NAV_LAYER BACKSPACE>, <&lt NAV_LAYER SPACE>;
       mods = <MOD_LSFT>;
       keep-mods = <MOD_LSFT>;
     };
 
-    magic_backspace_vim: magic_backspace_vim {
+    magic_space: magic_space {
       compatible = "zmk,behavior-mod-morph";
       #binding-cells = <0>;
-      bindings = <&sc VIM_NAV_LAYER BACKSPACE>, <&lt VIM_NAV_LAYER SPACE>;
-      mods = <MOD_LSFT>;
-      keep-mods = <MOD_LSFT>;
+      bindings = <&lt NAV_LAYER SPACE>, <&sc NAV_LAYER BACKSPACE>;
+      mods = <MOD_LCTL>;
+      keep-mods = <MOD_LCTL>;
     };
   };
 };

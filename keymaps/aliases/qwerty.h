@@ -14,28 +14,12 @@
 #define X_SAVE  &kp CMD(S)
 #define X_ALL   &kp CMD(A)
 
-#define X_SHTAB &kp RS(TAB)
-#define X_PREV  &kp LA(LEFT)
-#define X_NEXT  &kp LA(RIGHT)
-
 /**
  * Arsenik Symbols:
  *   ^<>$% @&*'`
  *   {()}= \+-/"
  *   ~[]_# |!;:?
  */
-
-// numbers row
-#define S_N0    &kp N0
-#define S_N1    &kp N1
-#define S_N2    &kp N2
-#define S_N3    &kp N3
-#define S_N4    &kp N4
-#define S_N5    &kp N5
-#define S_N6    &kp N6
-#define S_N7    &kp N7
-#define S_N8    &kp N8
-#define S_N9    &kp N9
 
 // first row
 #define S_CARET &kp CARET
@@ -76,3 +60,5 @@
 // extra
 #define S_COMMA &kp COMMA
 #define S_DOT   &kp DOT
+
+#include "numbers.h"

@@ -11,16 +11,16 @@
 // Keyboard Layout
 
 #ifdef KB_LAYOUT_ERGOL
-#include "aliases_ergol.h"
+#include "aliases/ergol.h"
 
 #elifdef KB_LAYOUT_AZERTY
-#include "aliases_azerty.h"
+#include "aliases/azerty.h"
 
 #elifdef KB_LAYOUT_QWERTY_LAFAYETTE
-#include "aliases_qwerty_lafayette.h"
+#include "aliases/qwerty_lafayette.h"
 
 #else
-#include "aliases_qwerty.h"
+#include "aliases/qwerty.h"
 
 #endif
 

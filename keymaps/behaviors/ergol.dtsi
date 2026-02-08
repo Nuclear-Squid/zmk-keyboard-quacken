@@ -1,0 +1,40 @@
+/ {
+  behaviors {
+    // Swap out the standard dead key for a one-shot layer to override some of the keys
+    dead_key: dead_key {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&EZ_SL(ODK_LAYER)>, <&kp O>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
+      keep-mods = <(MOD_LSFT|MOD_RSFT)>;
+    };
+
+    // Macro to tap Ergo‑L’s ODK before the specified key
+    odk: one_dead_key_macro {
+      compatible = "zmk,behavior-macro-one-param";
+      #binding-cells = <1>;
+      tap-ms = <0>;
+      wait-ms = <0>;
+      bindings
+        = <&macro_tap &kp O>
+        , <&macro_param_1to1>
+        , <&macro_tap &kp MACRO_PLACEHOLDER>
+        ;
+    };
+
+    // Same as `odk`, but adds Shift to the speicied key
+    odks: one_dead_key_shift_macro {
+      compatible = "zmk,behavior-macro-one-param";
+      #binding-cells = <1>;
+      tap-ms = <0>;
+      wait-ms = <0>;
+      bindings
+        = <&macro_tap &kp O>
+        , <&macro_press &kp LSHIFT>
+        , <&macro_param_1to1>
+        , <&macro_tap &kp MACRO_PLACEHOLDER>
+        , <&macro_release &kp LSHIFT>
+        ;
+    };
+  };
+};

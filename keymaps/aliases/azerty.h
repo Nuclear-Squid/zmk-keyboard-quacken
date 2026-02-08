@@ -1,4 +1,3 @@
-#include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
 /**
@@ -15,28 +14,12 @@
 #define X_SAVE  &kp CMD(S)
 #define X_ALL   &kp CMD(Q)
 
-#define X_SHTAB &kp RS(TAB)
-#define X_PREV  &kp LA(LEFT)
-#define X_NEXT  &kp LA(RIGHT)
-
 /**
  * Arsenik Symbols:
  *   ^<>$% @&*'`
  *   {()}= \+-/"
  *   ~[]_# |!;:?
  */
-
-// numbers row
-#define S_N0    &kp LS(N0)
-#define S_N1    &kp LS(N1)
-#define S_N2    &kp LS(N2)
-#define S_N3    &kp LS(N3)
-#define S_N4    &kp LS(N4)
-#define S_N5    &kp LS(N5)
-#define S_N6    &kp LS(N6)
-#define S_N7    &kp LS(N7)
-#define S_N8    &kp LS(N8)
-#define S_N9    &kp LS(N9)
 
 // first row
 #define S_CARET &kp RA(N9)
@@ -78,31 +61,5 @@
 #define S_COMMA &kp M
 #define S_DOT   &kp LS(COMMA)
 
-/ {
-  macros {
-    kpc: circumflex {
-      compatible = "zmk,behavior-macro-one-param";
-      #binding-cells = <1>;
-      tap-ms = <0>;
-      wait-ms = <0>;
-      bindings
-        = <&macro_tap &kp LBKT>
-        , <&macro_pause_for_release>
-        , <&macro_param_1to1>
-        , <&kp MACRO_PLACEHOLDER>
-        ;
-    };
-    spc: space_after_dk {
-      compatible = "zmk,behavior-macro-one-param";
-      #binding-cells = <1>;
-      tap-ms = <0>;
-      wait-ms = <0>;
-      bindings
-        = <&macro_param_1to1>
-        , <&kp MACRO_PLACEHOLDER>
-        , <&macro_pause_for_release>
-        , <&macro_tap &kp SPACE>
-        ;
-    };
-  };
-};
+#define SHIFTED_NUMBERS
+#include "numbers.h"

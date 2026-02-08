@@ -78,8 +78,8 @@
  * Keymap
 ******************************************************************************/
 
-#include "aliases.h"      // defines symbols and actions
-#include "hold_taps.dtsi" // defines thumb keys and homerow mods
+#include "aliases.h" // defines symbols and actions
+#include "behaviors/hold_taps.dtsi" // defines thumb keys and homerow mods
 
 / {
   keymap {
@@ -165,8 +165,7 @@
 };
 
 // Some layouts require extra layers to fit on the Quacken.
-#ifdef KB_LAYOUT_AZERTY
-#include "extra_layers_azerty.dtsi"
-#elif defined KB_LAYOUT_ERGOL && defined CFG_OCSINE
-#include "extra_layers_ergol_ocsine.dtsi"
-#endif
+// This file will automatically include them if the relevant options are
+// specified. Feel free to replace this include statement with whatever extra
+// layer file you want, if you plan on customising them.
+#include "extra_layers/resolver.h"

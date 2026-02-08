@@ -78,8 +78,8 @@
  * Keymap
 ******************************************************************************/
 
-#include "aliases.h" // defines symbols and actions
-#include "behaviors/hold_taps.dtsi" // defines thumb keys and homerow mods
+#include "aliases.h"      // defines symbols and actions
+#include "hold_taps.dtsi" // defines thumb keys and homerow mods
 
 / {
   keymap {

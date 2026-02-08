@@ -62,4 +62,4 @@ include:
     artifact-name: quacken_flex_ergol_hummingbird
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DCFG_GENERIC_HUMMINGBIRD"
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DHUMMINGBIRD"

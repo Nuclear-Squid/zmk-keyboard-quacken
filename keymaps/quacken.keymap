@@ -157,7 +157,7 @@
         &trans  &kp F1  &kp F2  &kp F3  &kp F4  &none         &none &kp PAUSE_BREAK &kp PSCRN &kp SYSREQ &none      &trans
         &trans  &kp F5  &kp F6  &kp F7  &kp F8  &none         &none &kp LALT        &kp RCTL  &kp RGUI   &kp RSHIFT &trans
         &trans  &kp F9  &kp F10 &kp F11 &kp F12 &none         &none &none           &none     &none      &none      &trans
-                                &trans  &trans  &bootloader   &sys_reset  &trans  &trans
+                                &trans  &trans  &bootloader   &sys_reset  &trans  &studio_unlock
       >;
     };
   };

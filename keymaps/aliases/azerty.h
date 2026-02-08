@@ -1,8 +1,5 @@
 #include <dt-bindings/zmk/keys.h>
 
-#define SHIFTED_NUMBERS
-#include "numbers.h"
-
 /**
  * Action Combos
  */

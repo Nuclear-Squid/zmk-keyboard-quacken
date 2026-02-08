@@ -1,7 +1,5 @@
 #include <dt-bindings/zmk/keys.h>
 
-#include "numbers.h"
-
 /**
  * Action Combos
  */

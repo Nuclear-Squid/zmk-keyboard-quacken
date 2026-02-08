@@ -21,6 +21,9 @@
         requests
         anytree
         intelhex
+        grpcio-tools
+        protobuf
+        google
       ]
     ));
 
@@ -30,8 +33,13 @@
         cmake
         ninja
         dfu-util
+        protobuf
         minicom
       ];
+
+      shellHook = ''
+          export PATH="${self-pkgs.python.outPath}/bin:$PATH"
+      '';
     };
   };
 }

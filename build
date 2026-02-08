@@ -8,6 +8,10 @@ IFS=" "
 # uncomment the following line to enable USB logging
 USB_LOGGING="-S zmk-usb-logging"
 
+# uncomment the following line to enable ZMK Studio support
+ZMK_STUDIO_SNIPPET="-S studio-rpc-usb-uart"
+ZMK_STUDIO_CMAKE="-DCONFIG_ZMK_STUDIO=y"
+
 # comment out the following line to enable incremental builds
 PRISTINE="-p"
 
@@ -60,7 +64,8 @@ fi
 # build
 cd $ZMK_APP_DIR
 source ../.venv/bin/activate
-west build $PRISTINE $USB_LOGGING $BOARD -- $SHIELD \
+west build $PRISTINE $USB_LOGGING $ZMK_STUDIO_SNIPPET $BOARD -- $SHIELD \
+	$ZMK_STUDIO_CMAKE \
 	-DKEYMAP_FILE="$SCRIPT_DIR/keymaps/quacken.keymap" \
 	-DZMK_EXTRA_MODULES="$SCRIPT_DIR" \
 	-DDTS_EXTRA_CPPFLAGS="$CPP_FLAGS" && {

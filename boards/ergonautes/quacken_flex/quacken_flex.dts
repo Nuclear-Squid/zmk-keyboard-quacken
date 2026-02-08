@@ -3,6 +3,7 @@
 #include <raspberrypi/rpi_pico/rp2040.dtsi>
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <zephyr/dt-bindings/pinctrl/rpi-pico-rp2040-pinctrl.h>
+#include <physical_layouts.dtsi>
 
 / {
     chosen {
@@ -141,12 +142,68 @@
         triggers-per-rotation = <20>;
     };
 
+    // helper macro to place keys in ZMK Studio interface
+    //                                    w   h      x         y     rot rx ry
+    #define KEY(x, y) &key_physical_attrs 100 100 x y  0  0  0
+
     physical_layout0: physical_layout_0 { // First physical layout, use different naming for other layouts
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
         kscan = <&kscan_composite>; // Label of the kscan node, optional if all layouts use the same
         transform = <&default_transform>; // Label of the matrix transform for this layout
+        keys
+            = <KEY(000,  200)>
+            , <KEY(100,  220)>
+            , <KEY(200,  280)>
+            , <KEY(300,  315)>
+            , <KEY(400,  290)>
+            , <KEY(500,  270)>
+
+            , <KEY(500,  270)>
+            , <KEY(600,  290)>
+            , <KEY(700,  315)>
+            , <KEY(800,  280)>
+            , <KEY(900,  220)>
+            , <KEY(1000, 200)>
+
+            , <KEY(000,  100)>
+            , <KEY(100,  120)>
+            , <KEY(200,  180)>
+            , <KEY(300,  215)>
+            , <KEY(400,  190)>
+            , <KEY(500,  170)>
+
+            , <KEY(500,  170)>
+            , <KEY(600,  190)>
+            , <KEY(700,  215)>
+            , <KEY(800,  180)>
+            , <KEY(900,  120)>
+            , <KEY(1000, 100)>
+
+            , <KEY(000,    0)>
+            , <KEY(100,   20)>
+            , <KEY(200,   80)>
+            , <KEY(300,  115)>
+            , <KEY(400,   90)>
+            , <KEY(500,   70)>
+
+            , <KEY(500,   70)>
+            , <KEY(600,   90)>
+            , <KEY(700,  115)>
+            , <KEY(800,   80)>
+            , <KEY(900,   20)>
+            , <KEY(1000,   0)>
+
+            , <KEY(300,  (-100))>
+            , <KEY(400,  (-100))>
+            , <KEY(500,  (-100))>
+            , <KEY(600,  (-100))>
+            , <KEY(700,  (-100))>
+            , <KEY(800,  (-100))>
+            ;
     };
+
+    #undef KEY
 };
 
 rp2040_gpio: &gpio0 {

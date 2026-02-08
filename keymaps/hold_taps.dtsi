@@ -69,39 +69,39 @@
   #define REACH_TAP TAB
 #endif
 
-#ifdef LEFT_HAND_SPACE
-  #define LEFT_THUMB_LT   &hrm LCTL SPACE
-  #define RIGHT_THUMB_LT  &magic_backspace
-  #define LEFT_THUMB_HRM  &lt NAV_LAYER SPACE
-  #define RIGHT_THUMB_HRM &magic_backspace
+#ifdef LHAND_SPACE
+  #define LTHUMB_TT  &hrm LCTL SPACE
+  #define RTHUMB_TT  &magic_backspace
+  #define LTHUMB_HRM &lt NAV_LAYER SPACE
+  #define RTHUMB_HRM &magic_backspace
 #else
-  #define LEFT_THUMB_LT   &mt LCTL BACKSPACE
-  #define RIGHT_THUMB_LT  &magic_space
-  #define LEFT_THUMB_HRM  &sc NAV_LAYER BACKSPACE
-  #define RIGHT_THUMB_HRM &lt NAV_LAYER SPACE
+  #define LTHUMB_TT  &mt LCTL BACKSPACE
+  #define RTHUMB_TT  &magic_space
+  #define LTHUMB_HRM &sc NAV_LAYER BACKSPACE
+  #define RTHUMB_HRM &lt NAV_LAYER SPACE
 #endif
 
 #ifdef HT_NONE
-  #define LEFT_THUMB_TUCK    &kp LALT
-  #define LEFT_THUMB_HOME    &kp LCTL
-  #define LEFT_THUMB_REACH   &kp LGUI
-  #define RIGHT_THUMB_REACH  &mo NAV_LAYER
-  #define RIGHT_THUMB_HOME   &kp SPACE
-  #define RIGHT_THUMB_TUCK   &mo SYMBOLS_LAYER
+  #define LTHUMB_TUCK   &kp LALT
+  #define LTHUMB_HOME   &kp LCTL
+  #define LTHUMB_REACH  &kp LGUI
+  #define RTHUMB_REACH  &mo NAV_LAYER
+  #define RTHUMB_HOME   &kp SPACE
+  #define RTHUMB_TUCK   &mo SYMBOLS_LAYER
 #elifdef HT_THUMB_TAPS
-  #define LEFT_THUMB_TUCK    &EZ_SK(LSHIFT)
-  #define LEFT_THUMB_HOME    LEFT_THUMB_LT
-  #define LEFT_THUMB_REACH   &mt LGUI REACH_TAP
-  #define RIGHT_THUMB_REACH  &mt LALT ENTER
-  #define RIGHT_THUMB_HOME   RIGHT_THUMB_LT
-  #define RIGHT_THUMB_TUCK   &EZ_SL(SYMBOLS_LAYER)
+  #define LTHUMB_TUCK   &EZ_SK(LSHIFT)
+  #define LTHUMB_HOME   LTHUMB_TT
+  #define LTHUMB_REACH  &mt LGUI REACH_TAP
+  #define RTHUMB_REACH  &mt LALT ENTER
+  #define RTHUMB_HOME   RTHUMB_TT
+  #define RTHUMB_TUCK   &EZ_SL(SYMBOLS_LAYER)
 #elifdef HT_HOME_ROW_MODS
-  #define LEFT_THUMB_TUCK    &EZ_SK(LSHIFT)
-  #define LEFT_THUMB_HOME    LEFT_THUMB_HRM
-  #define LEFT_THUMB_REACH   &sc HRM_LAYER REACH_TAP
-  #define RIGHT_THUMB_REACH  &sc HRM_LAYER ENTER
-  #define RIGHT_THUMB_HOME   RIGHT_THUMB_HRM
-  #define RIGHT_THUMB_TUCK   &EZ_SL(SYMBOLS_LAYER)
+  #define LTHUMB_TUCK   &EZ_SK(LSHIFT)
+  #define LTHUMB_HOME   LTHUMB_HRM
+  #define LTHUMB_REACH  &sc HRM_LAYER REACH_TAP
+  #define RTHUMB_REACH  &sc HRM_LAYER ENTER
+  #define RTHUMB_HOME   RTHUMB_HRM
+  #define RTHUMB_TUCK   &EZ_SL(SYMBOLS_LAYER)
 #endif
 
 

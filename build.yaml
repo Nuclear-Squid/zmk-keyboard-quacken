@@ -57,9 +57,9 @@ include:
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
       -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_AZERTY;-DHT_THUMB_TAPS"
 
-    # Quacken Flex, Ergol + Ocsine config
+    # Quacken Flex, Ergol + Hummnigbird config
   - board: quacken_flex
-    artifact-name: quacken_flex_ergol_ocsine
+    artifact-name: quacken_flex_ergol_hummingbird
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DCFG_OCSINE"
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DCFG_GENERIC_HUMMINGBIRD"

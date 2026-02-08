@@ -28,11 +28,19 @@
 // #define HT_HOME_ROW_MODS  // (default behavior)
 
 // Timing is key! Keep the default value if unsure.
-// This defines how long (in ms) a hold-tap key must be held to be considered
-// as a modifier or layer shift.
+// This defines how long (in ms) a hold-tap key with the "tap-preferred" flavor
+// must be held to be considered as a modifier or layer shift. These hold-taps
+// are the ones who may produce text, including the space-bar and home-row-mods.
 // Keep this value high if you struggle wih home-row-mods.
 
 // #define TAPPING_TERM 300
+
+// This defines how quickly (in ms) you need to press and release a hold-tap
+// with the "hold-prefered" flavor for it to be considered a tap. These
+// hold-taps include the ones who don’t produce text when tapped.
+// Keep this value low if you press Enter or Escape by mistake too often
+
+// #define SHORT_TAPPING_TERM 150
 
 // When tapping then holding the same tap-hold, if the delay between the two
 // key presses is lower than `QUICK_TAP`, the tap-hold will hold the tap action
@@ -40,6 +48,8 @@
 
 // #define QUICK_TAP 200
 
+// For more information on how hold-taps operate, feel free to read ZMK’s docs:
+// https://zmk.dev/docs/keymaps/behaviors/hold-tap
 
 /******************************************************************************
  * Other Options
@@ -121,7 +131,7 @@
       bindings = <
         &trans  &kp ESC  &kp HOME &kp UP   &kp END   &kp PG_UP    &none     S_N7  S_N8  S_N9  S_FSLH  &trans
         &trans  &kp CAPS &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN    S_MINUS   S_N4  S_N5  S_N6  S_N0    &trans
-        &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_SHTAB      S_COMMA   S_N1  S_N2  S_N3  S_DOT   &trans
+
                &kp CAPSLOCK  &lt FUNCTION_LAYER DEL  &kp LS(TAB)  &kp ESCAPE  &mo FUNCTION_LAYER  &kp RALT
       >;
     };

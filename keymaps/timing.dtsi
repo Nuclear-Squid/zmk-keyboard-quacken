@@ -11,6 +11,10 @@
 #define TAPPING_TERM 300
 #endif
 
+#ifndef SHORT_TAPPING_TERM
+#define SHORT_TAPPING_TERM 150
+#endif
+
 #ifndef QUICK_TAP
 #define QUICK_TAP 200
 #endif
@@ -22,7 +26,7 @@
 
 // add our common tap-hold parametesr to the default options
 &mt{
-  tapping-term-ms = <TAPPING_TERM>;
+  tapping-term-ms = <SHORT_TAPPING_TERM>;
   quick-tap-ms = <QUICK_TAP>;
 };
 
@@ -44,7 +48,7 @@
     sc: space_cadet { // same as lt, but with hold-preferred
       compatible = "zmk,behavior-hold-tap";
       #binding-cells = <2>;
-      tapping-term-ms = <TAPPING_TERM>;
+      tapping-term-ms = <SHORT_TAPPING_TERM>;
       quick-tap-ms = <QUICK_TAP>;
       flavor = "hold-preferred";
       bindings = <&mo>, <&kp>;

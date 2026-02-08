@@ -30,7 +30,7 @@
 // Timing is key! Keep the default value if unsure.
 // This defines how long (in ms) a hold-tap key with the "tap-preferred" flavor
 // must be held to be considered as a modifier or layer shift. These hold-taps
-// are the ones who may produce text, including the space-bar and home-row-mods.
+// are the ones that may produce text, including the space-bar and home-row-mods.
 // Keep this value high if you struggle wih home-row-mods.
 
 // #define TAPPING_TERM 300

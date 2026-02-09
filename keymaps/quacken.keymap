@@ -53,7 +53,7 @@
 
 /******************************************************************************
  * Other Options
-******************************************************************************/
+*****************************************************************************/
 
 // Uncomment the following line to plit the num-nav layer in two:
 //  - one layer for vim-style navigation (right) and GUI shortcuts (left)
@@ -106,7 +106,7 @@
         &trans  S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &trans
         &trans  S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &trans
         &trans  S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &trans
-                 &EZ_SL(NUM_LAYER)  &kp SPACE  &kp ENTER     &trans  &kp RALT  &trans
+                    SYM_NUM_LAYER  &kp SPACE  &kp ENTER     &trans  &kp RALT  &trans
       >;
     };
 
@@ -116,9 +116,9 @@
     vim_nav_layer: vim_nav_layer {
       display-name = "VimNav";
       bindings = <
-        &trans  &kp CAPS X_CLOSE  X_PREV   X_NEXT    &none        &kp HOME &kp PG_DN &kp PG_UP &kp END   &none  &trans
-        &trans  X_ALL    X_SAVE   X_SHTAB  &kp TAB   &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none  &trans
-        &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_REDO       &none    &none     &none     &none     &none  &trans
+        &trans  &kp CAPS X_CLOSE  X_PREV   X_NEXT    &none        &kp HOME &kp PG_DN &kp PG_UP &kp END   &kp DEL &trans
+        &trans  X_ALL    X_SAVE   X_SHTAB  &kp TAB   &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none   &trans
+        &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_REDO       &none    &none     &none     &none     &none   &trans
         &kp CAPSLOCK   &lt FUNCTION_LAYER DEL &mo NUM_ROW_LAYER      &trans   &mo FUNCTION_LAYER  &kp RALT
       >;
     };

@@ -25,13 +25,13 @@
  * Home Rew
  */
 
-#if !defined HT_NONE && !defined HT_THUMB_TAPS && !defined HT_HOME_ROW_MODS
+#if !defined HT_NONE && !defined HT_THUMB_TAPS && !defined HT_HOME_ROW_MODS && !defined HT_COMPACT
 #define HT_HOME_ROW_MODS
-#elif defined HT_NONE + defined HT_THUMB_TAPS + defined HT_HOME_ROW_MODS > 1
+#elif defined HT_NONE + defined HT_THUMB_TAPS + defined HT_HOME_ROW_MODS + defined HT_COMPACT > 1
 #error "Please select only up to one hold-tap configuration at a time"
 #endif
 
-#ifdef HT_HOME_ROW_MODS
+#if defined HT_HOME_ROW_MODS || defined HT_COMPACT
   #define HRM_S &hrm LGUI S
   #define HRM_D &hrm LCTL D
   #define HRM_F &hrm LALT F
@@ -49,7 +49,7 @@
 
 #ifdef HRM_SHIFT
   #define HRM_A    &hrm LSHIFT A
-  #define HRM_SEMI &hrm RSHIFT SEMI
+  #define HRM_SEMI &hrm RSHIFT SEMI878
 #else
   #define HRM_A    &kp A
   #define HRM_SEMI &kp SEMI
@@ -77,11 +77,15 @@
   #define RTHUMB_TT  &magic_backspace
   #define LTHUMB_HRM &lt NAV_LAYER SPACE
   #define RTHUMB_HRM &magic_backspace
+  #define LTHUMB_34  &lt NAV_LAYER SPACE
+  #define RTHUMB_34  &magic_backspace_34_keys
 #else
   #define LTHUMB_TT  &mt LCTL BACKSPACE
   #define RTHUMB_TT  &magic_space
   #define LTHUMB_HRM &sc NAV_LAYER BACKSPACE
   #define RTHUMB_HRM &lt NAV_LAYER SPACE
+  #define LTHUMB_34  &sc NAV_LAYER BACKSPACE
+  #define RTHUMB_34  &lt HRM_LAYER SPACE
 #endif
 
 #ifdef HT_NONE
@@ -105,6 +109,13 @@
   #define RTHUMB_REACH  &sc HRM_LAYER ENTER
   #define RTHUMB_HOME   RTHUMB_HRM
   #define RTHUMB_TUCK   &EZ_SL(SYMBOLS_LAYER)
+#elifdef HT_COMPACT
+  #define LTHUMB_TUCK   &mt LSHIFT REACH_TAP
+  #define LTHUMB_HOME   LTHUMB_34
+  #define LTHUMB_REACH  LTHUMB_TUCK
+  #define RTHUMB_REACH  &sc SYMBOLS_LAYER ENTER
+  #define RTHUMB_HOME   RTHUMB_34
+  #define RTHUMB_TUCK   RTHUMB_REACH
 #endif
 
 
@@ -205,6 +216,13 @@
       bindings = <&lt NAV_LAYER SPACE>, <&sc NAV_LAYER BACKSPACE>;
       mods = <MOD_LCTL>;
       keep-mods = <MOD_LCTL>;
+    };
+    magic_backspace_34_keys: magic_backspace_34_keys {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&sc HRM_LAYER BACKSPACE>, <&lt HRM_LAYER SPACE>;
+      mods = <MOD_LSFT>;
+      keep-mods = <MOD_LSFT>;
     };
   };
 };

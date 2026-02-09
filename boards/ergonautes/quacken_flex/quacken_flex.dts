@@ -199,8 +199,6 @@
             , <&key_physical_attrs 100 100  870  400 (-1500)  1025   330>
             ;
     };
-
-    #undef KEY
 };
 
 rp2040_gpio: &gpio0 {

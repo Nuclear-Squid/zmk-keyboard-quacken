@@ -24,42 +24,71 @@
 #   - `left` (LEFT_HAND_SPACE): space on the left thumb, backspace on the right thumb
 #   - `shift` (HRM_SHIFT): add shift as a pinky homerow-mod
 
+env:
+  keymap_file: /__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+
+  # Layouts
+  ergol:     -DKB_LAYOUT_ERGOL
+  azerty:    -DKB_LAYOUT_AZERTY
+  lafayette: -DKB_LAYOUT_QWERTY_LAFAYETTE
+
+  # Hold-Taps
+  ez:  -DHT_NONE
+  tt:  -DHT_THUMB_TAPS
+  hrm: -DHT_HOME_ROW_MODS
+  s34: -DHT_COMPACT
+
+  # Options
+  vim:   -DVIM_NAVIGATION
+  left:  -DLEFT_HAND_SPACE
+  shift: -DHRM_SHIFT
+
+  # Geometries
+  hummingbird: -DHUMMINGBIRD
+
+
 include:
 
     # dummy firmware, just making sure we can build for the RP2040
   - board: sparkfun_pro_micro_rp2040
     shield: tester_pro_micro
     artifact-name: quacken_test
-    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+    cmake-args: -DKEYMAP_FILE=$keymap_file
 
     # Quacken Zero + SparkFun RP2040, default config
   - board: sparkfun_pro_micro_rp2040
     shield: quacken_zero
     artifact-name: quacken_zero
-    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+    cmake-args: -DKEYMAP_FILE=$keymap_file
 
     # Quacken Flex, default config
   - board: quacken_flex
     artifact-name: quacken_flex
-    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+    cmake-args: -DKEYMAP_FILE=$keymap_file
 
     # Quacken Flex, Ergol + Vim + hrm_shift config
   - board: quacken_flex
     artifact-name: quacken_flex_ergol_vim_shift
     cmake-args: >
-      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DVIM_NAVIGATION;-DHRM_SHIFT"
+      -DKEYMAP_FILE=$keymap_file
+      -DDTS_EXTRA_CPPFLAGS="$ergol;$vim;$shift"
 
     # Quacken Flex, Azerty + thumb-taps config
   - board: quacken_flex
     artifact-name: quacken_flex_azerty_tt
     cmake-args: >
-      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_AZERTY;-DHT_THUMB_TAPS"
+      -DKEYMAP_FILE=$keymap_file
+      -DDTS_EXTRA_CPPFLAGS="$azerty;$tt"
 
     # Quacken Flex, Ergol + Hummingbird config
   - board: quacken_flex
     artifact-name: quacken_flex_ergol_hummingbird
     cmake-args: >
-      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DHUMMINGBIRD"
+      -DKEYMAP_FILE=$keymap_file
+      -DDTS_EXTRA_CPPFLAGS="$ergol;$hummingbird"
+
+  - board: quacken_flex
+    artifact-name: quacken_flex_lafayette_compact
+    cmake-args: >
+      -DKEYMAP_FILE=$keymap_file
+      -DDTS_EXTRA_CPPFLAGS="$lafayette;$s34"

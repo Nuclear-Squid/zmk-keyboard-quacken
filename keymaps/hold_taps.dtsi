@@ -49,7 +49,7 @@
 
 #ifdef HRM_SHIFT
   #define HRM_A    &hrm LSHIFT A
-  #define HRM_SEMI &hrm RSHIFT SEMI878
+  #define HRM_SEMI &hrm RSHIFT SEMI
 #else
   #define HRM_A    &kp A
   #define HRM_SEMI &kp SEMI

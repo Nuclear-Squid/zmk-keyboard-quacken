@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 TARGET=$1
 shift
-IFS=";"
-CPP_FLAGS=$*
-IFS=" "
 
 # uncomment the following line to enable USB logging
 USB_LOGGING="-S zmk-usb-logging"
@@ -49,6 +46,41 @@ test)
 	;;
 esac
 
+declare -A FLAGS_SUBSTITUTION_TABLE
+FLAGS_SUBSTITUTION_TABLE=(
+  # Layouts
+  ["ergol"]="-DKB_LAYOUT_ERGOL"
+  ["azerty"]="-DKB_LAYOUT_AZERTY"
+  ["lafayette"]="-DKB_LAYOUT_QWERTY_LAFAYETTE"
+
+  # Hold-Taps
+  ["ez"]="-DHT_NONE"
+  ["tt"]="-DHT_THUMB_TAPS"
+  ["hrm"]="-DHT_HOME_ROW_MODS"
+  ["s34"]="-DHT_COMPACT"
+
+  # Options
+  ["vim"]="-DVIM_NAVIGATION"
+  ["left"]="-DLEFT_HAND_SPACE"
+  ["shift"]="-DHRM_SHIFT"
+
+  # Geometries
+  ["hummingbird"]="-DHUMMINGBIRD"
+)
+
+CPP_FLAG_LIST=()
+OUTPUT_FILE="zmk_quacken_$TARGET"
+
+for flag in "$@"; do
+  CPP_FLAG_LIST+=( ${FLAGS_SUBSTITUTION_TABLE["$flag"]:-"$flag"} )
+  OUTPUT_FILE+=$( [ -n "${FLAGS_SUBSTITUTION_TABLE["$flag"]}" ] && echo "_$flag" )
+done
+
+CPP_FLAGS=$(IFS=';'; echo "${CPP_FLAG_LIST[*]}")
+OUTPUT_FILE+=".uf2"
+
+echo $OUTPUT_FILE
+
 # ensure we have a symlink to a proper ZMK setup
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 ZMK_APP_DIR=$SCRIPT_DIR/zmk/app
@@ -65,7 +97,6 @@ west build $PRISTINE $USB_LOGGING $BOARD -- $SHIELD \
 	-DZMK_EXTRA_MODULES="$SCRIPT_DIR" \
 	-DDTS_EXTRA_CPPFLAGS="$CPP_FLAGS" && {
 
-	OUTPUT_FILE="zmk_quacken_$TARGET.uf2"
 	mv build/zephyr/zmk.uf2 "$SCRIPT_DIR/$OUTPUT_FILE"
 	echo
 	echo "Successfully generated: $OUTPUT_FILE"

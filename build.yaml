@@ -24,32 +24,10 @@
 #   - `left` (LEFT_HAND_SPACE): space on the left thumb, backspace on the right thumb
 #   - `shift` (HRM_SHIFT): add shift as a pinky homerow-mod
 
-env:
-  keymap_file: /__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-
-  # Layouts
-  ergol:     -DKB_LAYOUT_ERGOL
-  azerty:    -DKB_LAYOUT_AZERTY
-  lafayette: -DKB_LAYOUT_QWERTY_LAFAYETTE
-
-  # Hold-Taps
-  ez:  -DHT_NONE
-  tt:  -DHT_THUMB_TAPS
-  hrm: -DHT_HOME_ROW_MODS
-  s34: -DHT_COMPACT
-
-  # Options
-  vim:   -DVIM_NAVIGATION
-  left:  -DLEFT_HAND_SPACE
-  shift: -DHRM_SHIFT
-
-  # Geometries
-  hummingbird: -DHUMMINGBIRD
-
 
 include:
 
-    # dummy firmware, just making sure we can build for the RP2040
+  # dummy firmware, just making sure we can build for the RP2040
   - board: sparkfun_pro_micro_rp2040
     shield: tester_pro_micro
     artifact-name: quacken_test
@@ -92,3 +70,27 @@ include:
     cmake-args: >
       -DKEYMAP_FILE=$keymap_file
       -DDTS_EXTRA_CPPFLAGS="$lafayette;$s34"
+
+
+env:
+  keymap_file: /__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+
+  # Layouts
+  ergol:     -DKB_LAYOUT_ERGOL
+  azerty:    -DKB_LAYOUT_AZERTY
+  lafayette: -DKB_LAYOUT_QWERTY_LAFAYETTE
+
+  # Hold-Taps
+  ez:  -DHT_NONE
+  tt:  -DHT_THUMB_TAPS
+  hrm: -DHT_HOME_ROW_MODS
+  s34: -DHT_COMPACT
+
+  # Options
+  vim:   -DVIM_NAVIGATION
+  left:  -DLEFT_HAND_SPACE
+  shift: -DHRM_SHIFT
+
+  # Geometries
+  hummingbird: -DHUMMINGBIRD
+

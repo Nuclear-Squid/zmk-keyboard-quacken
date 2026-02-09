@@ -30,32 +30,45 @@ include:
   - board: sparkfun_pro_micro_rp2040
     shield: tester_pro_micro
     artifact-name: quacken_test
-    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DCONFIG_ZMK_STUDIO=y
 
     # Quacken Zero + SparkFun RP2040, default config
   - board: sparkfun_pro_micro_rp2040
     shield: quacken_zero
     artifact-name: quacken_zero
-    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DCONFIG_ZMK_STUDIO=y
 
     # Quacken Flex, default config
   - board: quacken_flex
     artifact-name: quacken_flex
-    cmake-args: -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DCONFIG_ZMK_STUDIO=y
 
     # Quacken Flex, Ergol + Vim + hrm_shift config
   - board: quacken_flex
     artifact-name: quacken_flex_ergol_vim_shift
+    snippet: studio-rpc-usb-uart
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
       -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DVIM_NAVIGATION;-DHRM_SHIFT"
+      -DCONFIG_ZMK_STUDIO=y
 
     # Quacken Flex, Azerty + thumb-taps config
   - board: quacken_flex
     artifact-name: quacken_flex_azerty_tt
+    snippet: studio-rpc-usb-uart
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
       -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_AZERTY;-DHT_THUMB_TAPS"
+      -DCONFIG_ZMK_STUDIO=y
 
     # Quacken Flex, Ergol + Hummingbird config
   - board: quacken_flex

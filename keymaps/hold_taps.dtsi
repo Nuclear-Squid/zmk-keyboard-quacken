@@ -236,11 +236,18 @@
 
   // AltGr support
 
-  // Sym becomes Shift+AltGr when combined with Shift
+  // Sym becomes Shift+AltGr when combined with exclusively Shift
   sym_shift_altgr: sym_shift_altgr {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
-    bindings = <&EZ_SL(1)>, <&EZ_SK(RALT)>;
+    bindings = <&sym_shift_altgr_inner>, <&EZ_SL(SYMBOLS_LAYER)>;
+    mods      = <(MOD_LCTL|MOD_RCTL|MOD_LGUI|MOD_RGUI|MOD_LALT)>;
+    keep-mods = <(MOD_LCTL|MOD_RCTL|MOD_LGUI|MOD_RGUI|MOD_LALT)>;
+  };
+  sym_shift_altgr_inner: sym_shift_altgr_inner {
+    compatible = "zmk,behavior-mod-morph";
+    #binding-cells = <0>;
+    bindings = <&EZ_SL(SYMBOLS_LAYER)>, <&EZ_SK(RALT)>;
     mods      = <(MOD_LSFT|MOD_RSFT)>;
     keep-mods = <(MOD_LSFT|MOD_RSFT)>;
   };

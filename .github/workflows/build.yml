@@ -5,3 +5,27 @@ jobs:
   build:
     # uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
     uses: petejohanson/zmk/.github/workflows/build-user-config.yml@core/move-to-zephyr-4-1
+
+
+env:
+  keymap_file: /__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+
+  # Layouts
+  ergol:     -DKB_LAYOUT_ERGOL
+  azerty:    -DKB_LAYOUT_AZERTY
+  lafayette: -DKB_LAYOUT_QWERTY_LAFAYETTE
+
+  # Hold-Taps
+  ez:  -DHT_NONE
+  tt:  -DHT_THUMB_TAPS
+  hrm: -DHT_HOME_ROW_MODS
+  s34: -DHT_COMPACT
+
+  # Options
+  vim:   -DVIM_NAVIGATION
+  left:  -DLEFT_HAND_SPACE
+  shift: -DHRM_SHIFT
+
+  # Geometries
+  hummingbird: -DHUMMINGBIRD
+

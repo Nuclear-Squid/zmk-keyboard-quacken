@@ -136,9 +136,9 @@
         status = "okay";
     };
 
-		right_encoder: right_encoder {
+    right_encoder: right_encoder {
         compatible = "alps,ec11";
-				a-gpios = <&io_exp_gpio  0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        a-gpios = <&io_exp_gpio  0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         b-gpios = <&io_exp_gpio  1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         steps = <18>;  //encoders sold at splitkb are EC11E18244A5 (tactile) and EC11E183440C (linear). Both have 18 pulses (36 detents for the tactile one)
         status = "okay";

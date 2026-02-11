@@ -72,6 +72,9 @@
 
 // #define LEFT_HAND_SPACE
 
+//Comment the following line if not using the mouse scroll behaviors on the encoders
+#include "mouse_scroll.dtsi"
+
 
 /******************************************************************************
  * Keymap
@@ -95,6 +98,7 @@
         &kp LSHIFT &kp Z  &kp X  &kp C  &kp V  &kp B        &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH   &kp RSHIFT
                 LTHUMB_TUCK  LTHUMB_HOME  LTHUMB_REACH    RTHUMB_REACH  RTHUMB_HOME  RTHUMB_TUCK
       >;
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
     };
 
     // 1. Symbols layer -- with Ergol, basically just an AltGr layer with custom thumb keys
@@ -107,6 +111,7 @@
         &trans  S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &trans
                     SYM_NUM_LAYER  &kp SPACE  &kp ENTER     &trans  &kp RALT  &trans
       >;
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
     };
 
     // 2. VimNav layer -- HJKL arrow cluster on the right hand
@@ -120,6 +125,7 @@
         &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_REDO       &none    &none     &none     &none     &none   &trans
         &kp CAPSLOCK  &lt FUNCTION_LAYER DEL  &mo NUM_ROW_LAYER   &trans   &mo FUNCTION_LAYER  &lkp BASE_LAYER RALT
       >;
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
     };
 
     // 3. NumNav layer -- inverted T arrow cluster on the left hand, numpad on the right hand
@@ -133,6 +139,7 @@
         &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_SHTAB      S_COMMA   S_N1  S_N2  S_N3  S_DOT   &trans
                &kp CAPSLOCK  &lt FUNCTION_LAYER DEL  &kp LS(TAB)  &kp ESCAPE  &mo FUNCTION_LAYER  &lkp BASE_LAYER RALT
       >;
+			sensor-bindings = <&mouse_scroll_v &mouse_scroll_h>;
     };
 
     // 4. NumRow layer -- bring the numbers to the homerow, keep shift+numbers for shortcuts and symbols
@@ -146,6 +153,7 @@
         &trans  &none      &none      &none      &none      &none            S_MINUS    S_COMMA    S_DOT      S_COLON    S_FSLH     &trans
                                       &trans  &kp RS(SPACE) &trans           &trans  &kp LS(SPACE) &kp RALT
       >;
+			sensor-bindings = <&mouse_scroll_v &mouse_scroll_h>;
     };
 
     // 5. Function layer -- F1..12 pad on the left hand, HRM on the right hand (with an additional Shift key)
@@ -159,6 +167,7 @@
         &trans  &kp F9  &kp F10 &kp F11 &kp F12 &none         &none &none           &none     &none      &none      &trans
                                 &trans  &trans  &bootloader   &sys_reset  &trans  &studio_unlock
       >;
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
     };
   };
 };

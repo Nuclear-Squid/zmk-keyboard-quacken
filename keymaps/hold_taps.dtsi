@@ -61,19 +61,11 @@
  * Thumb Keys
  */
 
-#ifdef VIM_NAVIGATION
-  #define NAV_LAYER VIM_NAV_LAYER
-  #define NUM_LAYER NUM_ROW_LAYER
-  #define HRM_LAYER NUM_ROW_LAYER
-  #define S34_LAYER NUM_ROW_LAYER
-  #define REACH_TAP ESCAPE
-#else
-  #define NAV_LAYER NUM_NAV_LAYER
-  #define NUM_LAYER NUM_NAV_LAYER
-  #define HRM_LAYER FUNCTION_LAYER
-  #define S34_LAYER NUM_NAV_LAYER
-  #define REACH_TAP TAB
-#endif
+// hybrid setup: NumRow + NumNav layers
+#define NAV_LAYER NUM_NAV_LAYER
+#define NUM_LAYER NUM_ROW_LAYER
+#define HRM_LAYER NUM_ROW_LAYER
+#define REACH_TAP TAB
 
 #if defined HT_COMPACT && !defined VIM_NAVIGATION
   #define SYM_NUM_LAYER &sc NUM_NAV_LAYER CAPSLOCK

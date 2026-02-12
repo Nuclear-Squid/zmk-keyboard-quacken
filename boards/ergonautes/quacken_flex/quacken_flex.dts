@@ -149,7 +149,7 @@
     sensors: sensors {
         compatible = "zmk,keymap-sensors";
         sensors = <&left_encoder &right_encoder>;
-        triggers-per-rotation = <18>; //Number of times to trigger the bound behavior per full rotation
+        triggers-per-rotation = <18>; // number of times to trigger the bound behavior per full rotation
     };
 
     physical_layout0: physical_layout_0 { // First physical layout, use different naming for other layouts

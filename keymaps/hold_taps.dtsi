@@ -145,7 +145,7 @@
 
 #define EZ_SL(layer) bsl (layer) (layer)
 #define EZ_SK(mod)   bsk (mod) (mod)
-#define EZ_LSK(mod)   lbsk (mod) (mod)
+#define EZ_LSK(mod)  lbsk (mod) (mod)
 &sl { ignore-modifiers; }; // keep one-shot-mods when chained into a one-shot-layer
 &sk { quick-release; };    // must-have! (lots of false positives otherwise)
 

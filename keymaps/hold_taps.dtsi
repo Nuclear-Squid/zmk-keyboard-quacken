@@ -235,6 +235,7 @@
     };
   };
 
+  // XXX this whole AltGr section should probably be inside the `behaviors` branch
   // AltGr support
 
   // Sym becomes Shift+AltGr when combined with exclusively Shift

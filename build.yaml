@@ -72,7 +72,8 @@ include:
 
 
     # Quacken Zero, Ergol + Thumb-Taps + Hummingbird config
-  - board: quacken_zero
+  - board: sparkfun_pro_micro_rp2040
+    shield: quacken_zero
     artifact-name: quacken_zero_ergol_tt_hummingbird
     snippet: studio-rpc-usb-uart
     cmake-args: >
@@ -81,7 +82,8 @@ include:
       -DCONFIG_ZMK_STUDIO=y
 
     # Quacken Zero, Ergol + Thumb-Taps + Vim navigation + Hummingbird config
-  - board: quacken_zero
+  - board: sparkfun_pro_micro_rp2040
+    shield: quacken_zero
     artifact-name: quacken_zero_ergol_tt_vim_hummingbird
     snippet: studio-rpc-usb-uart
     cmake-args: >
@@ -90,7 +92,8 @@ include:
       -DCONFIG_ZMK_STUDIO=y
 
     # Quacken Zero, Ergol + Home-Row-Mods + Hummingbird config
-  - board: quacken_zero
+  - board: sparkfun_pro_micro_rp2040
+    shield: quacken_zero
     artifact-name: quacken_zero_ergol_hrm_hummingbird
     snippet: studio-rpc-usb-uart
     cmake-args: >
@@ -99,7 +102,8 @@ include:
       -DCONFIG_ZMK_STUDIO=y
 
     # Quacken Zero, Ergol + Home-Row-Mods + Vim navigation + Hummingbird config
-  - board: quacken_zero
+  - board: sparkfun_pro_micro_rp2040
+    shield: quacken_zero
     artifact-name: quacken_zero_ergol_hrm_vim_hummingbird
     snippet: studio-rpc-usb-uart
     cmake-args: >
@@ -108,7 +112,8 @@ include:
       -DCONFIG_ZMK_STUDIO=y
 
     # Quacken Zero, Ergol + Hummingbird config
-  - board: quacken_zero
+  - board: sparkfun_pro_micro_rp2040
+    shield: quacken_zero
     artifact-name: quacken_zero_ergol_hrm_hummingbird_custom
     snippet: studio-rpc-usb-uart
     cmake-args: >

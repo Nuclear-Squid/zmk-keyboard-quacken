@@ -122,9 +122,9 @@
     default_layer {
       display-name = "Base";
       bindings = <
-        &none &kp Q &kp W     &kp E     &kp R     &kp T      &kp N &kp U     &kp I     &dead_key &kp P    &none
-        &none &kp A &hrm MS S &hrm MC D &hrm MA F &kp G      &kp H &hrm MA J &hrm MC K &hrm MS L &kp SEMI &none
-        &none &none &kp X     &kp C     &kp V     &none      &none &kp M     &kp COMMA &kp DOT   &none    &none
+        &none &kp Q &kp W &kp E &kp R &kp T      &kp N &kp U &kp I     &dead_key &kp P    &none
+        &none &kp A HRM_S HRM_D HRM_F &kp G      &kp H HRM_J HRM_K     HRM_L     &kp SEMI &none
+        &none &none &kp X &kp C &kp V &none      &none &kp M &kp COMMA &kp DOT   &none    &none
      &hrm LGUI ESCAPE  &ltsk LAYER_VIM_NAV LSHFT  &osl LAYER_MIRROR      &none  &lt LAYER_SYMBOLS SPACE  &lt LAYER_NUM_ROW BSPC
       >;
     };

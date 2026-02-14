@@ -143,9 +143,10 @@
 #define QUICK_TAP 200
 #endif
 
-#define EZ_SL(layer) bsl (layer) (layer)
-#define EZ_SK(mod)   bsk (mod) (mod)
-#define EZ_LSK(mod)  lbsk (mod) (mod)
+#define EZ_SL(layer)  bsl (layer) (layer)
+#define EZ_SK(mod)    bsk (mod) (mod)
+#define EZ_SLL(layer) bsll (layer) (layer)
+#define EZ_LSK(mod)   lbsk (mod) (mod)
 &sl { ignore-modifiers; }; // keep one-shot-mods when chained into a one-shot-layer
 &sk { quick-release; };    // must-have! (lots of false positives otherwise)
 
@@ -232,6 +233,64 @@
       bindings = <&sc HRM_LAYER BACKSPACE>, <&lt HRM_LAYER SPACE>;
       mods      = <MOD_LSFT>;
       keep-mods = <MOD_LSFT>;
+    };
+    
+     // NumLock Support
+
+    // Toggle NavNum along with NumLock
+    tog_numlock: toggle_numlock {
+      compatible = "zmk,behavior-macro";
+      wait-ms = <0>;
+      tap-ms = <0>;
+      #binding-cells = <0>;
+      bindings = <&macro_tap &tog NUM_NAV_LAYER>, <&macro_tap &tog NUM_LOCK_LAYER>;
+    };
+   
+    // Momentary access to a lower layer from NumLock 
+    mll: mo_lower_layer {
+      compatible = "zmk,behavior-macro-one-param";
+      wait-ms = <0>;
+      tap-ms = <0>;
+      #binding-cells = <1>;
+      bindings = <&macro_param_1to1>, 
+                 <&macro_tap &to MACRO_PLACEHOLDER>, 
+                 <&macro_pause_for_release>,  
+                 <&macro_param_1to1>, 
+                 <&macro_tap &tog MACRO_PLACEHOLDER>, 
+                 <&macro_tap &tog_numlock>; 
+    };
+  
+    // Layer-tap from NumLock
+    nlt: num_layer_tap {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      tapping-term-ms = <TAPPING_TERM>;
+      flavor = "tap-preferred";
+      bindings = <&mll>, <&kp>;
+    };
+
+    // bsl for lower layers
+    sll: sticky_lower_layer {
+      compatible = "zmk,behavior-sticky-key";
+      #binding-cells = <1>;
+      bindings = <&mll>;
+      release-after-ms = <1000>;
+      quick-release;
+      ignore-modifiers;
+    };
+    osll: one_shot_lower_layer {
+      compatible = "zmk,behavior-macro-one-param";
+      #binding-cells = <1>;
+      tap-ms = <0>;
+      wait-ms = <0>;
+      bindings = <&macro_param_1to1>, <&macro_tap &sll MACRO_PLACEHOLDER>;
+    };
+    bsll: better_sticky_lower_layer {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      tapping-term-ms = <TAPPING_TERM>;
+      flavor = "tap-preferred";
+      bindings = <&mll>, <&osll>;
     };
   };
 

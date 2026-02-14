@@ -60,3 +60,5 @@
 // extra
 #define S_COMMA &kp DOT
 #define S_DOT   &kp N
+#define S_MONEY &kp LS(N1)
+

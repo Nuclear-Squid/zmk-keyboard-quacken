@@ -60,3 +60,5 @@
 // extra
 #define S_COMMA &kp COMMA
 #define S_DOT   &kp DOT
+#define S_MONEY &kp DLLR
+

@@ -60,3 +60,16 @@
 // extra
 #define S_COMMA &kp COMMA
 #define S_DOT   &kp DOT
+#define S_MONEY &euro
+
+/ {
+  behaviors {
+    euro: euro {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      tap-ms = <0>;
+      wait-ms = <0>;
+      bindings = <&kp O &kp N5>;
+    };
+  };
+};

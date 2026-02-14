@@ -105,7 +105,7 @@
       bindings = <
         &trans  &kp ESC  &kp HOME &kp UP   &kp END   &kp PG_UP    &to BASE_LAYER S_N7  S_N8  S_N9  S_FSLH  &trans
         &trans  S_EQUAL  &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN    S_MINUS        S_N4  S_N5  S_N6  S_N0    &trans
-        &trans  S_MONEY  S_PRCNT  S_PLUS   S_STAR    S_COLON      S_COMMA        S_N1  S_N2  S_N3  S_DOT   &trans
+        &trans  S_MONEY  S_COLON  S_STAR   S_PLUS    S_PRCNT      S_COMMA        S_N1  S_N2  S_N3  S_DOT   &trans
                  &trans  &sc NUM_NAV_LAYER BACKSPACE  &kp (TAB)  &trans  &lt NUM_NAV_LAYER LS(SPACE)  &EZ_SL(SYMBOLS_LAYER)
       >;
     };

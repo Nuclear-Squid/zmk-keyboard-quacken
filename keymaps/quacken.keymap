@@ -144,7 +144,7 @@
         &trans  &trans 	 &trans  &trans  &trans  &trans     S_EQUAL  &trans  &trans  &trans  &trans  &trans
         &trans  &trans   &trans  &trans  &trans  &trans     &trans   &trans  &trans  &trans  &trans  &trans
         &trans  S_MONEY  S_PRCNT S_PLUS  S_STAR  S_COLON    &trans   &trans  &trans  &trans  &trans  &trans
-		     &trans &nlth NUM_NAV_LAYER BACKSPACE &trans     &trans   &nlt NUM_NAV_LAYER LS(SPACE)  &EZ_SLL(SYMBOLS_LAYER)
+           &trans &nlth NUM_NAV_LAYER BACKSPACE &kp TAB     &trans   &nlt NUM_NAV_LAYER LS(SPACE)  &EZ_SLL(SYMBOLS_LAYER)
       >;
     };	
 

@@ -28,7 +28,7 @@ include:
 
     # Quacken Flex, Ergol + Thumb-Taps + Hummingbird config
   - board: quacken_flex
-    artifact-name: quacken_flex_ergol_hrm_hummingbird
+    artifact-name: quacken_flex_ergol_tt_hummingbird
     snippet: studio-rpc-usb-uart
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
@@ -37,7 +37,7 @@ include:
 
     # Quacken Flex, Ergol + Thumb-Taps + Vim navigation + Hummingbird config
   - board: quacken_flex
-    artifact-name: quacken_flex_ergol_hrm_vim_hummingbird
+    artifact-name: quacken_flex_ergol_tt_vim_hummingbird
     snippet: studio-rpc-usb-uart
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
@@ -73,7 +73,7 @@ include:
 
     # Quacken Zero, Ergol + Thumb-Taps + Hummingbird config
   - board: quacken_zero
-    artifact-name: quacken_zero_ergol_hrm_hummingbird
+    artifact-name: quacken_zero_ergol_tt_hummingbird
     snippet: studio-rpc-usb-uart
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
@@ -82,7 +82,7 @@ include:
 
     # Quacken Zero, Ergol + Thumb-Taps + Vim navigation + Hummingbird config
   - board: quacken_zero
-    artifact-name: quacken_zero_ergol_hrm_vim_hummingbird
+    artifact-name: quacken_zero_ergol_tt_vim_hummingbird
     snippet: studio-rpc-usb-uart
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap

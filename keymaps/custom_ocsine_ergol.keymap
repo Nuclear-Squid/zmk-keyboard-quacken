@@ -10,7 +10,7 @@
 #define HRM_S &hrm LSFT S
 #define HRM_L &hrm LSFT L
 
-&hrm { tapping-term-ms = <250>; }
+&hrm { tapping-term-ms = <250>; };
 #define COMBO_TIMEOUT_MS 20
 #define COMBO_LOCK_MS 135
 

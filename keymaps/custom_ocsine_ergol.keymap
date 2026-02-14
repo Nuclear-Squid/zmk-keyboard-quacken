@@ -1,20 +1,18 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-#define TAPPING_TERM 200
-#include "../hold_taps.dtsi"
-#include "../aliases/ergol.h"
+#define TAPPING_TERM 175
+#include "hold_taps.dtsi"
+#include "aliases/ergol.h"
 
-#define MS LSHFT
-#define MA LALT
-#define MC LCTL
+#undef  HRM_S
+#undef  HRM_L
+#define HRM_S &hrm LSFT S
+#define HRM_L &hrm LSFT L
 
-&sk { quick-release; };
-&sl { ignore-modifiers; };
-
-&caps_word {
-  continue-list = <COMMA FSLH>;
-};
+&hrm { tapping-term-ms = <250>; }
+#define COMBO_TIMEOUT_MS 20
+#define COMBO_LOCK_MS 135
 
 #define LAYER_BASE      0
 #define LAYER_MIRROR    1
@@ -25,16 +23,13 @@
 #define LAYER_NUM_ROW   6
 #define LAYER_GAMING    7
 
-#define COMBO_TIMEOUT_MS 20
-#define COMBO_LOCK_MS 135
-
 
 / {
   behaviors {
     ltsk: layer_tap_sticky_key {
       compatible = "zmk,behavior-hold-tap";
       #binding-cells = <2>;
-      tapping-term-ms = <200>;
+      tapping-term-ms = <TAPPING_TERM>;
       flavor = "tap-preferred";
       bindings = <&mo>, <&osm>;
     };

@@ -132,9 +132,9 @@
     mirror_layer {
       display-name = "Mirror";
       bindings = <
-        &none &kp P    &dead_key &kp I     &kp U     &kp N      &none &none &none &none &none &none
-        &none &kp SEMI &hrm MS L &hrm MC K &hrm MA L &kp H      &none &none &none &none &none &none
-        &none &none    &kp DOT   &kp COMMA &kp M     &none      &none &none &none &none &none &none
+        &none &kp P    &dead_key &kp I     &kp U &kp N      &none &none &none &none &none &none
+        &none &kp SEMI HRM_L     HRM_K     HRM_L &kp H      &none &none &none &none &none &none
+        &none &none    &kp DOT   &kp COMMA &kp M &none      &none &none &none &none &none &none
         &hrm LGUI ESCAPE  &ltsk LAYER_VIM_NAV LSHFT  &none      &none  &lt LAYER_SYMBOLS SPACE  &lt LAYER_NUM_ROW BSPC
       >;
     };

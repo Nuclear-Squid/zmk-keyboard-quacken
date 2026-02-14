@@ -2,19 +2,96 @@
 
 include:
 
-  # Quacken Zero + SparkFun RP2040
-  - board: sparkfun_pro_micro_rp2040//zmk
-    shield: quacken_zero
-    artifact-name: quacken_zero
+    # Quacken Flex, Ergol + Thumb-Taps + Hummingbird config
+  - board: quacken_flex
+    artifact-name: quacken_flex_ergol_tt_hummingbird
     snippet: studio-rpc-usb-uart
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DHT_THUMB_TAPS;-DHUMMINGBIRD"
       -DCONFIG_ZMK_STUDIO=y
 
-  # Quacken Flex
+    # Quacken Flex, Ergol + Thumb-Taps + Vim navigation + Hummingbird config
   - board: quacken_flex
-    artifact-name: quacken_flex
+    artifact-name: quacken_flex_ergol_tt_vim_hummingbird
     snippet: studio-rpc-usb-uart
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DHT_THUMB_TAPS;-DVIM_NAVIGATION;-DHUMMINGBIRD"
+      -DCONFIG_ZMK_STUDIO=y
+
+    # Quacken Flex, Ergol + Home-Row-Mods + Hummingbird config
+  - board: quacken_flex
+    artifact-name: quacken_flex_ergol_hrm_hummingbird
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DHT_HOME_ROW_MODS;-DHUMMINGBIRD"
+      -DCONFIG_ZMK_STUDIO=y
+
+    # Quacken Flex, Ergol + Home-Row-Mods + Vim navigation + Hummingbird config
+  - board: quacken_flex
+    artifact-name: quacken_flex_ergol_hrm_vim_hummingbird
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DHT_HOME_ROW_MODS;-DVIM_NAVIGATION;-DHUMMINGBIRD"
+      -DCONFIG_ZMK_STUDIO=y
+
+    # Quacken Flex, Ergol + Hummingbird config
+  - board: quacken_flex
+    artifact-name: quacken_flex_ergol_hrm_hummingbird_custom
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/custom_ocsine_ergol.keymap
+      -DCONFIG_ZMK_STUDIO=y
+
+
+    # Quacken Zero, Ergol + Thumb-Taps + Hummingbird config
+  - board: sparkfun_pro_micro_rp2040
+    shield: quacken_zero
+    artifact-name: quacken_zero_ergol_tt_hummingbird
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DHT_THUMB_TAPS;-DHUMMINGBIRD"
+      -DCONFIG_ZMK_STUDIO=y
+
+    # Quacken Zero, Ergol + Thumb-Taps + Vim navigation + Hummingbird config
+  - board: sparkfun_pro_micro_rp2040
+    shield: quacken_zero
+    artifact-name: quacken_zero_ergol_tt_vim_hummingbird
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DHT_THUMB_TAPS;-DVIM_NAVIGATION;-DHUMMINGBIRD"
+      -DCONFIG_ZMK_STUDIO=y
+
+    # Quacken Zero, Ergol + Home-Row-Mods + Hummingbird config
+  - board: sparkfun_pro_micro_rp2040
+    shield: quacken_zero
+    artifact-name: quacken_zero_ergol_hrm_hummingbird
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DHT_HOME_ROW_MODS;-DHUMMINGBIRD"
+      -DCONFIG_ZMK_STUDIO=y
+
+    # Quacken Zero, Ergol + Home-Row-Mods + Vim navigation + Hummingbird config
+  - board: sparkfun_pro_micro_rp2040
+    shield: quacken_zero
+    artifact-name: quacken_zero_ergol_hrm_vim_hummingbird
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DHT_HOME_ROW_MODS;-DVIM_NAVIGATION;-DHUMMINGBIRD"
+      -DCONFIG_ZMK_STUDIO=y
+
+    # Quacken Zero, Ergol + Hummingbird config
+  - board: sparkfun_pro_micro_rp2040
+    shield: quacken_zero
+    artifact-name: quacken_zero_ergol_hrm_hummingbird_custom
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/custom_ocsine_ergol.keymap
       -DCONFIG_ZMK_STUDIO=y

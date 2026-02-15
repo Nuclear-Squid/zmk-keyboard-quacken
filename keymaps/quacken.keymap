@@ -167,9 +167,9 @@
     function_layer: function_layer {
       display-name = "Function";
       bindings = <
-        &trans  &kp F1  &kp F2  &kp F3  &kp F4  &none         &none &kp PAUSE_BREAK &kp PSCRN &kp SYSREQ &none     &trans
-        &trans  &kp F5  &kp F6  &kp F7  &kp F8  &none         &none &kp LALT        &kp RCTL  &kp RGUI   &kp RSHIFT &trans
-        &trans  &kp F9  &kp F10 &kp F11 &kp F12 &none         &none &none           &none     &none      &none      &trans
+        &trans  &kp F1  &kp F2  &kp F3  &kp F4  &none         &none &kp C_PREV     &kp C_VOL_UP     &kp C_BRI_UP        &kp SLCK           &trans
+        &trans  &kp F5  &kp F6  &kp F7  &kp F8  &none         &none &hrm LALT C_PP &hrm RCTL C_MUTE &hrm RGUI C_AL_LOCK &hrm LSHIFT PSCRN  &trans
+        &trans  &kp F9  &kp F10 &kp F11 &kp F12 &none         &none &kp C_NEXT     &kp C_VOL_DN     &kp C_BRI_DN        &kp INS            &trans
                                 &trans  &trans  &bootloader   &sys_reset  &trans  &studio_unlock
       >;
     };

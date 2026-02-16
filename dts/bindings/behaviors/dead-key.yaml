@@ -1,0 +1,10 @@
+compatible: "zmk,behavior-dead-key"
+
+description: Dead Key Behavior, prefix a key press with an un-shifted keycode.
+
+include: one_param.yaml
+
+properties:
+  dead-keycode:
+    type: int
+    required: true

@@ -1,0 +1,10 @@
+config ZMK_BEHAVIOR_DEAD_KEY
+    bool
+    default y
+    depends on DT_HAS_ZMK_BEHAVIOR_DEAD_KEY_ENABLED
+
+if ZMK_BEHAVIOR_DEAD_KEY
+    config ZMK_BEHAVIOR_HOLD_DEAD_KEY_HELD
+        int "Dead Keys Max Held"
+        default 6
+endif

@@ -26,13 +26,13 @@
  * Home Rew
  */
 
-#if !defined HT_NONE && !defined HT_THUMB_TAPS && !defined HT_HOME_ROW_MODS && !defined HT_COMPACT
+#if !defined HT_NONE && !defined HT_THUMB_TAPS && !defined HT_HOME_ROW_MODS && !defined HT_TWO_THUMB_KEYS
 #define HT_HOME_ROW_MODS
-#elif defined HT_NONE + defined HT_THUMB_TAPS + defined HT_HOME_ROW_MODS + defined HT_COMPACT > 1
+#elif defined HT_NONE + defined HT_THUMB_TAPS + defined HT_HOME_ROW_MODS + defined HT_TWO_THUMB_KEYS > 1
 #error "Please select only up to one hold-tap configuration at a time"
 #endif
 
-#if defined HT_HOME_ROW_MODS || defined HT_COMPACT
+#if defined HT_HOME_ROW_MODS || defined HT_TWO_THUMB_KEYS
   #define HRM_S &hrm LGUI S
   #define HRM_D &hrm LCTL D
   #define HRM_F &hrm LALT F
@@ -75,7 +75,7 @@
   #define REACH_TAP TAB
 #endif
 
-#if defined HT_COMPACT && !defined VIM_NAVIGATION
+#if defined HT_TWO_THUMB_KEYS && !defined VIM_NAVIGATION
   #define SYM_NUM_LAYER &sc NUM_NAV_LAYER CAPSLOCK
 #else
   #define SYM_NUM_LAYER &EZ_SL(NUM_LAYER)
@@ -118,7 +118,7 @@
   #define RTHUMB_REACH  &sc HRM_LAYER ENTER
   #define RTHUMB_HOME   RTHUMB_HRM
   #define RTHUMB_TUCK   &sym_shift_altgr
-#elifdef HT_COMPACT
+#elifdef HT_TWO_THUMB_KEYS
   #define LTHUMB_TUCK   &mt LSHIFT REACH_TAP
   #define LTHUMB_HOME   LTHUMB_S34
   #define LTHUMB_REACH  LTHUMB_TUCK
@@ -256,7 +256,7 @@
   };
 
   // go to base layer and press mod
-  
+
   lkp: goto_layer_then_keypress {
     compatible = "zmk,behavior-macro-one-param";
     wait-ms = <0>;
@@ -269,7 +269,7 @@
       <&macro_pause_for_release>,
       <&macro_param_1to1>,
       <&macro_release &kp MACRO_PLACEHOLDER>;
-  }; 
+  };
   losm: goto_layer_then_osm {
     compatible = "zmk,behavior-macro-one-param";
     wait-ms = <0>;

@@ -25,6 +25,7 @@
 // #define HT_NONE
 // #define HT_THUMB_TAPS
 // #define HT_HOME_ROW_MODS  // (default behavior)
+// #define HT_TWO_THUMB_KEYS
 
 // Timing is key! Keep the default value if unsure.
 // This defines how long (in ms) a hold-tap key with the "tap-preferred" flavor
@@ -96,10 +97,8 @@
                 LTHUMB_TUCK  LTHUMB_HOME  LTHUMB_REACH    RTHUMB_REACH  RTHUMB_HOME  RTHUMB_TUCK
       >;
     };
-    
+
     // 1. NumLock layer -- NavNum layer that stays on until deactivated without holding key
-    //                  -- 
-    //                  -- 
     num_lock_layer: num_lock_layer {
       display-name = "NumLock";
       bindings = <
@@ -109,7 +108,7 @@
                  &trans  &sc NUM_NAV_LAYER BACKSPACE  &kp (TAB)  &trans  &lt NUM_NAV_LAYER LS(SPACE)  &EZ_SL(SYMBOLS_LAYER)
       >;
     };
-      
+
     // 2. Symbols layer -- with Ergol, basically just an AltGr layer with custom thumb keys
     //                  -- can be redefined for non-AltGr layouts such as QWERTY-ANSI
     symbols_layer: symbols_layer {

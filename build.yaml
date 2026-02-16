@@ -18,6 +18,7 @@
 #   - `ez`  (HT_NONE): no hold-taps, VERY simple config (recommended for absolute beginners)
 #   - `tt`  (HT_THUMB_TAPS): hold-taps on thumb keys (recommended for beginner/intermediate users)
 #   - `hrm` (HT_HOME_ROW_MODS): homerow-mods enabled and refactored thumb keys (default)
+#   - `2tk` (HT_TWO_THUMB_KEYS): hrm enabled and only two thumb keys used per thumb (needed if you use a rotary encoder)
 #
 # - [options]:
 #   - `vim` (VIM_NAVIGATION): use two `VimNav` and `NumRow` layers instead of `NavNum`
@@ -59,6 +60,15 @@ include:
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
       -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DVIM_NAVIGATION;-DHRM_SHIFT"
+      -DCONFIG_ZMK_STUDIO=y
+
+    # Quacken Flex, Ergol + Vim + 2tk config
+  - board: quacken_flex
+    artifact-name: quacken_flex_ergol_2tk
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DVIM_NAVIGATION;-DHT_TWO_THUMB_KEYS"
       -DCONFIG_ZMK_STUDIO=y
 
     # Quacken Flex, Azerty + thumb-taps config

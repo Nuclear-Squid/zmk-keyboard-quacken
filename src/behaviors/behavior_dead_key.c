@@ -1,3 +1,9 @@
+/*
+ * Dead Key Behavior
+ * prefix a key press with an unshifted-keycode, to more easilly and reliably
+ * use dead keys on the host layout to write more complex symbols.
+ */
+
 #define DT_DRV_COMPAT zmk_behavior_dead_key
 
 #include <zephyr/device.h>

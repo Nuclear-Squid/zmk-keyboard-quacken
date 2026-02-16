@@ -172,9 +172,9 @@
     vim_nav {
       display-name = "VimNav";
       bindings = <
-        &none &kp LC(Z) &kp K_MUTE    &kp K_VOL_UP &kp K_VOL_DN  &kp LC(T)  &kp HOME &kp PG_DN &kp PG_UP  &kp END   &none &none
-        &none &kp LC(A) &hrm MS LC(S) &kp LS(TAB)  &kp TAB       &tog LAYER_GAMING   &kp LEFT &kp DOWN  &kp UP     &kp RIGHT &none &none
-        &none &none     &kp LC(X)     &kp LC(W)    &kp LC(V)     &none      &none &kp FSLH  &odk COMMA &odk DOT &none &none
+        &none &kp LC(Z) &kp K_MUTE      &kp K_VOL_UP       &kp K_VOL_DN  &kp LC(T)           &kp HOME &kp PG_DN &kp PG_UP  &kp END   &none &none
+        &none &kp LC(A) &hrm LSFT LC(S) &hrm LCTL LS(TAB)  &kp TAB       &tog LAYER_GAMING   &kp LEFT &kp DOWN  &kp UP     &kp RIGHT &none &none
+        &none &none     &kp LC(X)       &kp LC(W)          &kp LC(V)     &none               &none    &kp FSLH  &odk COMMA &odk DOT  &none &none
                                              &kp LALT  &kp LCTL  &none      &none  &kp ENTER  &kp RALT
       >;
     };

@@ -5,7 +5,7 @@
 #include <drivers/behavior.h>
 #include <dt-bindings/zmk/modifiers.h>
 #include <zmk/event_manager.h>
-#include <zmk/events/keycode_state_changed.h>
+#include <zmk/events/position_state_changed.h>
 #include <zmk/hid.h>
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
@@ -17,6 +17,13 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 struct behavior_dead_key_config {
     uint32_t dead_keycode;
 };
+
+struct persistant_dead_key_info {
+    uint32_t dead_keycode;
+    bool is_down;
+};
+
+struct persistant_dead_key_info current_dead_key;
 
 static int on_dead_key_binding_pressed(
     struct zmk_behavior_binding *binding,
@@ -34,7 +41,10 @@ static int on_dead_key_binding_pressed(
     zmk_hid_masked_modifiers_set(MOD_LSFT | MOD_RSFT);
 
     zmk_behavior_invoke_binding(&kp_binding, event, true);
-    zmk_behavior_invoke_binding(&kp_binding, event, false);
+    current_dead_key = (struct persistant_dead_key_info) {
+        .is_down = true,
+        .dead_keycode = cfg->dead_keycode,
+    };
 
     zmk_mod_flags_t mods_after = zmk_hid_get_explicit_mods();
     zmk_hid_masked_modifiers_clear();
@@ -54,13 +64,17 @@ static int on_dead_key_binding_released(
     struct zmk_behavior_binding *binding,
     struct zmk_behavior_binding_event event
 ) {
-    const struct device *dev = zmk_behavior_get_binding(binding->behavior_dev);
-
     struct zmk_behavior_binding kp_binding = {
         .behavior_dev = "key_press",
-        .param1 = binding->param1,
+        .param1 = current_dead_key.dead_keycode,
     };
 
+    if (current_dead_key.is_down) {
+        current_dead_key.is_down = false;
+        zmk_behavior_invoke_binding(&kp_binding, event, false);
+    };
+
+    kp_binding.param1 = binding->param1;
     zmk_behavior_invoke_binding(&kp_binding, event, false);
 
     return ZMK_BEHAVIOR_OPAQUE;
@@ -70,6 +84,36 @@ static const struct behavior_driver_api dead_key_driver_api = {
     .binding_pressed  = on_dead_key_binding_pressed,
     .binding_released = on_dead_key_binding_released,
 };
+
+static int dead_key_position_state_changed_listener(const zmk_event_t *eh);
+
+ZMK_LISTENER(behavior_dead_key, dead_key_position_state_changed_listener);
+ZMK_SUBSCRIPTION(behavior_dead_key, zmk_position_state_changed);
+
+static int dead_key_position_state_changed_listener(const zmk_event_t *eh) {
+    struct zmk_position_state_changed *ev = as_zmk_position_state_changed(eh);
+    if (ev == NULL || !current_dead_key.is_down) {
+        return ZMK_EV_EVENT_BUBBLE;
+    }
+
+    struct zmk_behavior_binding kp_binding = {
+        .behavior_dev = "key_press",
+        .param1 = current_dead_key.dead_keycode,
+    };
+
+    struct zmk_behavior_binding_event event = {
+        .position = ev->position,
+        .timestamp = ev->timestamp,
+        #if IS_ENABLED(CONFIG_ZMK_SPLIT)
+        .source = ev->source,
+        #endif
+    };
+
+    zmk_behavior_invoke_binding(&kp_binding, event, false);
+    current_dead_key.is_down = false;
+
+    return ZMK_EV_EVENT_BUBBLE;
+}
 
 #define DEAD_KEY_INST(n)                                                      \
     static struct behavior_dead_key_config behavior_dead_key_config_##n = {   \

@@ -9,8 +9,8 @@ IFS=" "
 USB_LOGGING="-S zmk-usb-logging"
 
 # uncomment the following line to enable ZMK Studio support
-ZMK_STUDIO_SNIPPET="-S studio-rpc-usb-uart"
-ZMK_STUDIO_CMAKE="-DCONFIG_ZMK_STUDIO=y"
+# ZMK_STUDIO_SNIPPET="-S studio-rpc-usb-uart"
+# ZMK_STUDIO_CMAKE="-DCONFIG_ZMK_STUDIO=y"
 
 # comment out the following line to enable incremental builds
 PRISTINE="-p"

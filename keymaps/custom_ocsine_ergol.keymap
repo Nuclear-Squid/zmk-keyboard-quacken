@@ -3,16 +3,22 @@
 
 #define TAPPING_TERM 175
 #include "hold_taps.dtsi"
-#include "aliases/ergol.h"
+
+#define KB_LAYOUT_ERGOL
+#include "aliases.h"
 
 #undef  HRM_S
 #undef  HRM_L
-#define HRM_S &hrm LSFT S
-#define HRM_L &hrm LSFT L
+#undef  X_SAVE
+#undef  X_SHTAB
+#define HRM_S   &hrm LSFT S
+#define HRM_L   &hrm LSFT L
+#define X_SAVE  &hrm LSFT LC(S)
+#define X_SHTAB &hrm LCTL LS(TAB)
 
 &hrm { tapping-term-ms = <250>; };
-#define COMBO_TIMEOUT_MS 20
-#define COMBO_LOCK_MS 135
+#define COMBO_TIMEOUT_MS 17
+#define COMBO_LOCK_MS 125
 
 #define LAYER_BASE      0
 #define LAYER_MIRROR    1
@@ -23,6 +29,13 @@
 #define LAYER_NUM_ROW   6
 #define LAYER_GAMING    7
 
+#define S_MULT  &kp LS(RA(I))
+#define X_GAME  &tog LAYER_GAMING
+#define X_MUTE  &kp C_MUTE
+#define X_VOLUP &kp C_VOL_UP
+#define X_VOLDN &kp C_VOL_DN
+#define X_BRIUP &kp C_BRI_UP
+#define X_BRIDN &kp C_BRI_DN
 
 / {
   behaviors {
@@ -74,8 +87,18 @@
   combos {
     compatible= "zmk,combos";
 
+    #define HOME_ROW 12
+    #define BOT_ROW  24
+
+    #define LRING   2
+    #define LMIDDLE 3
+    #define LINDEX  4
+    #define RINDEX  7
+    #define RMIDDLE 8
+    #define RRING   9
+
     compose_sd {
-      key-positions = <14 15>;
+      key-positions = <(HOME_ROW + LRING) (HOME_ROW + LMIDDLE)>;
       bindings = <&kp NUBS>;
       timeout-ms = <COMBO_TIMEOUT_MS>;
       require-prior-idle-ms = <COMBO_LOCK_MS>;
@@ -83,7 +106,7 @@
     };
 
     enter_df {
-      key-positions = <15 16>;
+      key-positions = <(HOME_ROW + LMIDDLE) (HOME_ROW + LINDEX)>;
       bindings = <&kp ENTER>;
       timeout-ms = <COMBO_TIMEOUT_MS>;
       require-prior-idle-ms = <COMBO_LOCK_MS>;
@@ -91,7 +114,7 @@
     };
 
     escape_kj {
-      key-positions = <19 20>;
+      key-positions = <(HOME_ROW + RINDEX) (HOME_ROW + RMIDDLE)>;
       bindings = <&kp ESCAPE>;
       timeout-ms = <COMBO_TIMEOUT_MS>;
       require-prior-idle-ms = <COMBO_LOCK_MS>;
@@ -99,7 +122,7 @@
     };
 
     delete_word_lk {
-      key-positions = <20 21>;
+      key-positions = <(HOME_ROW + RMIDDLE) (HOME_ROW + RRING)>;
       bindings = <&kp LC(BSPC)>;
       timeout-ms = <COMBO_TIMEOUT_MS>;
       require-prior-idle-ms = <COMBO_LOCK_MS>;
@@ -107,7 +130,7 @@
     };
 
     caps_word_m_comma {
-      key-positions = <31 32>;
+      key-positions = <(BOT_ROW + RINDEX) (BOT_ROW + RMIDDLE)>;
       /* bindings = <&caps_word>; */
       bindings = <&kp CAPSLOCK>;
       timeout-ms = <COMBO_TIMEOUT_MS>;
@@ -142,7 +165,7 @@
     symbols_layer {
       display-name = "Symbols";
       bindings = <
-        &trans  S_CARET S_LT    S_GT    S_DLLR  S_PRCNT       S_AT    S_AMPS  S_STAR  S_SQT   S_GRAVE  &trans
+        &trans  S_AT    S_LT    S_GT    S_DLLR  S_PRCNT       S_CARET S_AMPS  S_STAR  S_SQT   S_GRAVE  &trans
         &trans  S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &trans
         &trans  S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &trans
         &EZ_SL(LAYER_NUM_ROW)  &lt LAYER_NUM_ROW SPACE  &none     &trans  &kp RALT  &trans
@@ -172,29 +195,29 @@
     vim_nav {
       display-name = "VimNav";
       bindings = <
-        &none &kp LC(Z) &kp K_MUTE      &kp K_VOL_UP       &kp K_VOL_DN  &kp LC(T)           &kp HOME &kp PG_DN &kp PG_UP  &kp END   &none &none
-        &none &kp LC(A) &hrm LSFT LC(S) &hrm LCTL LS(TAB)  &kp TAB       &tog LAYER_GAMING   &kp LEFT &kp DOWN  &kp UP     &kp RIGHT &none &none
-        &none &none     &kp LC(X)       &kp LC(W)          &kp LC(V)     &none               &none    &kp FSLH  &odk COMMA &odk DOT  &none &none
-                                             &kp LALT  &kp LCTL  &none      &none  &kp ENTER  &kp RALT
+        &none X_UNDO X_MUTE X_VOLUP X_VOLDN X_BRIUP     &kp HOME &kp PG_DN &kp PG_UP &kp END   &none &none
+        &none X_ALL  X_SAVE X_SHTAB &kp TAB X_BRIDN     &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none &none
+        &none &none  X_CUT  X_COPY  X_PASTE &none       &none    X_GAME    &none     &none     &none &none
+                        &kp LALT  &kp LCTL  &none       &none  &kp ENTER  &kp RALT
       >;
     };
 
     num_row {
       display-name = "NumRow";
       bindings = <
-        &none &kp LS(N1) &kp LS(N2) &kp LS(N3)   &kp RA(N) &kp RA(B)     &kp N  &none    &kp LS(RA(I)) &kp O   &kp P  &none
-        &none &kp N1     &kp N2     &kp N3       &kp N4    &kp N5        &kp N6 &kp N7   &kp N8        &kp N9  &kp N0 &none
-        &none &none      &kp RA(Z)  &kp RA(FSLH) &odk V    &none         &none  &kp FSLH &kp N         &kp DOT &none  &none
-                                 &kp SPACE  &kp LS(SPACE)  &none         &none  &odk SPACE  &kp RALT
+        &none &kp LS(N1) &kp LS(N2) &kp LS(N3) &kp LS(N4) &kp LS(N5)     S_HASH S_PIPE   S_MULT &kp O   &none  &none
+        &none &kp N1     &kp N2     &kp N3     &kp N4     &kp N5         &kp N6 &kp N7   &kp N8 &kp N9  &kp N0 &none
+        &none &none      S_TILDE    S_QMARK    &odk V     &none          &none  S_COMMA  S_DOT  S_COLON &none  &none
+                                   &kp SPACE  &kp LS(SPACE)  &none       &none  &odk SPACE  &kp RALT
       >;
     };
 
     gaming {
       display-name = "Gaming";
       bindings = <
-        &none &kp LCTL &kp Q &kp W &kp E &kp R      &kp N &kp U &kp I     &dead_key &tog LAYER_GAMING &none
-        &none &kp LSFT &kp A &kp S &kp D &kp F      &kp H &kp J &kp K     &kp L     &kp SEMI          &none
-        &none &none    &kp X &kp C &kp V &none      &none &kp M &kp COMMA &kp DOT   &none             &none
+        &none &kp LCTL &kp Q &kp W &kp E &kp R      &kp N &kp U &kp I     &dead_key X_GAME   &none
+        &none &kp LSFT &kp A &kp S &kp D &kp F      &kp H &kp J &kp K     &kp L     &kp SEMI &none
+        &none &none    &kp X &kp C &kp V &none      &none &kp M &kp COMMA &kp DOT   &none    &none
          &hrm LGUI ESCAPE  &kp SPACE  &none      &none  &kp SPACE  &lt LAYER_NUM_ROW BSPC
       >;
     };

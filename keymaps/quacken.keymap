@@ -5,13 +5,13 @@
  * Layout-specific actions and symbols.
 ******************************************************************************/
 
-// Uncomment one of the folowing lines if using a non-QWERTY layout:
+// Uncomment one of the following lines if using a non-QWERTY layout:
 
 // #define KB_LAYOUT_QWERTY_LAFAYETTE
 // #define KB_LAYOUT_AZERTY
 // #define KB_LAYOUT_ERGOL
 
-// Uncomment the folowing line if using a Mac:
+// Uncomment the following line if using a Mac:
 
 // #define MACOS
 
@@ -20,7 +20,7 @@
  * Hold-Taps
 ******************************************************************************/
 
-// Uncomment one of the folowing lines to pick your preferred hold-tap config:
+// Uncomment one of the following lines to pick your preferred hold-tap config:
 
 // #define HT_NONE
 // #define HT_THUMB_TAPS
@@ -55,7 +55,7 @@
  * Other Options
 *****************************************************************************/
 
-// Uncomment the following line to plit the num-nav layer in two:
+// Uncomment the following line to split the num-nav layer in two:
 //  - one layer for vim-style navigation (right) and GUI shortcuts (left)
 //  - one layer for a full number row + easy access to Shift+Number
 //  + Escape under the left thumb (direct access)

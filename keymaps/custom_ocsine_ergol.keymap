@@ -1,7 +1,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-#define TAPPING_TERM 175
+#define TAPPING_TERM 170
 #include "hold_taps.dtsi"
 
 #define KB_LAYOUT_ERGOL

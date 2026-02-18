@@ -53,7 +53,7 @@ include:
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
       -DCONFIG_ZMK_STUDIO=y
 
-    # Quacken Flex, Ergol + Vim + hrm_shift config
+    # Quacken Flex, Ergo-L + Vim + hrm_shift config
   - board: quacken_flex
     artifact-name: quacken_flex_ergol_vim_shift
     snippet: studio-rpc-usb-uart
@@ -62,7 +62,7 @@ include:
       -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DVIM_NAVIGATION;-DHRM_SHIFT"
       -DCONFIG_ZMK_STUDIO=y
 
-    # Quacken Flex, Ergol + Vim + 2tk config
+    # Quacken Flex, Ergo-L + Vim + 2tk config
   - board: quacken_flex
     artifact-name: quacken_flex_ergol_2tk
     snippet: studio-rpc-usb-uart
@@ -80,7 +80,7 @@ include:
       -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_AZERTY;-DHT_THUMB_TAPS"
       -DCONFIG_ZMK_STUDIO=y
 
-    # Quacken Flex, Ergol + Hummingbird config
+    # Quacken Flex, Ergo-L + Hummingbird config
   - board: quacken_flex
     artifact-name: quacken_flex_ergol_hummingbird
     snippet: studio-rpc-usb-uart

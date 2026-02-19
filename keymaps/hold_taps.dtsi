@@ -23,7 +23,7 @@
 
 
 /**
- * Home Rew
+ * Home Row
  */
 
 #if !defined HT_NONE && !defined HT_THUMB_TAPS && !defined HT_HOME_ROW_MODS && !defined HT_TWO_THUMB_KEYS

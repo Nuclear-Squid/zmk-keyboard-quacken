@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 TARGET=$1
 shift
+
+if [ $1 == '-u' ]; then
+	KEYMAP_FILE="custom_ocsine_ergol.keymap"
+	shift
+else
+	KEYMAP_FILE="quacken.keymap"
+fi
+
 IFS=";"
 CPP_FLAGS=$*
 IFS=" "
@@ -63,7 +71,7 @@ cd $ZMK_APP_DIR
 source ../.venv/bin/activate
 west build $PRISTINE $USB_LOGGING $ZMK_STUDIO_SNIPPET $BOARD -- $SHIELD \
 	$ZMK_STUDIO_CMAKE \
-	-DKEYMAP_FILE="$SCRIPT_DIR/keymaps/quacken.keymap" \
+	-DKEYMAP_FILE="$SCRIPT_DIR/keymaps/$KEYMAP_FILE" \
 	-DZMK_EXTRA_MODULES="$SCRIPT_DIR" \
 	-DDTS_EXTRA_CPPFLAGS="$CPP_FLAGS" && {
 

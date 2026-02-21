@@ -27,10 +27,15 @@
 #define LAYER_ODK_SHIFT 4
 #define LAYER_VIM_NAV   5
 #define LAYER_NUM_ROW   6
-#define LAYER_GAMING    7
+#define LAYER_GAMING_EL 7
+#define LAYER_GAMING_QW 8
 
-#define S_MULT  &kp LS(RA(I))
-#define X_GAME  &tog LAYER_GAMING
+#define S_MULT &kp LS(RA(I))
+
+#define X_BASE    &to LAYER_BASE
+#define X_GAME_EL &to LAYER_GAMING_EL
+#define X_GAME_QW &to LAYER_GAMING_QW
+
 #define X_MUTE  &kp C_MUTE
 #define X_VOLUP &kp C_VOL_UP
 #define X_VOLDN &kp C_VOL_DN
@@ -105,21 +110,21 @@
       layers = <LAYER_BASE>;
     };
 
-    enter_df {
-      key-positions = <(HOME_ROW + LMIDDLE) (HOME_ROW + LINDEX)>;
-      bindings = <&kp ENTER>;
-      timeout-ms = <COMBO_TIMEOUT_MS>;
-      require-prior-idle-ms = <COMBO_LOCK_MS>;
-      layers = <LAYER_BASE>;
-    };
+    /* enter_df { */
+    /*   key-positions = <(HOME_ROW + LMIDDLE) (HOME_ROW + LINDEX)>; */
+    /*   bindings = <&kp ENTER>; */
+    /*   timeout-ms = <COMBO_TIMEOUT_MS>; */
+    /*   require-prior-idle-ms = <COMBO_LOCK_MS>; */
+    /*   layers = <LAYER_BASE>; */
+    /* }; */
 
-    escape_kj {
-      key-positions = <(HOME_ROW + RINDEX) (HOME_ROW + RMIDDLE)>;
-      bindings = <&kp ESCAPE>;
-      timeout-ms = <COMBO_TIMEOUT_MS>;
-      require-prior-idle-ms = <COMBO_LOCK_MS>;
-      layers = <LAYER_BASE>;
-    };
+    /* escape_kj { */
+    /*   key-positions = <(HOME_ROW + RINDEX) (HOME_ROW + RMIDDLE)>; */
+    /*   bindings = <&kp ESCAPE>; */
+    /*   timeout-ms = <COMBO_TIMEOUT_MS>; */
+    /*   require-prior-idle-ms = <COMBO_LOCK_MS>; */
+    /*   layers = <LAYER_BASE>; */
+    /* }; */
 
     delete_word_lk {
       key-positions = <(HOME_ROW + RMIDDLE) (HOME_ROW + RRING)>;
@@ -148,7 +153,7 @@
         &none &kp Q &kp W &kp E &kp R &kp T      &kp N &kp U &kp I     &dead_key &kp P    &none
         &none &kp A HRM_S HRM_D HRM_F &kp G      &kp H HRM_J HRM_K     HRM_L     &kp SEMI &none
         &none &none &kp X &kp C &kp V &none      &none &kp M &kp COMMA &kp DOT   &none    &none
-     &hrm LGUI ESCAPE  &ltsk LAYER_VIM_NAV LSHFT  &osl LAYER_MIRROR      &none  &lt LAYER_SYMBOLS SPACE  &lt LAYER_NUM_ROW BSPC
+     &hrm LGUI ESCAPE  &ltsk LAYER_VIM_NAV LSHFT  &osl LAYER_MIRROR      &kp ENTER  &lt LAYER_SYMBOLS SPACE  &lt LAYER_NUM_ROW BSPC
       >;
     };
 
@@ -197,7 +202,7 @@
       bindings = <
         &none X_UNDO X_MUTE X_VOLUP X_VOLDN X_BRIUP     &kp HOME &kp PG_DN &kp PG_UP &kp END   &none &none
         &none X_ALL  X_SAVE X_SHTAB &kp TAB X_BRIDN     &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none &none
-        &none &none  X_CUT  X_COPY  X_PASTE &none       &none    X_GAME    &none     &none     &none &none
+        &none &none  X_CUT  X_COPY  X_PASTE &none       &none    X_GAME_EL X_GAME_QW &none     &none &none
                         &kp LALT  &kp LCTL  &none       &none  &kp ENTER  &kp RALT
       >;
     };
@@ -205,20 +210,30 @@
     num_row {
       display-name = "NumRow";
       bindings = <
-        &none &kp LS(N1) &kp LS(N2) &kp LS(N3) &kp LS(N4) &kp LS(N5)     S_HASH S_PIPE   S_MULT &kp O   &none  &none
-        &none &kp N1     &kp N2     &kp N3     &kp N4     &kp N5         &kp N6 &kp N7   &kp N8 &kp N9  &kp N0 &none
-        &none &none      S_TILDE    S_QMARK    &odk V     &none          &none  S_COMMA  S_DOT  S_COLON &none  &none
-                                   &kp SPACE  &kp LS(SPACE)  &none       &none  &odk SPACE  &kp RALT
+        &none &kp LS(N1) &kp LS(N2) &kp LS(N3) S_HASH &kp LS(N5)     &none  S_PIPE   S_MULT &kp O   &none  &none
+        &none &kp N1     &kp N2     &kp N3     &kp N4 &kp N5         &kp N6 &kp N7   &kp N8 &kp N9  &kp N0 &none
+        &none &none      S_TILDE    S_QMARK    &odk V &none          &none  S_COMMA  S_DOT  S_COLON &none  &none
+                             &kp SPACE  &kp LS(SPACE)  &none       &none  &odk SPACE  &kp RALT
       >;
     };
 
-    gaming {
-      display-name = "Gaming";
+    gaming_ergol {
+      display-name = "GamingErgol";
       bindings = <
-        &none &kp LCTL &kp Q &kp W &kp E &kp R      &kp N &kp U &kp I     &dead_key X_GAME   &none
+        &none &kp LCTL &kp Q &kp W &kp E &kp R      &kp N &kp U &kp I     &dead_key X_BASE   &none
         &none &kp LSFT &kp A &kp S &kp D &kp F      &kp H &kp J &kp K     &kp L     &kp SEMI &none
         &none &none    &kp X &kp C &kp V &none      &none &kp M &kp COMMA &kp DOT   &none    &none
-         &hrm LGUI ESCAPE  &kp SPACE  &none      &none  &kp SPACE  &lt LAYER_NUM_ROW BSPC
+            &hrm LGUI ESCAPE  &kp SPACE  &none      &none  &kp SPACE  &lt LAYER_NUM_ROW BSPC
+      >;
+    };
+
+    gaming_qwerty {
+      display-name = "GamingQwerty";
+      bindings = <
+        &none &kp LCTL &kp Q &kp T &kp D &kp J      &kp J &kp K &kp COLON &kp L     X_BASE &none
+        &none &kp LSFT &kp A &kp S &kp I &kp G      &kp M &kp N &kp Y     &kp FSLH  &kp H  &none
+        &none &none    &kp Z &kp X &kp W &none      &none &kp F &kp U     &kp COMMA &none  &none
+            &hrm LGUI ESCAPE  &kp SPACE  &none      &none  &kp SPACE  &lt LAYER_NUM_ROW BSPC
       >;
     };
 

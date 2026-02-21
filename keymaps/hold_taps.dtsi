@@ -33,29 +33,29 @@
 #endif
 
 #if defined HT_HOME_ROW_MODS || defined HT_TWO_THUMB_KEYS
-  #define HRM_S &hrm LGUI S
-  #define HRM_D &hrm LCTL D
-  #define HRM_F &hrm LALT F
-  #define HRM_J &hrm LALT J
-  #define HRM_K &hrm RCTL K
-  #define HRM_L &hrm RGUI L
+  #define HRM_CTL(kc) &hrm LCTL (kc)
+  #define HRM_ALT(kc) &hrm LALT (kc)
+  #define HRM_GUI(kc) &hrm LGUI (kc)
 #else
-  #define HRM_S &kp S
-  #define HRM_D &kp D
-  #define HRM_F &kp F
-  #define HRM_J &kp J
-  #define HRM_K &kp K
-  #define HRM_L &kp L
+  #define HRM_CTL(kc) &kp (kc)
+  #define HRM_ALT(kc) &kp (kc)
+  #define HRM_GUI(kc) &kp (kc)
 #endif
 
 #ifdef HRM_SHIFT
-  #define HRM_A    &hrm LSHIFT A
-  #define HRM_SEMI &hrm RSHIFT SEMI
+  #define HRM_SFT(kc) &hrm LSFT (kc)
 #else
-  #define HRM_A    &kp A
-  #define HRM_SEMI &kp SEMI
+  #define HRM_SFT(kc) &kp (kc)
 #endif
 
+#define HRM_A    HRM_SFT(A)
+#define HRM_S    HRM_GUI(S)
+#define HRM_D    HRM_CTL(D)
+#define HRM_F    HRM_ALT(F)
+#define HRM_J    HRM_ALT(J)
+#define HRM_K    HRM_CTL(K)
+#define HRM_L    HRM_GUI(L)
+#define HRM_SEMI HRM_SFT(SEMI)
 
 /**
  * Thumb Keys

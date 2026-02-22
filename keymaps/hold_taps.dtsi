@@ -33,7 +33,7 @@
 #endif
 
 #if defined HT_HOME_ROW_MODS || defined HT_TWO_THUMB_KEYS
-  #define HRM_CTL(kc) &hrm LCTL (kc)
+  #define HRM_CTL(kc) &ihrm LCTL (kc)
   #define HRM_ALT(kc) &hrm LALT (kc)
   #define HRM_GUI(kc) &hrm LGUI (kc)
 #else
@@ -43,7 +43,7 @@
 #endif
 
 #ifdef HRM_SHIFT
-  #define HRM_SFT(kc) &hrm LSFT (kc)
+  #define HRM_SFT(kc) &ihrm LSFT (kc)
 #else
   #define HRM_SFT(kc) &kp (kc)
 #endif
@@ -170,6 +170,18 @@
       quick-tap-ms = <QUICK_TAP>;
       flavor = "tap-preferred";
       bindings = <&kp>, <&kp>;
+    };
+    // Same as hrm, but hold action is held immediately, and disabled before
+    // the tapaction. Handy when used with a mouse, but causes quick taps of
+    // the modifier when typing (can cause issues with Alt and Gui)
+    ihrm: instant_homerow_mods {
+      compatible = "zmk,behavior-hold-tap";
+      #binding-cells = <2>;
+      tapping-term-ms = <TAPPING_TERM>;
+      quick-tap-ms = <QUICK_TAP>;
+      flavor = "tap-preferred";
+      bindings = <&kp>, <&kp>;
+      hold-while-undecided;
     };
     sc: space_cadet { // same as lt, but with hold-preferred
       compatible = "zmk,behavior-hold-tap";

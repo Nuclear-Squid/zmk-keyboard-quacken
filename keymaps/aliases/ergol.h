@@ -1,4 +1,5 @@
 #include <dt-bindings/zmk/keys.h>
+#include "../hold_taps.dtsi"
 
 /**
  * Action Combos
@@ -11,8 +12,8 @@
 #define X_REDO  &kp CMD(P)
 
 #define X_CLOSE &kp CMD(T)
-#define X_SAVE  &kp CMD(S)
-#define X_ALL   &kp CMD(A)
+#define X_SAVE  HRM_GUI(CMD(S))
+#define X_ALL   HRM_SFT(CMD(A))
 
 /**
  * Arsenik Symbols:
@@ -34,16 +35,16 @@
 #define S_GRAVE &kp GRAVE
 
 // second row
-#define S_LBRC  &kp LBRC
-#define S_LPAR  &kp RA(S)
-#define S_RPAR  &kp RA(D)
-#define S_RBRC  &kp RBRC
+#define S_LBRC  HRM_SFT(LBRC)
+#define S_LPAR  HRM_GUI(RA(S))
+#define S_RPAR  HRM_CTL(RA(D))
+#define S_RBRC  HRM_ALT(RBRC)
 #define S_EQUAL &kp EQUAL
 #define S_BSLH  &kp BSLH
-#define S_PLUS  &kp PLUS
-#define S_MINUS &kp C
-#define S_FSLH  &kp MINUS
-#define S_DQT   &kp DQT
+#define S_PLUS  HRM_ALT(PLUS)
+#define S_MINUS HRM_CTL(C)
+#define S_FSLH  HRM_GUI(MINUS)
+#define S_DQT   HRM_SFT(DQT)
 
 // third row
 #define S_TILDE &kp TILDE

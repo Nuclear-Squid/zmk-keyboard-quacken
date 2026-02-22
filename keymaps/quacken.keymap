@@ -127,10 +127,9 @@
     vim_nav_layer: vim_nav_layer {
       display-name = "VimNav";
       bindings = <
-        &trans  &kp CAPS X_CLOSE  X_PREV   X_NEXT    &none        &kp HOME &kp PG_DN &kp PG_UP &kp END   &kp DEL &trans
-        &trans  X_ALL    X_SAVE   X_SHTAB  &kp TAB   &none        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none   &trans
-        &trans  X_UNDO   X_CUT    X_COPY   X_PASTE   X_REDO       &none    &none     &none     &none     &none   &trans
-        &kp CAPSLOCK  &lt FUNCTION_LAYER DEL  &mo NUM_ROW_LAYER   &trans   &mo FUNCTION_LAYER  &EZ_LSK(RALT)
+        &trans  &kp CAPS X_CLOSE  X_PREV   X_NEXT       &none        &kp HOME &kp PG_DN     &kp PG_UP   &kp END        &kp DEL    &trans
+        &trans  X_ALL    X_SAVE   X_SHTAB  HRM_CTL(TAB) &none        &kp LEFT HRM_ALT(DOWN) HRM_ALT(UP) HRM_ALT(RIGHT) &kp LSHIFT &trans
+        &trans  X_UNDO   X_CUT    X_COPY   X_PASTE      X_REDO       &none    &none         &none       &none          &none      &trans
       >;
     };
 
@@ -140,9 +139,9 @@
     num_nav_layer: num_nav_layer {
       display-name = "NumNav";
       bindings = <
-        &trans  &kp ESC        &kp HOME      &kp UP        &kp END        &kp PG_UP     &to NUM_LOCK_LAYER S_N7          S_N8          S_N9          S_FSLH         &trans
-        &trans  HRM_SFT(X_ALL) HRM_GUI(LEFT) HRM_CTL(DOWN) HRM_ALT(RIGHT) &kp PG_DN     S_MINUS            HRM_SFT(S_N4) HRM_SFT(S_N5) HRM_SFT(S_N6) HRM_SFT(S_N0)  &trans
-        &trans  X_UNDO         X_CUT         X_COPY        X_PASTE        X_REDO        S_COMMA            S_N1          S_N2          S_N3          S_DOT          &trans
+        &trans  &kp ESC &kp HOME      &kp UP        &kp END        &kp PG_UP    &to NUM_LOCK_LAYER S_N7  S_N8  S_N9  S_FSLH  &trans
+        &trans  X_ALL   HRM_GUI(LEFT) HRM_CTL(DOWN) HRM_ALT(RIGHT) &kp PG_DN    S_MINUS            S_N4  S_N5  S_N6  S_N0    &trans
+        &trans  X_UNDO  X_CUT         X_COPY        X_PASTE        X_REDO       S_COMMA            S_N1  S_N2  S_N3  S_DOT   &trans
                &kp CAPSLOCK  &sc FUNCTION_LAYER DEL  &kp LS(TAB)  &kp ESCAPE  &lt FUNCTION_LAYER LS(SPACE)  &EZ_LSK(RALT)
       >;
     };
@@ -153,10 +152,10 @@
     num_row_layer: num_row_layer {
       display-name = "NumRow";
       bindings = <
-        &trans  &kp RS(N1)  &kp RS(N2)  &kp RS(N3)  &kp RS(N4)  &kp RS(N5)       &kp LS(N6) &kp LS(N7)  &kp LS(N8)  &kp LS(N9)  &kp LS(N0)  &trans
-        &trans  HRM_SFT(N1) HRM_SFT(N2) HRM_SFT(N3) HRM_SFT(N4) &kp N5           &kp N6     HRM_SFT(N7) HRM_SFT(N8) HRM_SFT(N9) HRM_SFT(N0) &trans
-        &trans  &none       &none       &none       &none       &none            S_MINUS    S_COMMA     S_DOT       S_COLON     S_FSLH      &trans
-                                          &trans  &kp RS(SPACE) &trans           &trans  &kp LS(SPACE) &kp RALT
+        &trans  &kp RS(N1)  &kp RS(N2)  &kp RS(N3)  &kp RS(N4)  &kp RS(N5)        &kp LS(N6)  &kp LS(N7)  &kp LS(N8)  &kp LS(N9)  &kp LS(N0)  &trans
+        &trans  HRM_SFT(N1) HRM_SFT(N2) HRM_SFT(N3) HRM_SFT(N4) HRM_SFT(N5)       HRM_SFT(N6) HRM_SFT(N7) HRM_SFT(N8) HRM_SFT(N9) HRM_SFT(N0) &trans
+        &trans  &none       &none       &none       &none       &none             S_MINUS     S_COMMA     S_DOT       S_COLON     S_FSLH      &trans
+                                      &trans  &kp RS(SPACE) &trans           &trans  &kp LS(SPACE) &kp RALT
       >;
     };
 
@@ -166,10 +165,10 @@
     function_layer: function_layer {
       display-name = "Function";
       bindings = <
-        &trans  &kp F1       &kp F2       &kp F3       &kp F4       &none         &none &kp C_PREV    &kp C_VOL_UP    &kp C_BRI_UP       &kp SLCK       &trans
-        &trans  HRM_SFT(F5)  HRM_GUI(F6)  HRM_CTL(F7)  HRM_ALT(F8)  &none         &none HRM_ALT(C_PP) HRM_CTL(C_MUTE) HRM_GUI(C_AL_LOCK) HRM_SFT(PSCRN) &trans
-        &trans  &kp F9       &kp F10      &kp F11      &kp F12      &none         &none &kp C_NEXT    &kp C_VOL_DN    &kp C_BRI_DN       &kp INS        &trans
-                                                    &trans  &trans  &bootloader   &sys_reset  &trans  &studio_unlock
+        &trans  &kp F1  &kp F2  &kp F3  &kp F4  &none         &none &kp C_PREV    &kp C_VOL_UP    &kp C_BRI_UP       &kp SLCK       &trans
+        &trans  &kp F5  &kp F6  &kp F7  &kp F8  &none         &none HRM_ALT(C_PP) HRM_CTL(C_MUTE) HRM_GUI(C_AL_LOCK) HRM_SFT(PSCRN) &trans
+        &trans  &kp F9  &kp F10 &kp F11 &kp F12 &none         &none &kp C_NEXT    &kp C_VOL_DN    &kp C_BRI_DN       &kp INS        &trans
+                                &trans  &trans  &bootloader   &sys_reset  &trans  &studio_unlock
       >;
     };
   };

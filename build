@@ -5,6 +5,9 @@ shift
 if [ $1 == '-u' ]; then
 	KEYMAP_FILE="custom_ocsine_ergol.keymap"
 	shift
+elif [ $1 == '-U' ]; then
+	KEYMAP_FILE="custom_ocsine_ergol_prime.keymap"
+	shift
 else
 	KEYMAP_FILE="quacken.keymap"
 fi

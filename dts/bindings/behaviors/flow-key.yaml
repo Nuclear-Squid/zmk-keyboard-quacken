@@ -1,0 +1,15 @@
+description: >
+  Flow-key Behavior
+  Substitute a behavior depending on the previously tapped behavior
+
+compatible: "zmk,behavior-flow-key"
+
+include: zero_param.yaml
+
+properties:
+  timeout-ms:
+    type: int
+    default: 0
+  bindings:
+    type: phandle-array
+    required: true

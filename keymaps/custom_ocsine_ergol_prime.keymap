@@ -1,5 +1,6 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <behaviors/alt_repeat.dtsi>
 
 #define TAPPING_TERM 170
 #include "hold_taps.dtsi"
@@ -99,6 +100,16 @@
       flavor = "tap-preferred";
       bindings = <&mo>, <&key_repeat>;
     };
+
+    magic_key: magic_key {
+      compatible = "zmk,behavior-flow-key";
+      #binding-cells = <0>;
+      bindings
+        = <&ltr LAYER_NUM_ROW 0>
+        , <&kp L>, <&bsl LAYER_ODK LAYER_ODK>
+        , <&kp C>, <&kp D>
+        ;
+    };
   };
 
   combos {
@@ -165,7 +176,7 @@
         &none &kp Q &kp W &kp E &kp R &kp T      &kp N &kp U &kp I     &dead_key &kp P    &none
         &none &kp A HRM_S HRM_D HRM_F &kp G      &kp Y HRM_J HRM_K     HRM_L     &kp SEMI &none
         &none &none &kp X &kp C &kp V &none      &none &kp M &kp COMMA &kp DOT   &none    &none
-     &EZ_SK(LSHIFT)  &lt LAYER_VIM_NAV H  &lt LAYER_MIRROR BSPC      &kp ENTER  &lt LAYER_SYMBOLS SPACE  &ltr LAYER_NUM_ROW 0
+     &bsk LSHIFT LSHIFT  &lt LAYER_VIM_NAV H  &lt LAYER_MIRROR BSPC      &kp ENTER  &lt LAYER_SYMBOLS SPACE  &magic_key
       >;
     };
 

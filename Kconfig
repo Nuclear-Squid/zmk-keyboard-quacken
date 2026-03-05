@@ -1,3 +1,7 @@
 config ZMK_BEHAVIOR_ALT_REPEAT
     bool
     default y
+
+config ZMK_BEHAVIOR_FLOW_KEY
+    bool
+    default y

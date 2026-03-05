@@ -1,7 +1,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-#define TAPPING_TERM 170
+#define TAPPING_TERM 175
 #include "hold_taps.dtsi"
 
 #define KB_LAYOUT_ERGOL
@@ -85,6 +85,70 @@
         , <&macro_param_1to1>
         , <&macro_tap &kp MACRO_PLACEHOLDER>
         , <&macro_release &kp LSHIFT>
+        ;
+    };
+
+    macro_plus_to_zero: macro_plus_to_zero {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      tap-ms = <0>;
+      wait-ms = <0>;
+      bindings
+        = <&macro_tap &kp BACKSPACE>
+        , <&macro_tap &kp N0>
+        ;
+    };
+
+    plus: magic_plus {
+      compatible = "zmk,behavior-flow-key";
+      #binding-cells = <0>;
+      timeout-ms = <QUICK_TAP>;
+      bindings
+        = <S_PLUS>
+        , <S_MINUS &macro_plus_to_zero>
+        ;
+    };
+
+    macro_minus_to_one: macro_minus_to_one {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      tap-ms = <0>;
+      wait-ms = <0>;
+      bindings
+        = <&macro_tap &kp BACKSPACE>
+        , <&macro_tap &kp N1>
+        ;
+    };
+
+    minus: magic_minus {
+      compatible = "zmk,behavior-flow-key";
+      #binding-cells = <0>;
+      timeout-ms = <QUICK_TAP>;
+      bindings
+        = <S_MINUS>
+        , <S_PLUS &macro_minus_to_one>
+        ;
+    };
+
+    macro_slash_to_minus_one: macro_slash_to_minus_one {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      tap-ms = <0>;
+      wait-ms = <0>;
+      bindings
+        = <&macro_tap &kp BACKSPACE>
+        , <&macro_tap S_MINUS>
+        , <&macro_tap &kp N1>
+        ;
+    };
+
+    slash: magic_slash {
+      compatible = "zmk,behavior-flow-key";
+      #binding-cells = <0>;
+      timeout-ms = <QUICK_TAP>;
+      bindings
+        = <S_FSLH>
+        , <S_PLUS &macro_slash_to_minus_one>
         ;
     };
   };
@@ -171,7 +235,7 @@
       display-name = "Symbols";
       bindings = <
         &trans  S_AT    S_LT    S_GT    S_DLLR  S_PRCNT       S_CARET S_AMPS  S_STAR  S_SQT   S_GRAVE  &trans
-        &trans  S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  S_PLUS  S_MINUS S_FSLH  S_DQT    &trans
+        &trans  S_LBRC  S_LPAR  S_RPAR  S_RBRC  S_EQUAL       S_BSLH  &plus   &minus  &slash  S_DQT    &trans
         &trans  S_TILDE S_LBKT  S_RBKT  S_UNDER S_HASH        S_PIPE  S_EXCL  S_SEMI  S_COLON S_QMARK  &trans
         &EZ_SL(LAYER_NUM_ROW)  &lt LAYER_NUM_ROW SPACE  &none     &trans  &kp RALT  &trans
       >;

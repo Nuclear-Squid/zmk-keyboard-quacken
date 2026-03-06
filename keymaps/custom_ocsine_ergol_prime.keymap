@@ -1,6 +1,5 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
-#include <behaviors/alt_repeat.dtsi>
 
 #define TAPPING_TERM 170
 #include "hold_taps.dtsi"
@@ -106,8 +105,8 @@
       #binding-cells = <0>;
       bindings
         = <&ltr LAYER_NUM_ROW 0>
-        , <&kp L>, <&bsl LAYER_ODK LAYER_ODK>
-        , <&kp C>, <&kp D>
+        , <&kp L &bsl LAYER_ODK LAYER_ODK>
+        , <&kp C &kp D>
         ;
     };
   };

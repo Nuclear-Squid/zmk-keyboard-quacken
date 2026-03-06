@@ -3,7 +3,7 @@
 include:
 
   # dummy firmware, just making sure we can build for the RP2040
-  - board: sparkfun_pro_micro_rp2040
+  - board: sparkfun_pro_micro_rp2040//zmk
     shield: tester_pro_micro
     artifact-name: quacken_test
     snippet: studio-rpc-usb-uart
@@ -12,7 +12,7 @@ include:
       -DCONFIG_ZMK_STUDIO=y
 
   # Quacken Zero + SparkFun RP2040
-  - board: sparkfun_pro_micro_rp2040
+  - board: sparkfun_pro_micro_rp2040//zmk
     shield: quacken_zero
     artifact-name: quacken_zero
     snippet: studio-rpc-usb-uart
@@ -21,7 +21,7 @@ include:
       -DCONFIG_ZMK_STUDIO=y
 
   # Quacken Flex
-  - board: quacken_flex
+  - board: quacken_flex/rp2040
     artifact-name: quacken_flex
     snippet: studio-rpc-usb-uart
     cmake-args: >

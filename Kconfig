@@ -5,3 +5,8 @@ config ZMK_BEHAVIOR_ALT_REPEAT
 config ZMK_BEHAVIOR_FLOW_KEY
     bool
     default y
+
+config ZMK_BEHAVIOR_DEAD_KEY
+    bool
+    default y
+    depends on DT_HAS_ZMK_BEHAVIOR_DEAD_KEY_ENABLED

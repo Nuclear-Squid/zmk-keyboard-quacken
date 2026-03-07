@@ -1,0 +1,13 @@
+compatible: "zmk,behavior-dead-key"
+
+description: >
+  Dead Key Behavior
+  prefix a key press with an unshifted-keycode, to more easilly and reliably
+  use dead keys on the host layout to write more complex symbols.
+
+include: one_param.yaml
+
+properties:
+  dead-keycode:
+    type: int
+    required: true

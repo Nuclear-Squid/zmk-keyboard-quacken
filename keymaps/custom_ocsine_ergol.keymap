@@ -24,11 +24,10 @@
 #define LAYER_MIRROR    1
 #define LAYER_SYMBOLS   2
 #define LAYER_ODK       3
-#define LAYER_ODK_SHIFT 4
-#define LAYER_VIM_NAV   5
-#define LAYER_NUM_ROW   6
-#define LAYER_GAMING_EL 7
-#define LAYER_GAMING_QW 8
+#define LAYER_VIM_NAV   4
+#define LAYER_NUM_ROW   5
+#define LAYER_GAMING_EL 6
+#define LAYER_GAMING_QW 7
 
 #define S_MULT &kp LS(RA(I))
 
@@ -62,30 +61,16 @@
 
     // Macro to tap Ergo‑L’s ODK before the specified key
     odk: one_dead_key_macro {
-      compatible = "zmk,behavior-macro-one-param";
+      compatible = "zmk,behavior-dead-key";
       #binding-cells = <1>;
-      tap-ms = <0>;
-      wait-ms = <0>;
-      bindings
-        = <&macro_tap &kp O>
-        , <&macro_param_1to1>
-        , <&macro_tap &kp MACRO_PLACEHOLDER>
-        ;
+      dead-keycode = <O>;
     };
 
-    // Same as `odk`, but adds Shift to the speicied key
-    odks: one_dead_key_shift_macro {
-      compatible = "zmk,behavior-macro-one-param";
-      #binding-cells = <1>;
-      tap-ms = <0>;
-      wait-ms = <0>;
-      bindings
-        = <&macro_tap &kp O>
-        , <&macro_press &kp LSHIFT>
-        , <&macro_param_1to1>
-        , <&macro_tap &kp MACRO_PLACEHOLDER>
-        , <&macro_release &kp LSHIFT>
-        ;
+    em_dash: em_dash {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&odk V>, <&odk B>;
+      mods = <(MOD_LSFT|MOD_RSFT)>;
     };
 
     macro_plus_to_zero: macro_plus_to_zero {
@@ -244,20 +229,10 @@
     super_odk {
       display-name = "SuperOneDeadKey";
       bindings = <
-        &none &odk Q &odk W &odk E &odk R &kp Z     &odk N &kp Y    &odk I     &odk O   &odk P    &none
-        &none &odk A &odk S &odk D &odk F &kp B     &odk H &odk J   &odk K     &odk L   &odk SEMI &none
-        &none &none  &odk Z &odk C &odk V &none     &none  &kp FSLH &odk COMMA &odk DOT &none     &none
-          &kp LALT  &osl LAYER_ODK_SHIFT  &none     &none  &odk SPACE  &kp RALT
-      >;
-    };
-
-    super_odk_shift {
-      display-name = "SuperOneDeadKeyShifted";
-      bindings = <
-        &none &odks Q &odks W &odks E &odks R &kp LS(Z)   &odks N &kp LS(Y)    &odks I     &odks O   &odks P    &none
-        &none &odks A &odks S &odks D &odks F &kp LS(B)   &odks H &odks J      &odks K     &odks L   &odks SEMI &none
-        &none &none   &odks Z &odk C  &odk B  &none       &none   &kp LS(FSLH) &odks COMMA &odks DOT &none      &none
-                             &kp LALT  &none  &none       &none  &odks SPACE  &kp RALT
+        &none &odk Q &odk W &odk E &odk R   &kp Z     &odk N &kp Y    &odk I     &odk O   &odk P    &none
+        &none &odk A &odk S &odk D &odk F   &kp B     &odk H &odk J   &odk K     &odk L   &odk SEMI &none
+        &none &none  &odk Z &odk C &em_dash &none     &none  &kp FSLH &odk COMMA &odk DOT &none     &none
+                   &kp LALT  &EZ_SK(LSHFT)  &none     &none  &odk SPACE  &kp RALT
       >;
     };
 

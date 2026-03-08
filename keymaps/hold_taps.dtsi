@@ -32,31 +32,13 @@
 #error "Please select only up to one hold-tap configuration at a time"
 #endif
 
-<<<<<<< HEAD
 #if defined HT_HOME_ROW_MODS || defined HT_TWO_THUMB_KEYS
-  #define HRM_S &hrm LGUI S
-  #define HRM_D &hrm LCTL D
-  #define HRM_F &hrm LALT F
-  #define HRM_J &hrm LALT J
-  #define HRM_K &hrm RCTL K
-  #define HRM_L &hrm RGUI L
-||||||| parent of 400d8db (HRMs on all layers (or almost))
-#if defined HT_HOME_ROW_MODS || defined HT_COMPACT
-  #define HRM_S &hrm LGUI S
-  #define HRM_D &hrm LCTL D
-  #define HRM_F &hrm LALT F
-  #define HRM_J &hrm LALT J
-  #define HRM_K &hrm RCTL K
-  #define HRM_L &hrm RGUI L
-=======
-#if defined HT_HOME_ROW_MODS || defined HT_COMPACT
   #define HRM_S(key) &hrm LGUI key
   #define HRM_D(key) &hrm LCTL key
   #define HRM_F(key) &hrm LALT key
   #define HRM_J(key) &hrm LALT key
   #define HRM_K(key) &hrm RCTL key
   #define HRM_L(key) &hrm RGUI key
->>>>>>> 400d8db (HRMs on all layers (or almost))
 #else
   #define HRM_S(key) &kp key
   #define HRM_D(key) &kp key

@@ -32,6 +32,7 @@
 #error "Please select only up to one hold-tap configuration at a time"
 #endif
 
+/*
 #if defined HT_HOME_ROW_MODS || defined HT_TWO_THUMB_KEYS
   #define HRM_S(key) &hrm LGUI key
   #define HRM_D(key) &hrm LCTL key
@@ -58,6 +59,10 @@
 
 #define LHRM(key_A, key_S, key_D, key_F)    HRM_A(key_A) HRM_S(key_S) HRM_D(key_D) HRM_F(key_F)
 #define RHRM(key_J, key_K, key_L, key_SEMI) HRM_J(key_J) HRM_K(key_K) HRM_L(key_L) HRM_SEMI(key_SEMI)
+*/
+
+#define LHRM(key_A, key_S, key_D, key_F)    &hrm RSHIFT key_A  &hrm LGUI key_S  &hrm LCTL key_D  &hrm   LALT key_F
+#define RHRM(key_J, key_K, key_L, key_SEMI) &hrm   LALT key_J  &hrm RGUI key_K  &hrm LCTL key_L  &hrm LSHIFT key_SEMI
 
 
 /**

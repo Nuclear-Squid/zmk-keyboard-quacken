@@ -91,9 +91,9 @@
 #else
   #define LTHUMB_TT  &mt LCTL BACKSPACE
   #define RTHUMB_TT  &magic_space
-  #define LTHUMB_HRM &sc NAV_LAYER BACKSPACE
+  #define LTHUMB_HRM &mhsc NAV_LAYER BACKSPACE
   #define RTHUMB_HRM &lt NAV_LAYER SPACE
-  #define LTHUMB_S34 &sc NAV_LAYER BACKSPACE
+  #define LTHUMB_S34 &mhsc NAV_LAYER BACKSPACE
   #define RTHUMB_S34 &lt S34_LAYER SPACE
 #endif
 
@@ -286,5 +286,21 @@
     tapping-term-ms = <TAPPING_TERM>;
     flavor = "tap-preferred";
     bindings = <&lkp>, <&losm>;
+  };
+
+  mhmo: mmomentary_layer_with_held_mods {
+    compatible = "zmk,behavior-mod-hold";
+    #binding-cells = <2>;
+    binding = <&mo>;
+    mods-to-hold = <MOD_LALT>;
+  };
+
+  mhsc: space_cadet_with_held_mods {
+    compatible = "zmk,behavior-hold-tap";
+    #binding-cells = <2>;
+    tapping-term-ms = <SHORT_TAPPING_TERM>;
+    quick-tap-ms = <QUICK_TAP>;
+    flavor = "hold-preferred";
+    bindings = <&mhmo>, <&kp>;
   };
 };

@@ -1,0 +1,17 @@
+description: >
+  Mod-hold Behavior
+  Wraps a behavior while holding a selection of behaviors during it.
+  Handy when combined with home-row-mods
+
+compatible: "zmk,behavior-mod-hold"
+
+include: two_param.yaml
+
+properties:
+  binding:
+    type: phandle
+    required: true
+  mods-to-hold:
+    type: int
+    required: true
+

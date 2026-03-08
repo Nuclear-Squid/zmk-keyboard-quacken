@@ -56,8 +56,8 @@
   #define HRM_SEMI(key) &kp key
 #endif
 
-#define LHRM(key_A, key_S, key_D, key_F)    HRM_A(key_A) HRM_S(key_S) HRM_D(key_D) HRM_F(key_F)
-#define RHRM(key_J, key_K, key_L, key_SEMI) HRM_J(key_J) HRM_K(key_K) HRM_L(key_L) HRM_SEMI(key_SEMI)
+#define LHRM(key_A,key_S,key_D,key_F)    HRM_A(key_A) HRM_S(key_S) HRM_D(key_D) HRM_F(key_F)
+#define RHRM(key_J,key_K,key_L,key_SEMI) HRM_J(key_J) HRM_K(key_K) HRM_L(key_L) HRM_SEMI(key_SEMI)
 
 
 /**

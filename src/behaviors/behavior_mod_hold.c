@@ -27,8 +27,10 @@ static int on_mod_hold_binding_pressed(
     const struct device *dev = zmk_behavior_get_binding(binding->behavior_dev);
     const struct behavior_mod_hold_config *cfg = dev->config;
 
+    struct zmk_behavior_binding invoked_binding = *binding;
+    invoked_binding.behavior_dev = cfg->binding.behavior_dev;
+    zmk_behavior_invoke_binding(&invoked_binding, event, true);
     zmk_hid_register_mods(zmk_hid_get_explicit_mods() & cfg->mods_to_hold);
-    zmk_behavior_invoke_binding(&cfg->binding, event, true);
 
     return ZMK_BEHAVIOR_OPAQUE;
 }
@@ -46,17 +48,18 @@ static int on_mod_hold_binding_released(
         .param1 = LEFT_CONTROL,
     };
 
-    zmk_mod_flags_t mods_to_release = zmk_hid_get_explicit_mods() & cfg->mods_to_hold;
+    struct zmk_behavior_binding invoked_binding = *binding;
+    invoked_binding.behavior_dev = cfg->binding.behavior_dev;
+    zmk_behavior_invoke_binding(&invoked_binding, event, false);
 
     // Release mods using a key press, because `zmk_hid_unregister_mods` is lazy.
+    zmk_mod_flags_t mods_to_release = zmk_hid_get_explicit_mods() & cfg->mods_to_hold;
     for (int i = 0; i < 8; i++) {
         if ((mods_to_release & (1 << i)) != 0) {
             kp_binding.param1 = LEFT_CONTROL + i;
             zmk_behavior_invoke_binding(&kp_binding, event, false);
         }
     }
-
-    zmk_behavior_invoke_binding(&cfg->binding, event, false);
 
     return ZMK_BEHAVIOR_OPAQUE;
 }

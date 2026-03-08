@@ -302,15 +302,15 @@
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     bindings = <&kp LA(LEFT)>, <&kp LS(GRAVE)>;
-    mods      = <MOD_LALT|MOD_GUI>;
-    keep-mods = <MOD_LALT|MOD_GUI>;
+    mods      = <(MOD_LALT|MOD_LGUI)>;
+    keep-mods = <(MOD_LALT|MOD_LGUI)>;
   };
 
   vim_next: vim_next {
     compatible = "zmk,behavior-mod-morph";
     #binding-cells = <0>;
     bindings = <&kp LA(RIGHT)>, <&kp GRAVE>;
-    mods      = <MOD_LALT|MOD_GUI>;
-    keep-mods = <MOD_LALT|MOD_GUI>;
+    mods      = <(MOD_LALT|MOD_LGUI)>;
+    keep-mods = <(MOD_LALT|MOD_LGUI)>;
   };
 };

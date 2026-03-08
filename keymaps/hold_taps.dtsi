@@ -40,12 +40,12 @@
   #define HRM_K(key) &hrm RCTL key
   #define HRM_L(key) &hrm RGUI key
 #else
-  #define HRM_S(key) &kp key
-  #define HRM_D(key) &kp key
-  #define HRM_F(key) &kp key
-  #define HRM_J(key) &kp key
-  #define HRM_K(key) &kp key
-  #define HRM_L(key) &kp key
+  #define HRM_S(key) key
+  #define HRM_D(key) key
+  #define HRM_F(key) key
+  #define HRM_J(key) key
+  #define HRM_K(key) key
+  #define HRM_L(key) key
 #endif
 
 #ifdef HRM_SHIFT
@@ -56,8 +56,8 @@
   #define HRM_SEMI(key) &kp key
 #endif
 
-#define LHRM(key_A,key_S,key_D,key_F)    HRM_A(key_A) HRM_S(key_S) HRM_D(key_D) HRM_F(key_F)
-#define RHRM(key_J,key_K,key_L,key_SEMI) HRM_J(key_J) HRM_K(key_K) HRM_L(key_L) HRM_SEMI(key_SEMI)
+#define LHRM(key_A, key_S, key_D, key_F)    HRM_A(key_A) HRM_S(key_S) HRM_D(key_D) HRM_F(key_F)
+#define RHRM(key_J, key_K, key_L, key_SEMI) HRM_J(key_J) HRM_K(key_K) HRM_L(key_L) HRM_SEMI(key_SEMI)
 
 
 /**

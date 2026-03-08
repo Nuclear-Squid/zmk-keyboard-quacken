@@ -91,10 +91,10 @@
     base_layer: base_layer {
       display-name = "Base";
       bindings = <
-        &kp TAB     &kp Q  &kp W  &kp E  &kp R  &kp T     &kp Y  &kp U  &kp I     &kp O   &kp P      &kp BACKSPACE
-        &kp ESCAPE LHRM(A,     S,     D,     F) &kp G     &kp H RHRM(J,     K,        L,      SEMI)  &kp ENTER
-        &kp LSHIFT  &kp Z  &kp X  &kp C  &kp V  &kp B     &kp N  &kp M  &kp COMMA &kp DOT &kp FSLH   &kp RSHIFT
-                LTHUMB_TUCK  LTHUMB_HOME  LTHUMB_REACH    RTHUMB_REACH  RTHUMB_HOME  RTHUMB_TUCK
+        &kp TAB         &kp Q  &kp W  &kp E  &kp R  &kp T     &kp Y      &kp U  &kp I     &kp O   &kp P      &kp BACKSPACE
+        &kp ESCAPE LHRM(&kp A, &kp S, &kp D, &kp F) &kp G     &kp H RHRM(&kp J, &kp K,    &kp L,  &kp SEMI)  &kp ENTER
+        &kp LSHIFT      &kp Z  &kp X  &kp C  &kp V  &kp B     &kp N      &kp M  &kp COMMA &kp DOT &kp FSLH   &kp RSHIFT
+                   LTHUMB_TUCK  LTHUMB_HOME  LTHUMB_REACH     RTHUMB_REACH  RTHUMB_HOME  RTHUMB_TUCK
       >;
     };
 
@@ -129,8 +129,8 @@
     vim_nav_layer: vim_nav_layer {
       display-name = "VimNav";
       bindings = <
-        &trans  &kp CAPS    X_CLOSE  X_PREV   X_NEXT   &none      &kp HOME &kp PG_DN &kp PG_UP &kp END   &kp DEL &trans
-        &trans LHRM(X_ALL,  X_SAVE,  X_SHTAB, TAB)     &none      &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none   &trans
+        &trans    &kp CAPS  X_CLOSE  X_PREV   X_NEXT   &none      &kp HOME &kp PG_DN &kp PG_UP &kp END   &kp DEL &trans
+        &trans LHRM(X_ALL,  X_SAVE,  X_SHTAB, &kp TAB) &none      &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &none   &trans
         &trans      X_UNDO  X_CUT    X_COPY   X_PASTE  X_REDO     &none    &none     &none     &none     &none   &trans
         &kp CAPSLOCK  &lt FUNCTION_LAYER DEL  &mo NUM_ROW_LAYER   &trans   &mo FUNCTION_LAYER  &EZ_LSK(RALT)
       >;

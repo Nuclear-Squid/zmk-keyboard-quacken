@@ -160,11 +160,11 @@
       >;
     };
 
-    // 6. Function layer -- F1..12 pad on the left hand, HRM on the right hand (with an additional Shift key)
+    // 6. FunMedia layer -- F1..12 pad on the left hand, HRM on the right hand (with an additional Shift key)
     //                   -- reset and bootloader reset on difficult thumb keys
     //                   -- could be completed with other rare keys
-    function_layer: function_layer {
-      display-name = "Function";
+    fun_media_layer: fun_media_layer {
+      display-name = "FunMedia";
       bindings = <
         &trans  &kp F1  &kp F2  &kp F3  &kp F4  &none         &none &kp C_PREV     &kp C_VOL_UP     &kp C_BRI_UP        &kp SLCK           &trans
         &trans  &kp F5  &kp F6  &kp F7  &kp F8  &none         &none &hrm LALT C_PP &hrm RCTL C_MUTE &hrm RGUI C_AL_LOCK &hrm LSHIFT PSCRN  &trans

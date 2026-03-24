@@ -60,7 +60,7 @@ static int on_dead_key_binding_pressed(
     kp_binding.param1 = APPLY_MODS(sticky_mods, binding->param1);
     zmk_behavior_invoke_binding(&kp_binding, event, true);
 
-    return ZMK_BEHAVIOR_OPAQUE;
+    return 0;
 }
 
 static int on_dead_key_binding_released(
@@ -80,7 +80,7 @@ static int on_dead_key_binding_released(
     kp_binding.param1 = binding->param1;
     zmk_behavior_invoke_binding(&kp_binding, event, false);
 
-    return ZMK_BEHAVIOR_OPAQUE;
+    return 0;
 }
 
 static const struct behavior_driver_api dead_key_driver_api = {

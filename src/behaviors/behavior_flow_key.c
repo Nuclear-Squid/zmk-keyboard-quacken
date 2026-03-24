@@ -105,7 +105,7 @@ static int on_flow_key_binding_pressed(
     }
 
     zmk_behavior_invoke_binding(data->invoked_behavior, event, true);
-    return ZMK_BEHAVIOR_OPAQUE;
+    return 0;
 }
 
 static int on_flow_key_binding_released(
@@ -115,7 +115,7 @@ static int on_flow_key_binding_released(
     const struct device *dev = zmk_behavior_get_binding(binding->behavior_dev);
     struct behavior_flow_key_data *data = dev->data;
     zmk_behavior_invoke_binding(data->invoked_behavior, event, false);
-    return ZMK_BEHAVIOR_OPAQUE;
+    return 0;
 }
 
 static const struct behavior_driver_api behavior_flow_key_driver_api = {

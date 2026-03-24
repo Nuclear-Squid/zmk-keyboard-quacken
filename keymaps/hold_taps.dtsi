@@ -57,7 +57,7 @@
 #endif
 
 #if defined HT_HOME_ROW_MODS || defined HT_TWO_THUMB_KEYS
-  #define HRM_A    H_S A
+  #define HRM_A    H_A A
   #define HRM_S    H_S S
   #define HRM_D    H_D D
   #define HRM_F    H_F F

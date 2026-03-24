@@ -13,7 +13,7 @@
 #define NUM_LOCK_LAYER 1
 #define SYMBOLS_LAYER  2
 #define VIM_NAV_LAYER  3
-#define NUM_NAV_LAYER  4
+#define NAV_NUM_LAYER  4
 #define NUM_ROW_LAYER  5
 #define FUNCTION_LAYER 6
 
@@ -68,15 +68,15 @@
   #define S34_LAYER NUM_ROW_LAYER
   #define REACH_TAP ESCAPE
 #else
-  #define NAV_LAYER NUM_NAV_LAYER
-  #define NUM_LAYER NUM_NAV_LAYER
+  #define NAV_LAYER NAV_NUM_LAYER
+  #define NUM_LAYER NAV_NUM_LAYER
   #define HRM_LAYER FUNCTION_LAYER
-  #define S34_LAYER NUM_NAV_LAYER
+  #define S34_LAYER NAV_NUM_LAYER
   #define REACH_TAP TAB
 #endif
 
 #if defined HT_TWO_THUMB_KEYS && !defined VIM_NAVIGATION
-  #define SYM_NUM_LAYER &sc NUM_NAV_LAYER CAPSLOCK
+  #define SYM_NUM_LAYER &sc NAV_NUM_LAYER CAPSLOCK
 #else
   #define SYM_NUM_LAYER &EZ_SL(NUM_LAYER)
 #endif

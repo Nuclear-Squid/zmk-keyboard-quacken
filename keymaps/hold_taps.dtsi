@@ -33,12 +33,12 @@
 #endif
 
 #if defined MACOS
-  #define H_S &hrm LCTL
+  #define H_S &hrm LALT
   #define H_D &hrm LGUI
-  #define H_F &hrm LALT
-  #define H_J &hrm RALT
+  #define H_F &hrm LCTL
+  #define H_J &hrm RCTL
   #define H_K &hrm RGUI
-  #define H_L &hrm RCTL
+  #define H_L &hrm LALT
 #else
   #define H_S &hrm LGUI
   #define H_D &hrm LCTL

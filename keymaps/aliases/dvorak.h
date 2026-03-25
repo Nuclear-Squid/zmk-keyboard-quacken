@@ -40,7 +40,7 @@
 #define S_RBRC  &kp PLUS
 #define S_EQUAL &kp RBKT
 #define S_BSLH  &kp BSLH
-#define S_PLUS  &kp LBRC
+#define S_PLUS  &kp RBRC
 #define S_MINUS &kp SQT
 #define S_FSLH  &kp LBKT
 #define S_DQT   &kp RS(Q)
@@ -53,8 +53,8 @@
 #define S_HASH  &kp HASH
 #define S_PIPE  &kp PIPE
 #define S_EXCL  &kp EXCL
-#define S_SEMI  &kp LS(COMMA)
-#define S_COLON &kp LS(DOT)
+#define S_SEMI  &kp Z
+#define S_COLON &kp RS(Z)
 #define S_QMARK &kp LBRC
 
 // extra

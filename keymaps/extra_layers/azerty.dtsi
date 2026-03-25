@@ -1,5 +1,6 @@
 #define DK_LAYER EXTRA_LAYERS_START_INDEX
 
+// Same as the default base layer, but Enter becomes 1DK.
 &base_layer {
   display-name = "Base";
   bindings = <

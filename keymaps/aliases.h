@@ -3,26 +3,24 @@
 // PC / Mac
 
 #ifdef MACOS
-#define CMD RG // Mac: Cmd key as main modifier
+  #define CMD RG // Mac: Cmd key as main modifier
 #else
-#define CMD RC // PC: Ctrl key as main modifier
+  #define CMD RC // PC: Ctrl key as main modifier
 #endif
 
 // Keyboard Layout
 
-#ifdef KB_LAYOUT_ERGOL
-#include "aliases/ergol.h"
-
+#ifdef KB_LAYOUT_DVORAK
+  #include "aliases/dvorak.h"
+#elifdef KB_LAYOUT_ERGOL
+  #include "aliases/ergol.h"
 #elifdef KB_LAYOUT_AZERTY
-#define SHIFTED_NUMBERS
-#include "aliases/azerty.h"
-
+  #define SHIFTED_NUMBERS
+  #include "aliases/azerty.h"
 #elifdef KB_LAYOUT_QWERTY_LAFAYETTE
-#include "aliases/qwerty_lafayette.h"
-
+  #include "aliases/qwerty_lafayette.h"
 #else
-#include "aliases/qwerty.h"
-
+  #include "aliases/qwerty.h"
 #endif
 
 // Numbers

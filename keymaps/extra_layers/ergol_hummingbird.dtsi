@@ -64,7 +64,7 @@
     };
   };
 
-  // Extra layers defned specifically for this keymap.
+  // Extra layers defined specifically for this keymap.
   // They are appended at the end of the base keymap.
   keymap {
     compatible = "zmk,keymap";

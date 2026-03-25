@@ -5,13 +5,13 @@
  * Layout-specific actions and symbols.
 ******************************************************************************/
 
-// Uncomment one of the folowing lines if using a non-QWERTY layout:
+// Uncomment one of the following lines if using a non-QWERTY layout:
 
 // #define KB_LAYOUT_QWERTY_LAFAYETTE
 // #define KB_LAYOUT_AZERTY
 // #define KB_LAYOUT_ERGOL
 
-// Uncomment the folowing line if using a Mac:
+// Uncomment the following line if using a Mac:
 
 // #define MACOS
 
@@ -20,7 +20,7 @@
  * Hold-Taps
 ******************************************************************************/
 
-// Uncomment one of the folowing lines to pick your preferred hold-tap config:
+// Uncomment one of the following lines to pick your preferred hold-tap config:
 
 // #define HT_NONE
 // #define HT_THUMB_TAPS
@@ -109,7 +109,7 @@
       >;
     };
 
-    // 2. Symbols layer -- with Ergol, basically just an AltGr layer with custom thumb keys
+    // 2. Symbols layer -- with Ergo-L, basically just an AltGr layer with custom thumb keys
     //                  -- can be redefined for non-AltGr layouts such as QWERTY-ANSI
     symbols_layer: symbols_layer {
       display-name = "Symbols";
@@ -123,7 +123,7 @@
 
     // 3. VimNav layer -- HJKL arrow cluster on the right hand
     //                 -- best used along with the NumRow layer
-    //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergol here)
+    //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergo-L here)
     vim_nav_layer: vim_nav_layer {
       display-name = "VimNav";
       bindings = <
@@ -136,7 +136,7 @@
 
     // 4. NavNum layer -- inverted T arrow cluster on the left hand, numpad on the right hand
     //                 -- can be the only extra layer you need if you're not too picky with number+symbols n-grams
-    //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergol here)
+    //                 -- keyboard shortcuts on the left hand are adjusted to the OS layout (Ergo-L here)
     nav_num_layer: nav_num_layer {
       display-name = "NavNum";
       bindings = <
@@ -148,7 +148,7 @@
     };
 
     // 5. NumRow layer -- bring the numbers to the homerow, keep shift+numbers for shortcuts and symbols
-    //                 -- space becomes shift+space, which is a no-break space with some OS layouts (e.g. Ergol)
+    //                 -- space becomes shift+space, which is a no-break space with some OS layouts (e.g. Ergo-L)
     //                 -- best used along with the VimNav layer
     num_row_layer: num_row_layer {
       display-name = "NumRow";

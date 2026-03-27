@@ -32,27 +32,47 @@
 #error "Please select only up to one hold-tap configuration at a time"
 #endif
 
-#if defined HT_HOME_ROW_MODS || defined HT_TWO_THUMB_KEYS
-  #define HRM_S &hrm LGUI S
-  #define HRM_D &hrm LCTL D
-  #define HRM_F &hrm LALT F
-  #define HRM_J &hrm LALT J
-  #define HRM_K &hrm RCTL K
-  #define HRM_L &hrm RGUI L
+#if defined MACOS
+  #define H_S &hrm LALT
+  #define H_D &hrm LGUI
+  #define H_F &hrm LCTL
+  #define H_J &hrm RCTL
+  #define H_K &hrm RGUI
+  #define H_L &hrm LALT
 #else
-  #define HRM_S &kp S
-  #define HRM_D &kp D
-  #define HRM_F &kp F
-  #define HRM_J &kp J
-  #define HRM_K &kp K
-  #define HRM_L &kp L
+  #define H_S &hrm LGUI
+  #define H_D &hrm LCTL
+  #define H_F &hrm LALT
+  #define H_J &hrm LALT
+  #define H_K &hrm RCTL
+  #define H_L &hrm RGUI
 #endif
 
 #ifdef HRM_SHIFT
-  #define HRM_A    &hrm LSHIFT A
-  #define HRM_SEMI &hrm RSHIFT SEMI
+  #define H_A    &hrm LSHIFT
+  #define H_SEMI &hrm RSHIFT
+#else
+  #define H_A    &kp
+  #define H_SEMI &kp
+#endif
+
+#if defined HT_HOME_ROW_MODS || defined HT_TWO_THUMB_KEYS
+  #define HRM_A    H_A A
+  #define HRM_S    H_S S
+  #define HRM_D    H_D D
+  #define HRM_F    H_F F
+  #define HRM_J    H_J J
+  #define HRM_K    H_K K
+  #define HRM_L    H_L L
+  #define HRM_SEMI H_SEMI SEMI
 #else
   #define HRM_A    &kp A
+  #define HRM_S    &kp S
+  #define HRM_D    &kp D
+  #define HRM_F    &kp F
+  #define HRM_J    &kp J
+  #define HRM_K    &kp K
+  #define HRM_L    &kp L
   #define HRM_SEMI &kp SEMI
 #endif
 

@@ -52,5 +52,10 @@
 // Non-Alpha Actions
 
 #define X_SHTAB &kp RS(TAB)
-#define X_PREV  &kp LA(LEFT)
-#define X_NEXT  &kp LA(RIGHT)
+#ifdef MACOS
+  #define X_PREV &kp LG(LBKT)
+  #define X_NEXT &kp LG(RBKT)
+#else
+  #define X_PREV &kp LA(LEFT)
+  #define X_NEXT &kp LA(RIGHT)
+#endif

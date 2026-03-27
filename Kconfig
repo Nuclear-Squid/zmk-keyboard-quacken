@@ -1,6 +1,6 @@
 mainmenu "Selenium Settings"
 
-choice KEYBOAR_LAYOUT
+choice KEYBOARD_LAYOUT
   bool "Keyboard layout on computer"
   default KB_LAYOUT_ERGOL
 

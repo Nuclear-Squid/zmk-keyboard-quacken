@@ -1,0 +1,77 @@
+mainmenu "Selenium Settings"
+
+choice KEYBOAR_LAYOUT
+  bool "Keyboard layout on computer"
+  default KB_LAYOUT_ERGOL
+
+  config KB_LAYOUT_QWERTY
+    bool "Qwerty"
+
+  config KB_LAYOUT_QWERTY_LAFAYETTE
+    bool "Qwerty-Lafayette"
+
+  config KB_LAYOUT_AZERTY
+    bool "Azerty"
+
+  config KB_LAYOUT_ERGOL
+    bool "Ergo-L"
+
+  config KB_LAYOUT_DVORAK
+    bool "Dvorak"
+
+  config KB_LAYOUT_BEPO
+    bool "Bépo"
+
+  config KB_LAYOUT_BEPOLAR
+    bool "Bépolar"
+
+endchoice
+
+choice HOLD_TAPS
+  bool "Hold taps configuration"
+  default HT_HOME_ROW_MODS
+
+  config HT_NONE
+    bool "None (ez config)"
+
+  config HT_THUMB_TAPS
+    bool "Thumb-Taps"
+
+  config HT_HOME_ROW_MODS
+    bool "Home-Row-Mods"
+
+  config HT_TWO_THUMB_KEYS
+    bool "Two thumb keys"
+
+endchoice
+
+config TAPPING_TERM
+  int "TappingTerm (hold-taps with tap priority)"
+  default 300
+  help
+    Timing is key! Keep the default value if unsure.
+    This defines how long (in ms) a hold-tap key with the "tap-preferred" flavor
+    must be held to be considered as a modifier or layer shift. These hold-taps
+    are the ones that may produce text, including the space-bar and home-row-mods.
+    Keep this value high if you struggle wih home-row-mods.
+
+
+config SHORT_TAPPING_TERM
+  int "ShortTappingTerm (hold-taps with hold priority)"
+  default 150
+
+config QUICK_TAPPING_TERM
+  int "QuickTap (tap and hold max delay)"
+  default 200
+
+config VIM_NAVIGATION
+  bool "Enable vim-style navigation"
+  default False
+
+config HRM_SHIFT
+  bool "Enable Shift as HRM on pinky"
+  default False
+
+config MACOS
+  bool "Enable MacOS-compatible modifiers"
+  default False

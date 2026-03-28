@@ -121,7 +121,7 @@
             , <&io_exp_gpio 18 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
             , <&io_exp_gpio 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
 
-            // Thumb (Tucked / Home / Reachy)
+            // Thumb (Reachy / Home / Tucked)
             , <&io_exp_gpio 20 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
             , <&io_exp_gpio 21 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
             , <&io_exp_gpio 22 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
@@ -132,14 +132,24 @@
         compatible = "alps,ec11";
         a-gpios = <&rp2040_gpio 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         b-gpios = <&rp2040_gpio 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-        steps = <80>;
+        steps = <18>; // encoders sold by SplitKB are EC11E18244A5 (tactile) and EC11E183440C (linear),
+                      // both have 18 pulses (36 detents for the tactile one)
+        status = "okay";
+    };
+
+    right_encoder: right_encoder {
+        compatible = "alps,ec11";
+        a-gpios = <&io_exp_gpio  0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        b-gpios = <&io_exp_gpio  1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        steps = <18>;  // encoders sold by SplitKB are EC11E18244A5 (tactile) and EC11E183440C (linear),
+                       // both have 18 pulses (36 detents for the tactile one)
         status = "okay";
     };
 
     sensors: sensors {
         compatible = "zmk,keymap-sensors";
-        sensors = <&left_encoder>;
-        triggers-per-rotation = <20>;
+        sensors = <&left_encoder &right_encoder>;
+        triggers-per-rotation = <18>; // number of times to trigger the bound behavior per full rotation
     };
 
     physical_layout0: physical_layout_0 { // First physical layout, use different naming for other layouts

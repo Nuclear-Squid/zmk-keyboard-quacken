@@ -31,12 +31,12 @@
 #define S_AMPS  &kp RA(E)
 #define S_STAR  &kp N0
 #define S_SQT   &kp RA(G)
-#define S_GRAVE &kp RA(EQUAL)
+#define S_GRAVE &kp LS(EQUAL)
 
 // second row
 #define S_LBRC  &kp RA(X)
-#define S_LPAR  &kp RA(N4)
-#define S_RPAR  &kp RA(N5)
+#define S_LPAR  &kp N4
+#define S_RPAR  &kp N5
 #define S_RBRC  &kp RA(C)
 #define S_EQUAL &kp MINUS
 #define S_BSLH  &kp RA(Z)
@@ -46,11 +46,11 @@
 #define S_DQT   &kp N1
 
 // third row
-#define S_TILDE &kp &tilde
-#define S_LBKT  &kp LBKT
-#define S_RBKT  &kp RBKT
+#define S_TILDE &ascii_tilde
+#define S_LBKT  &kp RA(N4)
+#define S_RBKT  &kp RA(N5)
 #define S_UNDER &kp RA(SPACE)
-#define S_HASH  &kp RS(N1)
+#define S_HASH  &kp RS(GRAVE)
 #define S_PIPE  &kp RA(Q)
 #define S_EXCL  &kp LS(Y)
 #define S_SEMI  &kp RS(G)
@@ -64,7 +64,7 @@
 
 / {
   behaviors {
-    tilde: tilde {
+    ascii_tilde: ascii_tilde {
       compatible = "zmk,behavior-macro";
       #binding-cells = <0>;
       tap-ms = <0>;

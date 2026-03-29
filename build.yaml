@@ -27,3 +27,30 @@ include:
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
       -DCONFIG_ZMK_STUDIO=y
+
+  # Quacken Flex, Azerty
+  - board: quacken_flex
+    artifact-name: quacken_flex_azerty
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_AZERTY"
+      -DCONFIG_ZMK_STUDIO=y
+
+  # Quacken Flex, Bépo
+  - board: quacken_flex
+    artifact-name: quacken_flex_bepo
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_BEPO"
+      -DCONFIG_ZMK_STUDIO=y
+
+  # Quacken Flex, Bépolar
+  - board: quacken_flex
+    artifact-name: quacken_flex_bepolar
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_BEPOLAR"
+      -DCONFIG_ZMK_STUDIO=y

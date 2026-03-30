@@ -14,6 +14,8 @@
   #include "aliases/dvorak.h"
 #elifdef KB_LAYOUT_ERGOL
   #include "aliases/ergol.h"
+#elifdef KB_LAYOUT_ERGLACE
+  #include "aliases/erglace.h"
 #elifdef KB_LAYOUT_AZERTY
   #define SHIFTED_NUMBERS
   #include "aliases/azerty.h"

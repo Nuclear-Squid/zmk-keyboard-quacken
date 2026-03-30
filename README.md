@@ -77,6 +77,7 @@ west update  # this installs Zephyr and other ZMK stuff (takes a while)
 # install Zephyr's dependencies and SDK
 cd zephyr
 uv pip install -r scripts/requirements-base.txt
+uv pip install protobuf grpcio-tools
 west sdk install  # (this takes a while)
 ```
 

@@ -1,13 +1,13 @@
 manifest:
   remotes:
-    - name: petejohanson
-      url-base: https://github.com/petejohanson
-    # Additional modules containing boards/shields/custom code can be listed here as well
-    # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
+    - name: zmkfirmware
+      url-base: https://github.com/zmkfirmware
   projects:
     - name: zmk
-      remote: petejohanson
-      revision: afda1561bf9aeb4cb74f709acc8bf61f809450ea
+      remote: zmkfirmware
+      # pin zmk commit, this is the tip of the `main` branch on 2026-03-30
+      # see https://github.com/Nuclear-Squid/zmk-keyboard-quacken/pull/49#issuecomment-4153385353
+      revision: c62da0e16646d10240ba29191bdbcb5611b3a1af
       import: app/west.yml
   self:
     path: config

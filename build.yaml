@@ -21,7 +21,7 @@ include:
       -DCONFIG_ZMK_STUDIO=y
 
   # Quacken Flex
-  - board: quacken_flex/rp2040
+  - board: quacken_flex
     artifact-name: quacken_flex
     snippet: studio-rpc-usb-uart
     cmake-args: >

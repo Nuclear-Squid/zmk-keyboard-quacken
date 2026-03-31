@@ -43,7 +43,7 @@ test)
 	echo "    - erglace"
 	echo "    - bepo"
 	echo "    - bepolar"
-	echo "    - qwerty_lafayette"
+	echo "    - lafayette"
 	echo
 	exit 1
 	;;

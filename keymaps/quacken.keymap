@@ -1,11 +1,9 @@
 // Selenium keymap for the Quacken: https://github.com/OneDeadKey/selenium
 
 
-/******************************************************************************
- * Keymap
-******************************************************************************/
-
-#include "user_settings.h"
+#ifndef CI_IGNORE_USER_SETTINGS
+  #include "user_settings.h"
+#endif
 
 #include "aliases.h"      // defines symbols and actions
 #include "hold_taps.dtsi" // defines thumb keys and homerow mods

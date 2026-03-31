@@ -1,0 +1,40 @@
+# This file builds most combinations of options on the Quacken flex to make
+# sure there are no obvious mistakes
+
+include:
+
+  # EZ hold taps
+  - board: quacken_flex
+    artifact-name: ez
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DCONFIG_ZMK_STUDIO=y
+      -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DHT_NONE"
+
+  # TT hold taps
+  - board: quacken_flex
+    artifact-name: tt
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DCONFIG_ZMK_STUDIO=y
+      -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DHT_THUMB_TAPS"
+
+  # HRM hold taps
+  - board: quacken_flex
+    artifact-name: hrm
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DCONFIG_ZMK_STUDIO=y
+      -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DHT_HOME_ROW_MODS"
+
+  # 2TK hold taps
+  - board: quacken_flex
+    artifact-name: 2tk
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DCONFIG_ZMK_STUDIO=y
+      -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DHT_TWO_THUMB_KEYS"

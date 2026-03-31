@@ -102,14 +102,22 @@
 #endif
 
 #ifdef LHAND_SPACE
-  #define LTHUMB_TT  &hrm CMD SPACE
+  #if defined MACOS
+    #define LTHUMB_TT &hrm LGUI SPACE
+  #else
+    #define LTHUMB_TT &hrm LCTL SPACE
+  #endif
   #define RTHUMB_TT  &magic_backspace
   #define LTHUMB_HRM &lt NAV_LAYER SPACE
   #define RTHUMB_HRM &magic_backspace
   #define LTHUMB_S34 &lt NAV_LAYER SPACE
   #define RTHUMB_S34 &magic_backspace_34_keys
 #else
-  #define LTHUMB_TT  &mt CMD BACKSPACE
+  #if defined MACOS
+    #define LTHUMB_TT &mt LGUI BACKSPACE
+  #else
+    #define LTHUMB_TT &mt LCTL BACKSPACE
+  #endif
   #define RTHUMB_TT  &magic_space
   #define LTHUMB_HRM &sc NAV_LAYER BACKSPACE
   #define RTHUMB_HRM &lt NAV_LAYER SPACE

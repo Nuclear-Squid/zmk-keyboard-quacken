@@ -1,5 +1,18 @@
 #define ODK_LAYER EXTRA_LAYERS_START_INDEX
 
+#define DEAD_KEY(name, key) name: name {       \
+  compatible = "zmk,behavior-macro-one-param"; \
+  #binding-cells = <1>;                        \
+  tap-ms = <0>;                                \
+  wait-ms = <0>;                               \
+  bindings                                     \
+    = <&macro_tap key>                         \
+    , <&macro_pause_for_release>               \
+    , <&macro_param_1to1>                      \
+    , <&kp MACRO_PLACEHOLDER>                  \
+    ;                                          \
+};
+
 #define PUNCTUATION_KEY(name, base, shift) name: name { \
   compatible = "zmk,behavior-mod-morph";                \
   #binding-cells = <0>;                                 \
@@ -8,9 +21,22 @@
   keep-mods = <(MOD_LSFT|MOD_RSFT)>;                    \
 };
 
+/ {
+  behaviors {
+    PUNCTUATION_KEY(apos, &EZ_SL(ODK_LAYER), S_EXCL) // ' ! (1dk)
+    PUNCTUATION_KEY(dash,  S_MINUS, S_QMARK)         // - ?
+    PUNCTUATION_KEY(dot,   S_DOT,   S_COLON)         // . :
+    PUNCTUATION_KEY(comma, S_COMMA, S_SEMI)          // , ;
+  };
+};
+
+
+/******************************************************************************
+ * AZERTY host
+******************************************************************************/
+
 #ifdef KB_LAYOUT_AZERTY
 
-// Ergol: base emulation
 &base_layer {
   display-name = "Base";
   bindings = <
@@ -22,25 +48,12 @@
 };
 
 / {
-  behaviors {
-    PUNCTUATION_KEY(apos, &EZ_SL(ODK_LAYER), &kp FSLH) // ' ! (dead key)
-    PUNCTUATION_KEY(dash, &kp N6, &kp LS(M))           // - ?
-    PUNCTUATION_KEY(dot, &kp LS(COMMA), &kp DOT)       // . :
-    PUNCTUATION_KEY(comma, &kp M, &kp COMMA)           // , ;
-  };
-
   macros {
-    kpc: circumflex {
-      compatible = "zmk,behavior-macro-one-param";
-      #binding-cells = <1>;
-      tap-ms = <0>;
-      wait-ms = <0>;
-      bindings = <&macro_tap &kp LBKT>, <&macro_pause_for_release>, <&macro_param_1to1>, <&kp MACRO_PLACEHOLDER>;
-    };
+    DEAD_KEY(crc, &kp LBKT) // circumflex accent
     i_dia: i_diaeresis {
       compatible = "zmk,behavior-macro";
       #binding-cells = <0>;
-      bindings = <&macro_tap &kp LS(LBKT) &kp I>;
+      bindings = <&macro_tap &kp LBRC &kp I>;
     };
     n_tld: n_tilde {
       compatible = "zmk,behavior-macro";
@@ -49,20 +62,70 @@
     };
   };
 
-  // Ergol: 1dk emulation
   keymap {
     compatible = "zmk,keymap";
 
     one_dead_key {
       display-name = "OneDeadKey";
       bindings = <
-        &trans  &kpc Q  &kp N9  &trans  &kpc O  &trans     &trans  &kp LS(BSLH) &kp N8  &kp LS(LBKT)  &kpc U   &trans
-        &trans  &kp N0  &kp N2  &kp N7  &kpc E  &n_tld     &kp N5  &kp MINUS    &kpc I  &i_dia        &kp SQT  &trans
-        &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans       &trans  &trans        &trans   &trans
-                                &trans  &kp N4  &trans     &trans  &kp N4   &trans
+        &trans  &crc Q  &kp N9  &trans  &crc O  &trans     &trans  &kp LS(BSLH) S_UNDER &kp LBRC  &crc U   &trans
+        &trans  &kp N0  &kp N2  &kp N7  &crc E  &n_tld     S_LPAR  S_RPAR       &crc I  &i_dia    &kp SQT  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans       &trans  &trans    &trans   &trans
+                                &trans  S_SQT   &trans     &trans  S_SQT    &trans
       >;
     };
   };
 };
 
-#endif // KB_LAYOUT_AZERTY
+
+/******************************************************************************
+ * QWERTY-intl host
+******************************************************************************/
+
+#elifdef KB_LAYOUT_QWERTY_INTL
+
+&base_layer {
+  display-name = "Base";
+  bindings = <
+    &none  &kp Q  &kp C  &kp O  &kp P  &kp W        &kp J  &kp M  &kp D  &apos  &kp Y     &none
+    &none  H_A A  H_S S  H_D E  H_F N  &kp F        &kp L  H_J R  H_K T  H_L I  H_SEMI U  &none
+    &none  &kp Z  &kp X  &dash  &kp V  &kp B        &dot   &kp H  &kp G  &comma &kp K     &none
+        LTHUMB_TUCK  LTHUMB_HOME  LTHUMB_REACH    RTHUMB_REACH  RTHUMB_HOME  RTHUMB_TUCK
+  >;
+};
+
+/ {
+  macros {
+    DEAD_KEY(acu, &kp SQT)    // acute accent or cedilla
+    DEAD_KEY(grv, &kp GRAVE)  // grave accent
+    DEAD_KEY(crc, &kp CARET)  // circumflex accent
+    i_dia: i_diaeresis {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&macro_tap &kp DQT &kp I>;
+    };
+    n_tld: n_tilde {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&macro_tap &kp TILDE &kp N>;
+    };
+  };
+
+  keymap {
+    compatible = "zmk,keymap";
+
+    one_dead_key {
+      display-name = "OneDeadKey";
+      bindings = <
+        &trans  &crc A  &acu C  &trans  &crc O  &trans     &trans  &trans  S_UNDER &kp DQT &crc U  &trans
+        &trans  &grv A  &acu E  &grv E  &crc E  &n_tld     S_LPAR  S_RPAR  &crc I  &i_dia  &grv U  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans  &trans  &trans
+                                &trans  S_SQT   &trans     &trans  S_SQT   &trans
+      >;
+    };
+  };
+};
+
+#else
+#error "KB_EMULATION_ERGOL requires either KB_LAYOUT_AZERTY or KB_LAYOUT_QWERTY_INTL"
+#endif

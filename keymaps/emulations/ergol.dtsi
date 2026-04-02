@@ -1,0 +1,68 @@
+#define ODK_LAYER EXTRA_LAYERS_START_INDEX
+
+#define PUNCTUATION_KEY(name, base, shift) name: name { \
+  compatible = "zmk,behavior-mod-morph";                \
+  #binding-cells = <0>;                                 \
+  bindings = <base>, <shift>;                           \
+  mods      = <(MOD_LSFT|MOD_RSFT)>;                    \
+  keep-mods = <(MOD_LSFT|MOD_RSFT)>;                    \
+};
+
+#ifdef KB_LAYOUT_AZERTY
+
+// Ergol: base emulation
+&base_layer {
+  display-name = "Base";
+  bindings = <
+    &none  &kp A  &kp C  &kp O  &kp P  &kp Z        &kp J  &kp SEMI &kp D  &apos  &kp Y     &none
+    &none  H_A Q  H_S S  H_D E  H_F N  &kp F        &kp L  H_J R    H_K T  H_L I  H_SEMI U  &none
+    &none  &kp W  &kp X  &dash  &kp V  &kp B        &dot   &kp H    &kp G  &comma &kp K     &none
+        LTHUMB_TUCK  LTHUMB_HOME  LTHUMB_REACH    RTHUMB_REACH  RTHUMB_HOME  RTHUMB_TUCK
+  >;
+};
+
+/ {
+  behaviors {
+    PUNCTUATION_KEY(apos, &EZ_SL(ODK_LAYER), &kp FSLH) // ' ! (dead key)
+    PUNCTUATION_KEY(dash, &kp N6, &kp LS(M))           // - ?
+    PUNCTUATION_KEY(dot, &kp LS(COMMA), &kp DOT)       // . :
+    PUNCTUATION_KEY(comma, &kp M, &kp COMMA)           // , ;
+  };
+
+  macros {
+    kpc: circumflex {
+      compatible = "zmk,behavior-macro-one-param";
+      #binding-cells = <1>;
+      tap-ms = <0>;
+      wait-ms = <0>;
+      bindings = <&macro_tap &kp LBKT>, <&macro_pause_for_release>, <&macro_param_1to1>, <&kp MACRO_PLACEHOLDER>;
+    };
+    i_dia: i_diaeresis {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&macro_tap &kp LS(LBKT) &kp I>;
+    };
+    n_tld: n_tilde {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&macro_tap &kp RA(N2) &kp N>;
+    };
+  };
+
+  // Ergol: 1dk emulation
+  keymap {
+    compatible = "zmk,keymap";
+
+    one_dead_key {
+      display-name = "OneDeadKey";
+      bindings = <
+        &trans  &kpc Q  &kp N9  &trans  &kpc O  &trans     &trans  &kp LS(BSLH) &kp N8  &kp LS(LBKT)  &kpc U   &trans
+        &trans  &kp N0  &kp N2  &kp N7  &kpc E  &n_tld     &kp N5  &kp MINUS    &kpc I  &i_dia        &kp SQT  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans       &trans  &trans        &trans   &trans
+                                &trans  &kp N4  &trans     &trans  &kp N4   &trans
+      >;
+    };
+  };
+};
+
+#endif // KB_LAYOUT_AZERTY

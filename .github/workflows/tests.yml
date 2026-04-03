@@ -1,4 +1,4 @@
-name: Test ZMK firmware
+name: Test keymap options
 on: [pull_request, workflow_dispatch]
 
 jobs:

@@ -22,6 +22,7 @@
 #elifdef KB_LAYOUT_QWERTY_LAFAYETTE
   #include "aliases/qwerty_lafayette.h"
 #elifdef KB_LAYOUT_BEPO
+  #define SHIFTED_NUMBERS
   #include "aliases/bepo.h"
 #elifdef KB_LAYOUT_BEPOLAR
   #include "aliases/bepolar.h"

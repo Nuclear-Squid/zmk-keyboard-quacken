@@ -34,35 +34,8 @@
   };
 
   macros {
-    // tap a dead circumflex before a key
-    kpc: circumflex {
-      compatible = "zmk,behavior-macro-one-param";
-      #binding-cells = <1>;
-      tap-ms = <0>;
-      wait-ms = <0>;
-      bindings
-        = <&macro_tap &kp Y>
-        , <&macro_pause_for_release>
-        , <&macro_param_1to1>
-        , <&kp MACRO_PLACEHOLDER>
-        ;
-    };
-
-    // tap a dead circumflex before a shifted key
-    skpc: circumflex_shift {
-      compatible = "zmk,behavior-macro-one-param";
-      #binding-cells = <1>;
-      tap-ms = <0>;
-      wait-ms = <0>;
-      bindings
-        = <&macro_tap &kp Y>
-        , <&macro_pause_for_release>
-        , <&macro_press &kp LSHIFT>
-        , <&macro_param_1to1>
-        , <&kp MACRO_PLACEHOLDER>
-        , <&macro_release &kp LSHIFT>
-        ;
-    };
+    DEAD_KEY(kpc, &kp Y)  // circumflex accent
+    DEAD_KEY_SHIFT(skpc, &kp Y)
   };
 
   // Extra layers defined specifically for this keymap, appended to the base keymap.
@@ -70,7 +43,7 @@
     compatible = "zmk,keymap";
 
     one_dead_key {
-      display-name = "OneDeadKey";
+      display-name = "1dk";
       bindings = <
         &trans   &kpc A     &kpc S    &kpc D  &kpc R    &kp RA(R)    &trans     &trans        &trans  &trans  &trans   &trans
         &trans   &kp Z      &kp RA(S) &kp W   &kp T     &kp NUBS     &kp BSLH   &trans        &trans  &kpc O  &trans   &trans
@@ -80,7 +53,7 @@
     };
 
     shifted_one_dead_key {
-      display-name = "ShiftedOneDeadKey";
+      display-name = "1dkShift";
       bindings = <
         &trans   &skpc A   &skpc S   &skpc D   &skpc R   &kp SA(R)    &trans   &trans  &trans  &trans  &trans   &trans
         &trans   &kp RS(Z) &kp SA(S) &kp RS(W) &kp RS(T) &kp PIPE2    &kp PIPE &trans  &trans  &skpc O &trans   &trans

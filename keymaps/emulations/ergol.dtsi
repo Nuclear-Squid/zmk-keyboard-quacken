@@ -1,17 +1,5 @@
-#define ODK_LAYER EXTRA_LAYERS_START_INDEX
-
-#define DEAD_KEY(name, key) name: name {       \
-  compatible = "zmk,behavior-macro-one-param"; \
-  #binding-cells = <1>;                        \
-  tap-ms = <0>;                                \
-  wait-ms = <0>;                               \
-  bindings                                     \
-    = <&macro_tap key>                         \
-    , <&macro_pause_for_release>               \
-    , <&macro_param_1to1>                      \
-    , <&kp MACRO_PLACEHOLDER>                  \
-    ;                                          \
-};
+#define ODK_LAYER        EXTRA_LAYERS_START_INDEX
+#define ODK_SHIFT_LAYER (EXTRA_LAYERS_START_INDEX + 1)
 
 #define PUNCTUATION_KEY(name, base, shift) name: name { \
   compatible = "zmk,behavior-mod-morph";                \
@@ -66,7 +54,7 @@
     compatible = "zmk,keymap";
 
     one_dead_key {
-      display-name = "OneDeadKey";
+      display-name = "1dk";
       bindings = <
         &trans  &crc Q  &kp N9  &trans  &crc O  &trans     &trans  &kp LS(BSLH) S_UNDER &kp LBRC  &crc U   &trans
         &trans  &kp N0  &kp N2  &kp N7  &crc E  &n_tld     S_LPAR  S_RPAR       &crc I  &i_dia    &kp SQT  &trans
@@ -97,30 +85,38 @@
 / {
   macros {
     DEAD_KEY(acu, &kp SQT)    // acute accent or cedilla
+    DEAD_KEY(dia, &kp DQT)    // diaeresis
     DEAD_KEY(grv, &kp GRAVE)  // grave accent
     DEAD_KEY(crc, &kp CARET)  // circumflex accent
-    i_dia: i_diaeresis {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings = <&macro_tap &kp DQT &kp I>;
-    };
-    n_tld: n_tilde {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings = <&macro_tap &kp TILDE &kp N>;
-    };
+    DEAD_KEY(tld, &kp TILDE)  // tilde
+
+    DEAD_KEY_SHIFT(acus, &kp SQT)
+    DEAD_KEY_SHIFT(dias, &kp DQT)
+    DEAD_KEY_SHIFT(grvs, &kp GRAVE)
+    DEAD_KEY_SHIFT(crcs, &kp CARET)
+    DEAD_KEY_SHIFT(tlds, &kp TILDE)
   };
 
   keymap {
     compatible = "zmk,keymap";
 
     one_dead_key {
-      display-name = "OneDeadKey";
+      display-name = "1dk";
       bindings = <
         &trans  &crc A  &acu C  &trans  &crc O  &trans     &trans  &trans  S_UNDER &kp DQT &crc U  &trans
-        &trans  &grv A  &acu E  &grv E  &crc E  &n_tld     S_LPAR  S_RPAR  &crc I  &i_dia  &grv U  &trans
+        &trans  &grv A  &acu E  &grv E  &crc E  &tld N     S_LPAR  S_RPAR  &crc I  &dia I  &grv U  &trans
         &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans  &trans  &trans
-                                &trans  S_SQT   &trans     &trans  S_SQT   &trans
+                &EZ_SL(ODK_SHIFT_LAYER)  S_SQT  &trans     &trans  S_SQT   &trans
+      >;
+    };
+
+    one_dead_key_shift {
+      display-name = "1dkShift";
+      bindings = <
+        &trans  &crcs A &acus C &trans  &crcs O &trans     &trans  &trans  S_UNDER &kp DQT &crcs U  &trans
+        &trans  &grvs A &acus E &grvs E &crcs E &tlds N    &trans  &trans  &crcs I &dias I &grvs U  &trans
+        &trans  &trans  &trans  &trans  &trans  &trans     &trans  &trans  &trans  &trans  &trans  &trans
+                                &trans  &trans  &trans     &trans  &trans  &trans
       >;
     };
   };

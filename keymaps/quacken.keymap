@@ -7,7 +7,7 @@
 
 // Uncomment one of the following lines if using a non-QWERTY layout:
 
-/* #define KB_LAYOUT_QWERTY_INTL */
+// #define KB_LAYOUT_QWERTY_INTL
 // #define KB_LAYOUT_DVORAK
 
 // #define KB_LAYOUT_AZERTY
@@ -83,6 +83,7 @@
 ******************************************************************************/
 
 #include "aliases.h"      // defines symbols and actions
+#include "dead_keys.dtsi" // defines dead key helpers
 #include "hold_taps.dtsi" // defines thumb keys and homerow mods
 
 / {

@@ -10,22 +10,26 @@
 
 // Keyboard Layout
 
-#ifdef KB_LAYOUT_DVORAK
+#ifdef KB_LAYOUT_QWERTY_INTL
+  #include "aliases/qwerty_intl.h"
+#elifdef KB_LAYOUT_DVORAK
   #include "aliases/dvorak.h"
-#elifdef KB_LAYOUT_ERGOL
-  #include "aliases/ergol.h"
-#elifdef KB_LAYOUT_ERGLACE
-  #include "aliases/erglace.h"
+
 #elifdef KB_LAYOUT_AZERTY
   #define SHIFTED_NUMBERS
   #include "aliases/azerty.h"
 #elifdef KB_LAYOUT_QWERTY_LAFAYETTE
   #include "aliases/qwerty_lafayette.h"
+#elifdef KB_LAYOUT_ERGOL
+  #include "aliases/ergol.h"
+#elifdef KB_LAYOUT_ERGLACE
+  #include "aliases/erglace.h"
 #elifdef KB_LAYOUT_BEPO
   #define SHIFTED_NUMBERS
   #include "aliases/bepo.h"
 #elifdef KB_LAYOUT_BEPOLAR
   #include "aliases/bepolar.h"
+
 #else
   #include "aliases/qwerty.h"
 #endif

@@ -14,7 +14,14 @@
 // #define KB_LAYOUT_DVORAK
 // #define KB_LAYOUT_ERGOL
 // #define KB_LAYOUT_ERGLACE
+// #define KB_LAYOUT_QWERTY_INTL
 // #define KB_LAYOUT_QWERTY_LAFAYETTE
+
+// [Experimental]
+// Uncomment one of the following lines to enable layout emulation:
+
+// #define KB_EMULATION_DVORAK  // assumes the host is in QWERTY
+// #define KB_EMULATION_ERGOL   // assumes the host is in QWERTY-intl or AZERTY
 
 // Uncomment the following line if using a Mac:
 

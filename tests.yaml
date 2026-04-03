@@ -1,0 +1,36 @@
+# This file builds most combinations of options on the Quacken flex to make
+# sure there are no obvious mistakes
+
+include:
+
+  # making sure we can build for the RP2040
+  - board: sparkfun_pro_micro_rp2040//zmk
+    shield: quacken_zero
+    artifact-name: default
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS"
+
+  # Qwerty + Vim + hrm_shift
+  - board: sparkfun_pro_micro_rp2040//zmk
+    shield: tester_pro_micro
+    artifact-name: qwerty_vim_shift
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DVIM_NAVIGATION;-DHRM_SHIFT"
+
+  # Azerty + thumb-taps
+  - board: sparkfun_pro_micro_rp2040//zmk
+    shield: tester_pro_micro
+    artifact-name: azerty_tt
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_AZERTY;-DHT_THUMB_TAPS"
+
+  # Ergol + Hummingbird
+  - board: sparkfun_pro_micro_rp2040//zmk
+    shield: tester_pro_micro
+    artifact-name: ergol_hummingbird
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DCI_IGNORE_USER_SETTINGS;-DKB_LAYOUT_ERGOL;-DHUMMINGBIRD"

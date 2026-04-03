@@ -8,9 +8,13 @@
 
 // Uncomment one of the following lines if using a non-QWERTY layout:
 
-// #define KB_LAYOUT_QWERTY_LAFAYETTE
 // #define KB_LAYOUT_AZERTY
+// #define KB_LAYOUT_BEPO
+// #define KB_LAYOUT_BEPOLAR
+// #define KB_LAYOUT_DVORAK
 // #define KB_LAYOUT_ERGOL
+// #define KB_LAYOUT_ERGLACE
+// #define KB_LAYOUT_QWERTY_LAFAYETTE
 
 // Uncomment the following line if using a Mac:
 

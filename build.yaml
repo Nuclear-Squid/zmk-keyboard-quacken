@@ -11,36 +11,6 @@ include:
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
       -DCONFIG_ZMK_STUDIO=y
 
-  # Quacken Zero + SparkFun RP2040 + Dvorak emulation on Qwerty
-  - board: sparkfun_pro_micro_rp2040//zmk
-    shield: quacken_zero
-    artifact-name: quacken_zero_qwerty_dvorak
-    snippet: studio-rpc-usb-uart
-    cmake-args: >
-      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DDTS_EXTRA_CPP_FLAGS="-DKB_LAYOUT_QWERTY;-DKB_EMULATION_DVORAK"
-      -DCONFIG_ZMK_STUDIO=y
-
-  # Quacken Zero + SparkFun RP2040 + Ergol emulation on Azerty
-  - board: sparkfun_pro_micro_rp2040//zmk
-    shield: quacken_zero
-    artifact-name: quacken_zero_azerty_ergol
-    snippet: studio-rpc-usb-uart
-    cmake-args: >
-      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DDTS_EXTRA_CPP_FLAGS="-DKB_LAYOUT_AZERTY;-DKB_EMULATION_ERGOL"
-      -DCONFIG_ZMK_STUDIO=y
-
-  # Quacken Zero + SparkFun RP2040 + Ergol emulation on Qwerty-intl
-  - board: sparkfun_pro_micro_rp2040//zmk
-    shield: quacken_zero
-    artifact-name: quacken_zero_qwerty_ergol
-    snippet: studio-rpc-usb-uart
-    cmake-args: >
-      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DDTS_EXTRA_CPP_FLAGS="-DKB_LAYOUT_QWERTY_INTL;-DKB_EMULATION_ERGOL"
-      -DCONFIG_ZMK_STUDIO=y
-
   # Quacken Flex
   - board: quacken_flex
     artifact-name: quacken_flex

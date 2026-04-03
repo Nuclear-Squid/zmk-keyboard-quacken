@@ -25,6 +25,7 @@
 #elifdef KB_LAYOUT_ERGLACE
   #include "aliases/erglace.h"
 #elifdef KB_LAYOUT_BEPO
+  #define SHIFTED_NUMBERS
   #include "aliases/bepo.h"
 #elifdef KB_LAYOUT_BEPOLAR
   #include "aliases/bepolar.h"

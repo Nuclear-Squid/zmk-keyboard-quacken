@@ -180,8 +180,10 @@
   };
 };
 
-// Emulated layers
-#ifdef KB_EMULATION_ERGOL
+// Emulated layouts (experimental!)
+#ifdef KB_EMULATION_DVORAK
+  #include "emulations/dvorak.dtsi"
+#elif defined KB_EMULATION_ERGOL
   #include "emulations/ergol.dtsi"
 
 // Some layouts require extra layers to fit on the Quacken.

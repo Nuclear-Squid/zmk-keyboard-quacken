@@ -1,7 +1,7 @@
 // Selenium keymap for the Quacken: https://github.com/OneDeadKey/selenium
 
 #ifndef CI_IGNORE_USER_SETTINGS
-  #include "../user_settings.h"
+  #include "settings.h"
 #endif
 
 #include "aliases.h"      // defines symbols and actions

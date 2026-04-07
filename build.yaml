@@ -2,6 +2,15 @@
 
 include:
 
+    # Quacken Flex, Selenium
+  - board: quacken_flex
+    artifact-name: quacken_flex_selenium
+    snippet: studio-rpc-usb-uart
+    cmake-args: >
+      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/selenium.keymap
+      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DHT_THUMB_TAPS;-DHUMMINGBIRD"
+      -DCONFIG_ZMK_STUDIO=y
+
     # Quacken Flex, Ergol + Thumb-Taps + Hummingbird config
   - board: quacken_flex
     artifact-name: quacken_flex_ergol_tt_hummingbird

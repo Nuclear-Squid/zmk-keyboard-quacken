@@ -3,10 +3,10 @@ TARGET=$1
 LAYOUT=$2
 FILE_ROOT="zmk_quacken_${TARGET}_${LAYOUT}"
 
-# uncomment the following line to enable USB logging
+# comment out the following line to disable USB logging
 USB_LOGGING="-S zmk-usb-logging"
 
-# uncomment the following lines to enable ZMK Studio support
+# comment out the following lines to disable ZMK Studio support
 ZMK_STUDIO_SNIPPET="-S studio-rpc-usb-uart"
 ZMK_STUDIO_CMAKE="-DCONFIG_ZMK_STUDIO=y"
 
@@ -33,7 +33,9 @@ usage() {
 	echo "or a layout emulation description:"
 	echo "    - qwerty_to_dvorak"
 	echo "    - azerty_to_ergol"
+	echo "    - azerty_to_qwerty_lafayette"
 	echo "    - qwerty_intl_to_ergol"
+	echo "    - qwerty_intl_to_qwerty_lafayette"
 	echo
 	exit 1
 }
@@ -80,9 +82,17 @@ azerty_to_ergol)
 	$LAYOUT=azerty
 	$EMULATION="-DKB_EMULATION_ERGOL"
 	;;
+azerty_to_qwerty_lafayette)
+	$LAYOUT=azerty
+	$EMULATION="-DKB_EMULATION_QWERTY_LAFAYETTE"
+	;;
 qwerty_intl_to_ergol)
 	$LAYOUT=qwerty_intl
 	$EMULATION="-DKB_EMULATION_ERGOL"
+	;;
+qwerty_intl_to_qwerty_lafayette)
+	$LAYOUT=qwerty_intl
+	$EMULATION="-DKB_EMULATION_QWERTY_LAFAYETTE"
 	;;
 *)
 	usage
@@ -97,20 +107,22 @@ if [ ! -d $ZMK_APP_DIR ]; then
 	exit 1
 fi
 
-# build
+# Build
 cd $ZMK_APP_DIR
 source ../.venv/bin/activate
 
+PRISTINE="-p" # the first build is pristine, the others are incremental
 build() {
 	touch build/zephyr/zmk.uf2
 	FILE_PATH="$SCRIPT_DIR/${FILE_ROOT}$1.uf2"
 	CPP_FLAGS="-DKB_LAYOUT_${LAYOUT^^};-DHT_$2;$EMULATION;$OPT_FLAGS"
-	west build $USB_LOGGING $ZMK_STUDIO_SNIPPET $BOARD -- $SHIELD \
+	west build $PRISTINE $USB_LOGGING $ZMK_STUDIO_SNIPPET $BOARD -- $SHIELD \
 		$ZMK_STUDIO_CMAKE \
 		-DKEYMAP_FILE="$SCRIPT_DIR/keymaps/quacken.keymap" \
 		-DZMK_EXTRA_MODULES="$SCRIPT_DIR" \
 		-DDTS_EXTRA_CPPFLAGS="$CPP_FLAGS"
 	mv build/zephyr/zmk.uf2 "$FILE_PATH"
+	PRISTINE=
 }
 
 # Build PC flavors
@@ -139,8 +151,9 @@ build [mac]_2tk_vim TWO_THUMB_KEYS
 
 # Zip archives
 cd $SCRIPT_DIR
-zip ${FILE_ROOT}[pc].zip ${FILE_ROOT}[pc]*.uf2
-zip ${FILE_ROOT}[mac].zip ${FILE_ROOT}[mac]*.uf2
-rm ${FILE_ROOT}[pc]*.uf2
-rm ${FILE_ROOT}[mac]*.uf2
+mkdir -p zip
+zip ${FILE_ROOT}[pc].zip ${FILE_ROOT}\[pc\]*.uf2
+zip ${FILE_ROOT}[mac].zip ${FILE_ROOT}\[mac\]*.uf2
+rm ${FILE_ROOT}*.uf2
+mv ${FILE_ROOT}*.zip zip
 ls -l ${FILE_ROOT}*.zip

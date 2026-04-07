@@ -18,7 +18,7 @@
 #elifdef KB_LAYOUT_AZERTY
   #define SHIFTED_NUMBERS
   #include "aliases/azerty.h"
-#elifdef KB_LAYOUT_LAFAYETTE
+#elifdef KB_LAYOUT_QWERTY_LAFAYETTE
   #include "aliases/qwerty_lafayette.h"
 #elifdef KB_LAYOUT_ERGOL
   #include "aliases/ergol.h"

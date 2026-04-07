@@ -2,8 +2,8 @@
 
 A Zephyr module to build your own ZMK firmware for the Quacken:
 
-- common options can be defined in `user_settings.h`
-- the keymap itself can be customized in `keymaps/`
+- common options can be safely defined in `keymaps/settings.h`
+- the keymap itself can be customized in `keymaps/quacken.keymap`
 
 
 ## Build With GitHub Actions (GHA)
@@ -14,7 +14,8 @@ This is the recommended method for most users.
 
 - [create a GitHub account](https://github.com/signup) if you don’t already have one
 - fork this repository
-- modify the `keymaps/quacken.keymap` file (see the [customizing ZMK](https://zmk.dev/docs/customization) documentation)
+- modify `keymaps/settings.h` to set your options
+- tweak `keymaps/quacken.keymap` if needed (see the [customizing ZMK](https://zmk.dev/docs/customization) documentation)
 - save, commit, push
 
 Your firmware will now be built automatically by GitHub’s CI:

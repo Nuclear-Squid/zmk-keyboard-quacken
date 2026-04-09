@@ -2,12 +2,12 @@
 // https://github.com/OneDeadKey/selenium
 
 #ifndef CI_IGNORE_USER_SETTINGS
-  #include "settings.h"
+  #include "settings.h"   // user settings, ignored by CI tests
 #endif
 
-#include "aliases.h"      // defines symbols and actions
-#include "dead_keys.dtsi" // defines dead key helpers
-#include "hold_taps.dtsi" // defines thumb keys and homerow mods
+#include "dead_keys.dtsi" // dead key helpers
+#include "aliases.h"      // symbols, actions, non-ASCII chars
+#include "hold_taps.dtsi" // thumb keys and homerow mods
 
 / {
   keymap {

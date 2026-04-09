@@ -61,3 +61,39 @@
 #define S_COMMA &kp M
 #define S_DOT   &kp LS(COMMA)
 #define S_MONEY &kp RA(E)
+
+
+/**
+ * Azerty-specific Symbols
+ */
+
+/ {
+  macros {
+    DEAD_KEY(crc, &kp LBKT)   // circumflex
+    DEAD_KEY(dia, &kp LBRC)   // diaeresis
+    DEAD_KEY(tld, &kp RA(N2)) // tilde
+  };
+};
+
+#define C_EACU &kp N2  // é
+#define C_AGRV &kp N0  // à
+#define C_EGRV &kp N7  // è
+#define C_UGRV &kp SQT // ù
+#define C_CCDL &kp N9  // ç
+
+#define C_ACRC &crc A  // â
+#define C_ECRC &crc E  // ê
+#define C_ICRC &crc I  // î
+#define C_OCRC &crc O  // ô
+#define C_UCRC &crc U  // û
+#define C_YCRC &crc Y  // ŷ
+
+#define C_ADIA &dia A  // ä
+#define C_EDIA &dia E  // ë
+#define C_IDIA &dia I  // ï
+#define C_ODIA &dia O  // ö
+#define C_UDIA &dia U  // ü
+
+#define C_NTLD &tld N  // ñ
+
+#define C_MU &kp PIPE  // µ

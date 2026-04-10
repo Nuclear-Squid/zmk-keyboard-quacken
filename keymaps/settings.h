@@ -27,6 +27,10 @@
 
 // #define MACOS
 
+// Uncomment the following line for advanced Linux layout tricks:
+
+// #define LINUX
+
 
 /******************************************************************************
  * Hold-Taps

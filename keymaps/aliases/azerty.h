@@ -64,7 +64,8 @@
 
 
 /**
- * Azerty-specific Symbols
+ * Non-ASCII Symbols
+ * https://commons.wikimedia.org/wiki/File:KB_-_AZERTY_-_FR_-_Windows_-_FR.png
  */
 
 / {
@@ -72,6 +73,36 @@
     DEAD_KEY(crc, &kp LBKT)   // circumflex
     DEAD_KEY(dia, &kp LBRC)   // diaeresis
     DEAD_KEY(tld, &kp RA(N2)) // tilde
+
+    oe_base: oe_base {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&macro_tap &kp O &kp E>;
+    };
+    oe_shift: oe_shift {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings
+        = <&macro_press &kp RSHFT>
+        , <&macro_tap &kp O &kp E>
+        , <&macro_release &kp LSHFT>
+        ;
+    };
+
+    ae_base: ae_base {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&macro_tap &kp A &kp E>;
+    };
+    ae_shift: ae_shift {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings
+        = <&macro_press &kp RSHFT>
+        , <&macro_tap &kp A &kp E>
+        , <&macro_release &kp LSHFT>
+        ;
+    };
   };
 };
 
@@ -94,6 +125,21 @@
 #define C_ODIA &dia O  // ö
 #define C_UDIA &dia U  // ü
 
+#define C_ATLD &tld A  // ã
+#define C_OTLD &tld O  // õ
 #define C_NTLD &tld N  // ñ
 
 #define C_MU &kp PIPE  // µ
+
+// spectal letters
+#ifdef LINUX
+  #define  C_OE &kp RA(K) // œ
+  #define SC_OE &kp SA(K) // Œ
+  #define  C_AE &kp RA(X) // æ
+  #define SC_AE &kp SA(X) // Æ
+#else
+  #define  C_OE &oe_base  // oe
+  #define SC_OE &oe_shift // OE
+  #define  C_AE &ae_base  // ae
+  #define SC_AE &ae_shift // AE
+#endif

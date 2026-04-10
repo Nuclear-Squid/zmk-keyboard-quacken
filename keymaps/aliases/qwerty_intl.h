@@ -81,9 +81,27 @@
     DEAD_KEY_SHIFT(grvs, &kp GRAVE)
     DEAD_KEY_SHIFT(crcs, &kp CARET)
     DEAD_KEY_SHIFT(tlds, &kp TILDE)
+
+    oe_base: oe_base {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings = <&macro_tap &kp O &kp E>;
+    };
+    oe_shift: oe_shift {
+      compatible = "zmk,behavior-macro";
+      #binding-cells = <0>;
+      bindings
+        = <&macro_press &kp RSHFT>
+        , <&macro_tap &kp O &kp E>
+        , <&macro_release &kp LSHFT>
+        ;
+    };
   };
 };
 
+#define SA(key) RS(RA(key))
+
+// acute accent + cedilla
 #define  C_AACU &acu  A  // á
 #define SC_AACU &acus A  // Á
 #define  C_EACU &acu  E  // é
@@ -99,6 +117,7 @@
 #define  C_CCDL &acu  C  // ç
 #define SC_CCDL &acus C  // ç
 
+// grave accent
 #define  C_AGRV &grv  A  // à
 #define SC_AGRV &grvs A  // À
 #define  C_EGRV &grv  E  // è
@@ -112,6 +131,7 @@
 #define  C_YGRV &grv  Y  // ỳ
 #define SC_YGRV &grvs Y  // Ỳ
 
+// circumflex accent
 #define  C_ACRC &crc  A  // â
 #define SC_ACRC &crcs A  // Â
 #define  C_ECRC &crc  E  // ê
@@ -125,6 +145,7 @@
 #define  C_YCRC &crc  Y  // ŷ
 #define SC_YCRC &crcs Y  // Ŷ
 
+// diaeresis
 #define  C_ADIA &dia  A  // ä
 #define SC_ADIA &dias A  // Ä
 #define  C_EDIA &dia  E  // ë
@@ -138,40 +159,74 @@
 #define  C_YDIA &dia  Y  // ÿ
 #define SC_YDIA &dias Y  // Ÿ
 
+// tilde
 #define  C_ATLD &tld  A  // ã
 #define SC_ATLD &tlds A  // Ã
+#define  C_ETLD &tld  E  // ẽ
+#define SC_ETLD &tlds E  // Ẽ
+#define  C_ITLD &tld  I  // ĩ
+#define SC_ITLD &tlds I  // Ĩ
 #define  C_OTLD &tld  O  // õ
 #define SC_OTLD &tlds O  // Õ
+#define  C_UTLD &tld  U  // ũ
+#define SC_UTLD &tlds U  // Ũ
+#define  C_YTLD &tld  Y  // ỹ
+#define SC_YTLD &tlds Y  // Ỹ
 #define  C_NTLD &tld  N  // ñ
 #define SC_NTLD &tlds N  // Ñ
 
-#define  C_AE    &kp    RA(X)  // æ
-#define SC_AE    &kp RS(RA(X)) // Æ
-#define  C_ARING &kp    RA(W)  // å
-#define SC_ARING &kp RS(RA(W)) // Å
-#define  C_OSTRK &kp    RA(L)  // ø
-#define SC_OSTRK &kp RS(RA(L)) // Ø
-#define  C_DSTRK &kp    RA(D)  // đ
-#define SC_DSTRK &kp RS(RA(D)) // Đ
-#define  C_THORN &kp    RA(R)  // Þ
-#define SC_THORN &kp RS(RA(R)) // þ
-#define  C_SZ    &kp    RA(S)  // ß
+// spectal letters
+#ifdef LINUX
+  #define  C_OE  &kp RA(K) // œ
+  #define SC_OE  &kp SA(K) // Œ
+#else
+  #define  C_OE  &oe_base  // oe
+  #define SC_OE  &oe_shift // OE
+#endif
+#define  C_AE    &kp RA(X) // æ
+#define SC_AE    &kp SA(X) // Æ
+#define  C_ARING &kp RA(W) // å
+#define SC_ARING &kp SA(W) // Å
+#define  C_OSTRK &kp RA(L) // ø
+#define SC_OSTRK &kp SA(L) // Ø
+#define  C_ETH   &kp RA(D) // ð
+#define SC_ETH   &kp SA(D) // Ð
+#define  C_THORN &kp RA(R) // Þ
+#define SC_THORN &kp SA(R) // þ
+#define  C_SZ    &kp RA(S) // ß
 
-#define C_LQT   &kb RA(LBKT)   // «
-#define C_RQT   &kb RA(RBKT)   // «
-#define C_SECT  &kb RS(RA(S))  // §
-#define C_PAR   &kb RA(SEMI)   // ¶
-#define C_LCXE  &kb RA(EXCL)   // ¡
-#define C_KRAMQ &kb RA(QMARK)  // ¿
+// punctuation
+#define C_LSQT  &kb RA(N9)    // ‘
+#define C_RSQT  &kb RA(N0)    // ’
+#define C_LDQT  &kb RA(LBRC)  // “
+#define C_RDQT  &kb RA(RBRC)  // ”
+#define C_LGQT  &kb RA(LBKT)  // «
+#define C_RGQT  &kb RA(RBKT)  // «
+#define C_SECT  &kb SA(S)     // §
+#define C_PAR   &kb RA(SEMI)  // ¶
+#define C_LCXE  &kb RA(N1)    // ¡
+#define C_KRAMQ &kb RA(FSLH)  // ¿
 
-#define C_CURR  &kb RA(N4)     // ¤
-#define C_EURO  &kb RA(N5)     // €
-#define C_POUND &kb RS(RA(N4)) // €
-#define C_YEN   &kb RA(MINUS)  // ¥
+// currencies
+#define C_CURR  &kb RA(N4)    // ¤
+#define C_POUND &kb SA(N4)    // £
+#define C_EURO  &kb RA(N5)    // €
+#define C_YEN   &kb RA(MINUS) // ¥
+#define C_COPY  &kb RA(C)     // ©
+#define C_CENT  &kb SA(C)     // ¢
+#define C_RGSTR &kb RA(R)     // ®
+#define C_TM    &kb SA(R)     // ™
 
-#define C_DEG   &kb LS(RA(SEMI))  // °
-#define C_BPIPE &kb LS(RA(BSLH))  // ¦
-#define C_NOT   &kb    RA(BSLH)   // ¬
-#define C_DIV   &kb LS(RA(EQUAL)) // ÷
-#define C_MULT  &kb    RA(EQUAL)  // ×
-#define C_MU    &kp    RA(M)      // µ
+// math
+#define C_DEG   &kb SA(SEMI)  // °
+#define C_BPIPE &kb SA(BSLH)  // ¦
+#define C_NOT   &kb RA(BSLH)  // ¬
+#define C_DIV   &kb SA(EQUAL) // ÷
+#define C_MULT  &kb RA(EQUAL) // ×
+#define C_EXP1  &kb SA(N1)    // ¹
+#define C_EXP2  &kb RA(N2)    // ²
+#define C_EXP3  &kb RA(N3)    // ³
+#define C_QRT1  &kb RA(N6)    // ¼
+#define C_QRT2  &kb RA(N7)    // ½
+#define C_QRT3  &kb RA(N8)    // ¾
+#define C_MU    &kp RA(M)     // µ

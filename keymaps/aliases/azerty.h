@@ -106,6 +106,8 @@
   };
 };
 
+#define SA(key) RS(RA(key))
+
 #define C_EACU &kp N2  // é
 #define C_AGRV &kp N0  // à
 #define C_EGRV &kp N7  // è

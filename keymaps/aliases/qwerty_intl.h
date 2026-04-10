@@ -64,7 +64,8 @@
 
 
 /**
- * Qwerty-intl-specific Symbols
+ * Non-ASCII Symbols
+ * https://commons.wikimedia.org/wiki/File:KB_US-International.svg
  */
 
 / {
@@ -137,7 +138,40 @@
 #define  C_YDIA &dia  Y  // ÿ
 #define SC_YDIA &dias Y  // Ÿ
 
+#define  C_ATLD &tld  A  // ã
+#define SC_ATLD &tlds A  // Ã
+#define  C_OTLD &tld  O  // õ
+#define SC_OTLD &tlds O  // Õ
 #define  C_NTLD &tld  N  // ñ
 #define SC_NTLD &tlds N  // Ñ
 
-#define C_MU &kp PIPE  // µ
+#define  C_AE    &kp    RA(X)  // æ
+#define SC_AE    &kp RS(RA(X)) // Æ
+#define  C_ARING &kp    RA(W)  // å
+#define SC_ARING &kp RS(RA(W)) // Å
+#define  C_OSTRK &kp    RA(L)  // ø
+#define SC_OSTRK &kp RS(RA(L)) // Ø
+#define  C_DSTRK &kp    RA(D)  // đ
+#define SC_DSTRK &kp RS(RA(D)) // Đ
+#define  C_THORN &kp    RA(R)  // Þ
+#define SC_THORN &kp RS(RA(R)) // þ
+#define  C_SZ    &kp    RA(S)  // ß
+
+#define C_LQT   &kb RA(LBKT)   // «
+#define C_RQT   &kb RA(RBKT)   // «
+#define C_SECT  &kb RS(RA(S))  // §
+#define C_PAR   &kb RA(SEMI)   // ¶
+#define C_LCXE  &kb RA(EXCL)   // ¡
+#define C_KRAMQ &kb RA(QMARK)  // ¿
+
+#define C_CURR  &kb RA(N4)     // ¤
+#define C_EURO  &kb RA(N5)     // €
+#define C_POUND &kb RS(RA(N4)) // €
+#define C_YEN   &kb RA(MINUS)  // ¥
+
+#define C_DEG   &kb LS(RA(SEMI))  // °
+#define C_BPIPE &kb LS(RA(BSLH))  // ¦
+#define C_NOT   &kb    RA(BSLH)   // ¬
+#define C_DIV   &kb LS(RA(EQUAL)) // ÷
+#define C_MULT  &kb    RA(EQUAL)  // ×
+#define C_MU    &kp    RA(M)      // µ

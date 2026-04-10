@@ -92,14 +92,14 @@
     ae_base: ae_base {
       compatible = "zmk,behavior-macro";
       #binding-cells = <0>;
-      bindings = <&macro_tap &kp A &kp E>;
+      bindings = <&macro_tap &kp Q &kp E>;
     };
     ae_shift: ae_shift {
       compatible = "zmk,behavior-macro";
       #binding-cells = <0>;
       bindings
         = <&macro_press &kp RSHFT>
-        , <&macro_tap &kp A &kp E>
+        , <&macro_tap &kp Q &kp E>
         , <&macro_release &kp LSHFT>
         ;
     };
@@ -114,20 +114,20 @@
 #define C_UGRV &kp SQT // ù
 #define C_CCDL &kp N9  // ç
 
-#define C_ACRC &crc A  // â
+#define C_ACRC &crc Q  // â
 #define C_ECRC &crc E  // ê
 #define C_ICRC &crc I  // î
 #define C_OCRC &crc O  // ô
 #define C_UCRC &crc U  // û
 #define C_YCRC &crc Y  // ŷ
 
-#define C_ADIA &dia A  // ä
+#define C_ADIA &dia Q  // ä
 #define C_EDIA &dia E  // ë
 #define C_IDIA &dia I  // ï
 #define C_ODIA &dia O  // ö
 #define C_UDIA &dia U  // ü
 
-#define C_ATLD &tld A  // ã
+#define C_ATLD &tld Q  // ã
 #define C_OTLD &tld O  // õ
 #define C_NTLD &tld N  // ñ
 

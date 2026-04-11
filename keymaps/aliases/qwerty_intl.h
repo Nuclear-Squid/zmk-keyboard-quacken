@@ -146,11 +146,11 @@
 
 // spectal letters
 #ifdef LINUX
-  #define  C_OE &kp RA(K) // œ
-  #define SC_OE &kp SA(K) // Œ
+  #define  C_OE  &kp RA(K) // œ
+  #define SC_OE  &kp SA(K) // Œ
 #else
-  #define  C_OE &digraph O E
-  #define SC_OE &digraph LS(O) LS(E)
+  #define  C_OE  &digraph O E
+  #define SC_OE  &digraph LS(O) LS(E)
 #endif
 #define  C_AE    &kp RA(X) // æ
 #define SC_AE    &kp SA(X) // Æ

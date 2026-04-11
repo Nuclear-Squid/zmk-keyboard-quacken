@@ -1,8 +1,8 @@
 /*
  * Dead Key Behavior
- * prefix a key press with an unshifted-keycode, to more easilly and reliably
- * use dead keys on the host layout to write more complex symbols.
- */
+ * Press a non-modified dead key before the target key.
+ * This ensures the dead key is always applied without any modifier, even if
+ * Shift or Ctrl or Cmd are pressed while the target key is tapped.
 
 #define DT_DRV_COMPAT zmk_behavior_dead_key
 

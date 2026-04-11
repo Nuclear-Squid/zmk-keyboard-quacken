@@ -66,6 +66,7 @@
       >;
     };
 
+    // This layer is ignored (and useless) if ENABLE_FANCY_DEAD_KEYS is defined
     shifted_one_dead_key {
       display-name = "1dkShift";
       bindings = <

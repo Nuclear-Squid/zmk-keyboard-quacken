@@ -21,12 +21,12 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #if DT_HAS_COMPAT_STATUS_OKAY(DT_DRV_COMPAT)
 
 struct behavior_dead_key_config {
-    uint32_t dead_keycode;
+    uint32_t dead_key;
 };
 
 struct behavior_dead_key_data {
     uint32_t position;
-    uint32_t dead_keycode;
+    uint32_t dead_key;
     bool is_down;
 };
 
@@ -41,7 +41,7 @@ static int on_dead_key_binding_pressed(
 
     struct zmk_behavior_binding kp_binding = {
         .behavior_dev = "key_press",
-        .param1 = cfg->dead_keycode,
+        .param1 = cfg->dead_key,
     };
 
     const zmk_mod_flags_t mods_before = zmk_hid_get_explicit_mods();
@@ -51,7 +51,7 @@ static int on_dead_key_binding_pressed(
 
     active_dead_key = (struct behavior_dead_key_data) {
         .position = event.position,
-        .dead_keycode = cfg->dead_keycode,
+        .dead_key = cfg->dead_key,
         .is_down = true,
     };
 
@@ -69,7 +69,7 @@ static int on_dead_key_binding_released(
 ) {
     struct zmk_behavior_binding kp_binding = {
         .behavior_dev = "key_press",
-        .param1 = active_dead_key.dead_keycode,
+        .param1 = active_dead_key.dead_key,
     };
 
     if (active_dead_key.is_down) {
@@ -101,7 +101,7 @@ static int dead_key_position_state_changed_listener(const zmk_event_t *eh) {
 
     struct zmk_behavior_binding kp_binding = {
         .behavior_dev = "key_press",
-        .param1 = active_dead_key.dead_keycode,
+        .param1 = active_dead_key.dead_key,
     };
 
     struct zmk_behavior_binding_event event = {
@@ -120,7 +120,7 @@ static int dead_key_position_state_changed_listener(const zmk_event_t *eh) {
 
 #define DEAD_KEY_INST(n)                                                      \
     static struct behavior_dead_key_config behavior_dead_key_config_##n = {   \
-        .dead_keycode = DT_INST_PROP(n, dead_keycode)                         \
+        .dead_key = DT_INST_PROP(n, dead_key)                                 \
     };                                                                        \
                                                                               \
     BEHAVIOR_DT_INST_DEFINE(                                                  \

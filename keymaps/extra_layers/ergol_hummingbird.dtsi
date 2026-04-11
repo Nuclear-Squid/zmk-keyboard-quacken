@@ -40,7 +40,7 @@
     odk: odk {
       compatible = "zmk,behavior-dead-key";
       #binding-cells = <1>;
-      dead-keycode = <O>;
+      dead-key = <O>;
     };
   #else
     // Macro to tap Ergo‑L’s ODK before the specified key

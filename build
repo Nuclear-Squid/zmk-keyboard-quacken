@@ -8,9 +8,9 @@ IFS=" "
 # comment out the following line to disable USB logging
 USB_LOGGING="-S zmk-usb-logging"
 
-# comment out the following lines to disable ZMK Studio support
-ZMK_STUDIO_SNIPPET="-S studio-rpc-usb-uart"
-ZMK_STUDIO_CMAKE="-DCONFIG_ZMK_STUDIO=y"
+# # comment out the following lines to disable ZMK Studio support
+# ZMK_STUDIO_SNIPPET="-S studio-rpc-usb-uart"
+# ZMK_STUDIO_CMAKE="-DCONFIG_ZMK_STUDIO=y"
 
 # comment out the following line to enable incremental builds
 PRISTINE="-p"
@@ -52,7 +52,7 @@ esac
 
 # ensure we have a symlink to a proper ZMK setup
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-ZMK_APP_DIR=$SCRIPT_DIR/zmk/app
+ZMK_APP_DIR=$SCRIPT_DIR/zmk_upstream/app
 if [ ! -d $ZMK_APP_DIR ]; then
 	echo "Expecting a 'zmk' symlink to your local ZMK/Zephyr setup. Aborting."
 	exit 1

@@ -5,7 +5,6 @@
   #include "settings.h"   // user settings, ignored by CI tests
 #endif
 
-/* #include "dead_keys.dtsi" // dead key helpers */
 #include "aliases.h"      // symbols, actions, non-ASCII chars
 #include "mappings.dtsi"  // key mapping helpers and macros
 #include "hold_taps.dtsi" // thumb keys and homerow mods

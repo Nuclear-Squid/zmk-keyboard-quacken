@@ -43,6 +43,16 @@
 
 / {
   macros {
+    digraph: digraph {
+      compatible = "zmk,behavior-macro-two-param";
+      #binding-cells = <2>;
+      tap-ms = <0>;
+      wait-ms = <0>;
+      bindings = <
+        &macro_param_1to1 &kp MACRO_PLACEHOLDER
+        &macro_param_2to1 &kp MACRO_PLACEHOLDER>;
+    };
+
     spc: space_after_dead_key {
       compatible = "zmk,behavior-macro-one-param";
       #binding-cells = <1>;
@@ -53,6 +63,21 @@
         , <&kp MACRO_PLACEHOLDER>
         , <&macro_pause_for_release>
         , <&macro_tap &kp SPACE>
+        ;
+    };
+    oe_base: oe_base {
+      compatible = "zmk,behavior-macro-two-params";
+      #binding-cells = <2>;
+      bindings = <&macro_tap &kp O &kp E>;
+    };
+
+    oe_shift: oe_shift {
+      compatible = "zmk,behavior-macro-two-params";
+      #binding-cells = <2>;
+      bindings
+        = <&macro_press &kp RSHFT>
+        , <&macro_tap &kp O &kp E>
+        , <&macro_release &kp LSHFT>
         ;
     };
   };

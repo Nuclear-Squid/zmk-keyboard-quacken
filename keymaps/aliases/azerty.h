@@ -31,7 +31,7 @@
 #define S_AMPS  &kp N1
 #define S_STAR  &kp BSLH
 #define S_SQT   &kp N4
-#define S_GRAVE &spc RA(N7)
+#define S_GRAVE &digraph RA(N7) SPACE
 
 // second row
 #define S_LBRC  &kp RA(N4)
@@ -46,7 +46,7 @@
 #define S_DQT   &kp N3
 
 // third row
-#define S_TILDE &spc RA(N2)
+#define S_TILDE &digraph RA(N2) SPACE
 #define S_LBKT  &kp RA(N5)
 #define S_RBKT  &kp RA(MINUS)
 #define S_UNDER &kp N8
@@ -62,51 +62,19 @@
 #define S_DOT   &kp LS(COMMA)
 #define S_MONEY &kp RA(E)
 
+// GRAVE and TILDE are no dead keys on Linux
+#ifdef LINUX
+  #undef S_GRAVE
+  #define S_GRAVE &kp RA(N7)
+  #undef S_TILDE
+  #define S_TILDE &kp RA(N2)
+#endif
+
 
 /**
  * Non-ASCII Symbols
  * https://commons.wikimedia.org/wiki/File:KB_-_AZERTY_-_FR_-_Windows_-_FR.png
  */
-
-/ {
-  macros {
-    DEAD_KEY(crc, &kp LBKT)   // circumflex
-    DEAD_KEY(dia, &kp LBRC)   // diaeresis
-    DEAD_KEY(tld, &kp RA(N2)) // tilde
-
-    oe_base: oe_base {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings = <&macro_tap &kp O &kp E>;
-    };
-    oe_shift: oe_shift {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings
-        = <&macro_press &kp RSHFT>
-        , <&macro_tap &kp O &kp E>
-        , <&macro_release &kp LSHFT>
-        ;
-    };
-
-    ae_base: ae_base {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings = <&macro_tap &kp Q &kp E>;
-    };
-    ae_shift: ae_shift {
-      compatible = "zmk,behavior-macro";
-      #binding-cells = <0>;
-      bindings
-        = <&macro_press &kp RSHFT>
-        , <&macro_tap &kp Q &kp E>
-        , <&macro_release &kp LSHFT>
-        ;
-    };
-  };
-};
-
-#define SA(key) RS(RA(key))
 
 #define C_EACU &kp N2  // é
 #define C_AGRV &kp N0  // à
@@ -114,34 +82,30 @@
 #define C_UGRV &kp SQT // ù
 #define C_CCDL &kp N9  // ç
 
-#define C_ACRC &crc Q  // â
-#define C_ECRC &crc E  // ê
-#define C_ICRC &crc I  // î
-#define C_OCRC &crc O  // ô
-#define C_UCRC &crc U  // û
-#define C_YCRC &crc Y  // ŷ
-
-#define C_ADIA &dia Q  // ä
-#define C_EDIA &dia E  // ë
-#define C_IDIA &dia I  // ï
-#define C_ODIA &dia O  // ö
-#define C_UDIA &dia U  // ü
-
-#define C_ATLD &tld Q  // ã
-#define C_OTLD &tld O  // õ
-#define C_NTLD &tld N  // ñ
-
-#define C_MU &kp PIPE  // µ
-
-// spectal letters
 #ifdef LINUX
-  #define  C_OE &kp RA(K) // œ
-  #define SC_OE &kp SA(K) // Œ
-  #define  C_AE &kp RA(X) // æ
-  #define SC_AE &kp SA(X) // Æ
+  #define C_OE   &kp RA(K) // œ
+  #define C_AE   &kp RA(X) // æ
+  #define C_NTLD &kp N // unsupported
 #else
-  #define  C_OE &oe_base  // oe
-  #define SC_OE &oe_shift // OE
-  #define  C_AE &ae_base  // ae
-  #define SC_AE &ae_shift // AE
+  #define C_OE   &digraph O E // unsupported
+  #define C_AE   &digraph Q E // unsupported
+  #define C_NTLD &digraph RA(N2) N // ñ
 #endif
+
+#define C_MU &kp PIPE // µ
+
+// circumflex accent
+#define C_ACRC &digraph LBKT Q // â
+#define C_ECRC &digraph LBKT E // ê
+#define C_ICRC &digraph LBKT I // î
+#define C_OCRC &digraph LBKT O // ô
+#define C_UCRC &digraph LBKT U // û
+#define C_YCRC &digraph LBKT Y // ŷ
+
+// diaeresis
+#define C_ADIA &digraph LBRC Q // ä
+#define C_EDIA &digraph LBRC E // ë
+#define C_IDIA &digraph LBRC I // ï
+#define C_ODIA &digraph LBRC O // ö
+#define C_UDIA &digraph LBRC U // ü
+#define C_YDIA &digraph LBRC Y // ÿ

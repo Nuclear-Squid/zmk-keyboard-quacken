@@ -3,6 +3,7 @@
  * Press a non-modified dead key before the target key.
  * This ensures the dead key is always applied without any modifier, even if
  * Shift or Ctrl or Cmd are pressed while the target key is tapped.
+ */
 
 #define DT_DRV_COMPAT zmk_behavior_dead_key
 

@@ -45,7 +45,7 @@ static int on_dead_key_binding_pressed(
     };
 
     const zmk_mod_flags_t mods_before = zmk_hid_get_explicit_mods();
-    zmk_hid_masked_modifiers_set(MOD_LSFT | MOD_RSFT);
+    zmk_hid_masked_modifiers_set(0xff);  /* Temporarily disable any active modifier */
     zmk_behavior_invoke_binding(&kp_binding, event, true);
     zmk_hid_masked_modifiers_clear();
 
@@ -131,7 +131,7 @@ static int dead_key_position_state_changed_listener(const zmk_event_t *eh) {
         &behavior_dead_key_config_##n,  /* Behavior Configuration Pointer */  \
         POST_KERNEL,  /* Initialization Level */                              \
         CONFIG_KERNEL_INIT_PRIORITY_DEFAULT,  /* Device Priority */           \
-        &dead_key_driver_api);  // API struct
+        &dead_key_driver_api);  /* API struct */
 
 DT_INST_FOREACH_STATUS_OKAY(DEAD_KEY_INST)
 

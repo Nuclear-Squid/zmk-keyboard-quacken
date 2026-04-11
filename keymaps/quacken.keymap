@@ -5,8 +5,8 @@
   #include "settings.h"   // user settings, ignored by CI tests
 #endif
 
-#include "dead_keys.dtsi" // dead key helpers
 #include "aliases.h"      // symbols, actions, non-ASCII chars
+#include "mappings.dtsi"  // key mapping helpers and macros
 #include "hold_taps.dtsi" // thumb keys and homerow mods
 
 / {
@@ -108,6 +108,8 @@
   #include "emulations/dvorak.dtsi"
 #elif defined KB_EMULATION_ERGOL
   #include "emulations/ergol.dtsi"
+#elif defined KB_EMULATION_QWERTY_LAFAYETTE
+  #include "emulations/qwerty_lafayette.dtsi"
 
 // Some layouts require extra layers to fit on the Quacken.
 #elif defined KB_LAYOUT_AZERTY

@@ -97,7 +97,7 @@
   #define NAV_SC    sc
   #define NAV_LAYER NAV_NUM_LAYER
   #define NUM_LAYER NAV_NUM_LAYER
-  #define HRM_LAYER FUNCTION_LAYER
+  #define HRM_LAYER FN_MEDIA_LAYER
   #define S34_LAYER NAV_NUM_LAYER
   #define REACH_TAP TAB
 #endif

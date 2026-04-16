@@ -331,29 +331,29 @@
       flavor = "tap-preferred";
       bindings = <&lkp>, <&losm>;
     };
-  };
 
-  // Fancy behaviors for one-handed Alt(+Shift)+{tab,backtick}
-  mhsc: space_cade_with_held_mods {
-    compatible = "zmk,behavior-mod-hold";
-    #binding-cells = <2>;
-    binding = <&sc>;
-    mods-to-hold = <MOD_LALT>;
-  };
+    // Fancy behaviors for one-handed Alt(+Shift)+{tab,backtick}
+    mhsc: space_cade_with_held_mods {
+      compatible = "zmk,behavior-mod-hold";
+      #binding-cells = <2>;
+      binding = <&sc>;
+      mods-to-hold = <MOD_LALT>;
+    };
 
-  vim_prev: vim_prev {
-    compatible = "zmk,behavior-mod-morph";
-    #binding-cells = <0>;
-    bindings = <&kp LA(LEFT)>, <&kp LS(GRAVE)>;
-    mods      = <(MOD_LALT|MOD_LGUI)>;
-    keep-mods = <(MOD_LALT|MOD_LGUI)>;
-  };
+    vim_prev: vim_prev {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&kp LA(LEFT)>, <&kp LS(GRAVE)>;
+      mods      = <(MOD_LALT|MOD_LGUI)>;
+      keep-mods = <(MOD_LALT|MOD_LGUI)>;
+    };
 
-  vim_next: vim_next {
-    compatible = "zmk,behavior-mod-morph";
-    #binding-cells = <0>;
-    bindings = <&kp LA(RIGHT)>, <&kp GRAVE>;
-    mods      = <(MOD_LALT|MOD_LGUI)>;
-    keep-mods = <(MOD_LALT|MOD_LGUI)>;
+    vim_next: vim_next {
+      compatible = "zmk,behavior-mod-morph";
+      #binding-cells = <0>;
+      bindings = <&kp LA(RIGHT)>, <&kp GRAVE>;
+      mods      = <(MOD_LALT|MOD_LGUI)>;
+      keep-mods = <(MOD_LALT|MOD_LGUI)>;
+    };
   };
 };

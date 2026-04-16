@@ -52,7 +52,7 @@ static int on_mod_hold_binding_released(
     invoked_binding.behavior_dev = cfg->binding.behavior_dev;
     zmk_behavior_invoke_binding(&invoked_binding, event, false);
 
-    // Release mods using a key press, because `zmk_hid_unregister_mods` is lazy.
+    /* Release mods using a key press, because `zmk_hid_unregister_mods` is lazy. */
     zmk_mod_flags_t mods_to_release = zmk_hid_get_explicit_mods() & cfg->mods_to_hold;
     for (int i = 0; i < 8; i++) {
         if ((mods_to_release & (1 << i)) != 0) {

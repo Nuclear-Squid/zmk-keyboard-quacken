@@ -1,6 +1,56 @@
 # Quacken ZMK Module
 
-A Zephyr module to build your own ZMK firmware for the Quacken.
+A Zephyr module to build your own ZMK firmware for the Quacken:
+
+- common options can be safely defined in `keymaps/settings.h`
+- keymap layers can be customized in `keymaps/quacken.keymap`
+
+
+## Releases
+
+The default configuration implements the [Selenium] keymap:
+
+![Selenium keymap](selenium.png)
+
+Pre-built binaries are proposed in the [releases].
+Each zip archive is specific to a host keyboard layout,
+and contains 8 `.uf2` files to accommodate:
+- the 4 hold-tap flavors: [EZ], [TT], [HRM], [2TK]
+- the 2 variants: standard or [Vim variant]
+
+Download the archive for your host layout, [flash it](#flash), you’re done.
+
+[releases]:    https://github.com/Nuclear-Squid/zmk-keyboard-quacken/releases
+[Selenium]:    https://github.com/OneDeadKey/selenium
+[Vim variant]: https://onedeadkey.github.io/selenium/#vim-variant
+[EZ]:          https://onedeadkey.github.io/selenium/#flavor-ez
+[TT]:          https://onedeadkey.github.io/selenium/#flavor-tt
+[HRM]:         https://onedeadkey.github.io/selenium/#flavor-hrm
+[2TK]:         https://onedeadkey.github.io/selenium/#flavor-2tk
+
+
+## Configuration
+
+### `keymaps/settings.h`
+
+This is where [Selenium] options can be safely selected.
+This file should be self-explanatory, but here are the main options:
+
+- `HT_*` selects the hold-tap flavor: [EZ], [TT], [HRM] (default), [2TK].
+
+- `KB_LAYOUT_*` must match the layout used on the host computer.<br>
+  If unset, QWERTY is assumed, which **will** result in unexpected symbols or shortcuts
+  if a different keyboard layout is used.
+
+- `KB_EMULATION_*` (experimental) activates a layout emulation (none by default).
+
+- `VIM_NAVIGATION` enables the [Vim variant](https://onedeadkey.github.io/selenium/#vim-variant).
+
+### `keymaps/selenium.keymap`
+
+This is where all Selenium layers are defined and can be customized.
+
+See the [customizing ZMK](https://zmk.dev/docs/customization) documentation.
 
 
 ## Build With GitHub Actions (GHA)
@@ -11,7 +61,8 @@ This is the recommended method for most users.
 
 - [create a GitHub account](https://github.com/signup) if you don’t already have one
 - fork this repository
-- modify the `keymaps/quacken.keymap` file (see the [customizing ZMK](https://zmk.dev/docs/customization) documentation)
+- modify `keymaps/settings.h` to set your options
+- tweak `keymaps/quacken.keymap` if needed (see the [customizing ZMK](https://zmk.dev/docs/customization) documentation)
 - save, commit, push
 
 Your firmware will now be built automatically by GitHub’s CI:
@@ -77,6 +128,7 @@ west update  # this installs Zephyr and other ZMK stuff (takes a while)
 # install Zephyr's dependencies and SDK
 cd zephyr
 uv pip install -r scripts/requirements-base.txt
+uv pip install protobuf grpcio-tools
 west sdk install  # (this takes a while)
 ```
 
@@ -128,4 +180,10 @@ Note: local builds use the `zmk` tree, no matter what’s specified in the
 
 ## Flash
 
-See <https://zmk.dev/docs/user-setup#flash-uf2-files>.
+To flash <img src="flash.svg"> your keyboard with a `.uf2` file:
+1. hold the bootloader button while plugging the keyboard;
+2. your keyboard now appears as a removable storage device: `RPI-UF2`;
+3. drag the `.uf2` file onto the `RPI-UF2` drive;
+4. the keyboard restarts, the `RPI-UF2` drive is unmounted, done.
+
+More info: <https://zmk.dev/docs/user-setup#flash-uf2-files>.

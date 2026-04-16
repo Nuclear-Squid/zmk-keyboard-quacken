@@ -5,18 +5,15 @@ IFS=";"
 CPP_FLAGS=$*
 IFS=" "
 
-# uncomment the following line to enable USB logging
+# comment out the following line to disable USB logging
 USB_LOGGING="-S zmk-usb-logging"
 
-# uncomment the following line to enable ZMK Studio support
+# comment out the following lines to disable ZMK Studio support
 ZMK_STUDIO_SNIPPET="-S studio-rpc-usb-uart"
 ZMK_STUDIO_CMAKE="-DCONFIG_ZMK_STUDIO=y"
 
 # comment out the following line to enable incremental builds
 PRISTINE="-p"
-
-# uncomment the following line to test the HWMv2 branch
-SUFFIX="//zmk"
 
 # target: Quacken Flex or Quacken Zero
 # - Ergogen keebs rely on an MCU board, the keeb itself is just a shield
@@ -28,11 +25,11 @@ flex)
 	BOARD="-b quacken_flex"
 	;;
 zero)
-	BOARD="-b sparkfun_pro_micro_rp2040$SUFFIX"
+	BOARD="-b sparkfun_pro_micro_rp2040//zmk"
 	SHIELD="-DSHIELD=quacken_zero"
 	;;
 test)
-	BOARD="-b sparkfun_pro_micro_rp2040$SUFFIX"
+	BOARD="-b sparkfun_pro_micro_rp2040//zmk"
 	SHIELD="-DSHIELD=tester_pro_micro" # 'naked60' would work as well
 	;;
 *)

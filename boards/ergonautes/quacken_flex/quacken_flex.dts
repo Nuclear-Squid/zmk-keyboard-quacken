@@ -286,10 +286,17 @@ zephyr_udc0: &usbd {
         };
 
         // Usable flash. Starts at 0x100, after the bootloader. The partition
-        // size is 2MB minus the 0x100 bytes taken by the bootloader.
+        // size is 2MB minus:
+        // - 0x100 bytes taken by the bootloader
+        // - 0x20000 bytes (= 128 kB) taken by storage
         code_partition: partition@100 {
-            reg = <0x100 (DT_SIZE_M(2) - 0x100)>;
+            reg = <0x100 (DT_SIZE_M(2) - 0x100 - DT_SIZE_K(128))>;
             read-only;
+        };
+
+        // Extra storage needed to store extra tweaks done using ZMK-Studio
+        storage_partition: partition@1e0000 {
+            reg = <0x1e0000 DT_SIZE_K(128)>;
         };
     };
 };

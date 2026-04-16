@@ -1,43 +1,9 @@
 # This file describes the keymaps that will be built by the GitHub Actions CI.
-# Most options are defined by CMake arguments, see definitions in keymaps/quacken.keymap.
-# Each keymap is an "artifact", whose name goes as follows:
-#
-#   `quacken_[variant]_[layout]_[hold_taps]_[options]`
-#
-# - [variant]:
-#   - flex (integrated rp2040 micro-controller)
-#   - zero (promicro, you’ll have to update the `board` field to have your actual promicro board)
-#
-# - [layout]: (qwerty when omitted)
-#   - `ergol`     (KB_LAYOUT_ERGOL)
-#   - `azerty`    (KB_LAYOUT_AZERTY)
-#   - `lafayette` (KB_LAYOUT_QWERTY_LAFAYETTE)
-#   - ... probably more to come in the future
-#
-# - [hold_taps]: (hrm when omitted)
-#   - `ez`  (HT_NONE): no hold-taps, VERY simple config (recommended for absolute beginners)
-#   - `tt`  (HT_THUMB_TAPS): hold-taps on thumb keys (recommended for beginner/intermediate users)
-#   - `hrm` (HT_HOME_ROW_MODS): homerow-mods enabled and refactored thumb keys (default)
-#   - `2tk` (HT_TWO_THUMB_KEYS): hrm enabled and only two thumb keys used per thumb (needed if you use a rotary encoder)
-#
-# - [options]:
-#   - `vim` (VIM_NAVIGATION): use two `VimNav` and `NumRow` layers instead of `NavNum`
-#   - `left` (LEFT_HAND_SPACE): space on the left thumb, backspace on the right thumb
-#   - `shift` (HRM_SHIFT): add shift as a pinky homerow-mod
 
 include:
 
-    # dummy firmware, just making sure we can build for the RP2040
-  - board: sparkfun_pro_micro_rp2040
-    shield: tester_pro_micro
-    artifact-name: quacken_test
-    snippet: studio-rpc-usb-uart
-    cmake-args: >
-      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DCONFIG_ZMK_STUDIO=y
-
-    # Quacken Zero + SparkFun RP2040, default config
-  - board: sparkfun_pro_micro_rp2040
+  # Quacken Zero + SparkFun RP2040
+  - board: sparkfun_pro_micro_rp2040//zmk
     shield: quacken_zero
     artifact-name: quacken_zero
     snippet: studio-rpc-usb-uart
@@ -45,46 +11,10 @@ include:
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
       -DCONFIG_ZMK_STUDIO=y
 
-    # Quacken Flex, default config
+  # Quacken Flex
   - board: quacken_flex
     artifact-name: quacken_flex
     snippet: studio-rpc-usb-uart
     cmake-args: >
       -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DCONFIG_ZMK_STUDIO=y
-
-    # Quacken Flex, Ergol + Vim + hrm_shift config
-  - board: quacken_flex
-    artifact-name: quacken_flex_ergol_vim_shift
-    snippet: studio-rpc-usb-uart
-    cmake-args: >
-      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DVIM_NAVIGATION;-DHRM_SHIFT"
-      -DCONFIG_ZMK_STUDIO=y
-
-    # Quacken Flex, Ergol + Vim + 2tk config
-  - board: quacken_flex
-    artifact-name: quacken_flex_ergol_2tk
-    snippet: studio-rpc-usb-uart
-    cmake-args: >
-      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DVIM_NAVIGATION;-DHT_TWO_THUMB_KEYS"
-      -DCONFIG_ZMK_STUDIO=y
-
-    # Quacken Flex, Azerty + thumb-taps config
-  - board: quacken_flex
-    artifact-name: quacken_flex_azerty_tt
-    snippet: studio-rpc-usb-uart
-    cmake-args: >
-      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_AZERTY;-DHT_THUMB_TAPS"
-      -DCONFIG_ZMK_STUDIO=y
-
-    # Quacken Flex, Ergol + Hummingbird config
-  - board: quacken_flex
-    artifact-name: quacken_flex_ergol_hummingbird
-    snippet: studio-rpc-usb-uart
-    cmake-args: >
-      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DDTS_EXTRA_CPPFLAGS="-DKB_LAYOUT_ERGOL;-DHUMMINGBIRD"
       -DCONFIG_ZMK_STUDIO=y

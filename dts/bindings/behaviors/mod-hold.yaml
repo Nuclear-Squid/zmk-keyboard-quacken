@@ -1,7 +1,7 @@
 description: >
   Mod-hold Behavior
   Wraps a behavior while holding a selection of behaviors during it.
-  Handy when combined with home-row-mods
+  Handy when combined with home row mods.
 
 compatible: "zmk,behavior-mod-hold"
 

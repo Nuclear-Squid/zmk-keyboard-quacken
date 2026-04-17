@@ -87,7 +87,7 @@
 // #define VIM_NAVIGATION
 
 // [Experimental]
-// Uncomment the following line to enable the "mod-hold behavior on the left
+// Uncomment the following line to enable the "mod-hold behavior" on the left
 // hand’s navigation layer key. Enabling this means that if the Alt key is held
 // when entering the navigation layer, Alt will only be released when nav is
 // released. This enables one-handed alt-tabs, but may cause unwanted side effects.

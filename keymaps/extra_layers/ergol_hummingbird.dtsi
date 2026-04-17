@@ -34,11 +34,19 @@
       mods      = <(MOD_LSFT|MOD_RSFT)>;
       keep-mods = <(MOD_LSFT|MOD_RSFT)>;
     };
-  };
 
-  macros {
+  #ifdef ENABLE_FANCY_DEAD_KEYS
+    #define SHIFT_KEY &EZ_SK(LSHIFT)
+    odk: odk {
+      compatible = "zmk,behavior-dead-key";
+      #binding-cells = <1>;
+      dead-key = <O>;
+    };
+  #else
     // Macro to tap Ergo‑L’s ODK before the specified key
     DEAD_KEY(odk, &kp O)
+    #define SHIFT_KEY &EZ_SL(ODK_SHIFT_LAYER)
+  #endif
     // Same as `odk`, but adds Shift to the specified key
     DEAD_KEY_SHIFT(odks, &kp O)
   };
@@ -54,10 +62,11 @@
         &trans  &odk Q  &odk W  &odk E  &odk R  &kp Z      &odk N  &kp Y    &odk I     &odk O   &odk P    &trans
         &trans  &odk A  &odk S  &odk D  &odk F  &kp B      &odk H  &odk J   &odk K     &odk L   &odk SEMI &trans
         &trans  &odk Q  &odk Z  &odk C  &odk V  &trans     &trans  &kp FSLH &odk COMMA &odk DOT &odk P    &trans
-           &EZ_SL(ODK_SHIFT_LAYER)  &odk SPACE  &trans     &trans  &odk SPACE  &trans
+                             SHIFT_KEY  &trans  &trans     &trans  &odk SPACE  &trans
       >;
     };
 
+    // This layer is ignored (and useless) if ENABLE_FANCY_DEAD_KEYS is defined
     shifted_one_dead_key {
       display-name = "1dkShift";
       bindings = <

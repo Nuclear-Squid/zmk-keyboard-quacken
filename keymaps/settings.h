@@ -3,10 +3,11 @@
 
 
 /******************************************************************************
- * Layout-specific actions and symbols.
+ * Keyboard Layout
 ******************************************************************************/
 
 // Uncomment one of the following lines if using a non-QWERTY layout:
+// (this sets an appropriate Symbols layer and relevant keyboard shortcuts)
 
 // #define KB_LAYOUT_AZERTY
 // #define KB_LAYOUT_BEPO
@@ -17,15 +18,24 @@
 // #define KB_LAYOUT_QWERTY_INTL
 // #define KB_LAYOUT_QWERTY_LAFAYETTE
 
+// Keyboard layouts and shortcuts may vary between Windows / macOS / Linux.
+// Uncomment one of the following lines if using a non-Windows host:
+
+// #define MACOS
+// #define LINUX
+
 // [Experimental]
 // Uncomment one of the following lines to enable layout emulation:
 
-// #define KB_EMULATION_DVORAK  // assumes the host is in QWERTY
-// #define KB_EMULATION_ERGOL   // assumes the host is in QWERTY-intl or AZERTY
+// #define KB_EMULATION_DVORAK           // assumes the host is in QWERTY
+// #define KB_EMULATION_ERGOL            // assumes the host is in QWERTY-intl or AZERTY
+// #define KB_EMULATION_QWERTY_LAFAYETTE // assumes the host is in QWERTY-intl or AZERTY
 
-// Uncomment the following line if using a Mac:
+// [Experimental]
+// Uncomment the following line for an improved dead key support;
+// (only applies to some Hummingbird keymaps and layout emulations)
 
-// #define MACOS
+// #define ENABLE_FANCY_DEAD_KEYS
 
 
 /******************************************************************************
@@ -42,8 +52,8 @@
 // Timing is key! Keep the default value if unsure.
 // This defines how long (in ms) a hold-tap key with the "tap-preferred" flavor
 // must be held to be considered as a modifier or layer shift. These hold-taps
-// are the ones that may produce text, including the space-bar and home-row-mods.
-// Keep this value high if you struggle wih home-row-mods.
+// are the ones that may produce text, including the space bar and home row mods.
+// Keep this value high if you struggle with home row mods.
 
 // #define TAPPING_TERM 300
 
@@ -75,6 +85,14 @@
 // Highly recommended for Vim users, obviously. :-)
 
 // #define VIM_NAVIGATION
+
+// [Experimental]
+// Uncomment the following line to enable the "mod-hold behavior" on the left
+// hand’s navigation layer key. Enabling this means that if the Alt key is held
+// when entering the navigation layer, Alt will only be released when nav is
+// released. This enables one-handed alt-tabs, but may cause unwanted side effects.
+
+// #define ENABLE_MOD_HOLD_NAVIGATION
 
 // Uncomment the following line to enable shift as a pinky HRM.
 // Useful for combined shortcuts, but NOT MEANT to type text!

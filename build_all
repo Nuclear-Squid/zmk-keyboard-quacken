@@ -54,8 +54,7 @@ zero)
 	SHIELD="-DSHIELD=quacken_zero"
 	;;
 test)
-	BOARD="-b sparkfun_pro_micro_rp2040//zmk"
-	SHIELD="-DSHIELD=tester_pro_micro" # 'naked60' would work as well
+	BOARD=""
 	;;
 *)
 	usage
@@ -116,11 +115,19 @@ build() {
 	touch build/zephyr/zmk.uf2
 	FILE_PATH="$SCRIPT_DIR/${FILE_ROOT}$1.uf2"
 	CPP_FLAGS="-DKB_LAYOUT_${LAYOUT^^};-DHT_$2;$EMULATION;$OPT_FLAGS"
-	west build $PRISTINE $USB_LOGGING $ZMK_STUDIO_SNIPPET $BOARD -- $SHIELD \
-		$ZMK_STUDIO_CMAKE \
-		-DKEYMAP_FILE="$SCRIPT_DIR/keymaps/quacken.keymap" \
-		-DZMK_EXTRA_MODULES="$SCRIPT_DIR" \
-		-DDTS_EXTRA_CPPFLAGS="$CPP_FLAGS"
+	if [[ -z "$BOARD" ]]; then
+		echo build $PRISTINE $USB_LOGGING $ZMK_STUDIO_SNIPPET $BOARD -- $SHIELD \
+			$ZMK_STUDIO_CMAKE \
+			-DKEYMAP_FILE="$SCRIPT_DIR/keymaps/quacken.keymap" \
+			-DZMK_EXTRA_MODULES="$SCRIPT_DIR" \
+			-DDTS_EXTRA_CPPFLAGS="$CPP_FLAGS"
+	else
+		west build $PRISTINE $USB_LOGGING $ZMK_STUDIO_SNIPPET $BOARD -- $SHIELD \
+			$ZMK_STUDIO_CMAKE \
+			-DKEYMAP_FILE="$SCRIPT_DIR/keymaps/quacken.keymap" \
+			-DZMK_EXTRA_MODULES="$SCRIPT_DIR" \
+			-DDTS_EXTRA_CPPFLAGS="$CPP_FLAGS"
+	fi
 	mv build/zephyr/zmk.uf2 "$FILE_PATH"
 	PRISTINE=
 }
@@ -156,4 +163,4 @@ zip ${FILE_ROOT}[pc].zip ${FILE_ROOT}\[pc\]*.uf2
 zip ${FILE_ROOT}[mac].zip ${FILE_ROOT}\[mac\]*.uf2
 rm ${FILE_ROOT}*.uf2
 mv ${FILE_ROOT}*.zip zip
-ls -l ${FILE_ROOT}*.zip
+ls -l zip/${FILE_ROOT}*.zip

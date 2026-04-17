@@ -87,9 +87,9 @@
  */
 
 #ifdef ENABLE_MOD_HOLD_NAVIGATION
-  #define NAV_SC mhsc
+  #define NAV_SC &mhsc
 #else
-  #define NAV_SC sc
+  #define NAV_SC &sc
 #endif
 
 #ifdef VIM_NAVIGATION
@@ -130,9 +130,9 @@
     #define LTHUMB_TT &mt LCTL BACKSPACE
   #endif
   #define RTHUMB_TT  &magic_space
-  #define LTHUMB_HRM &NAV_SC NAV_LAYER BACKSPACE
+  #define LTHUMB_HRM NAV_SC NAV_LAYER BACKSPACE
   #define RTHUMB_HRM &lt NAV_LAYER SPACE
-  #define LTHUMB_S34 &NAV_SC NAV_LAYER BACKSPACE
+  #define LTHUMB_S34 NAV_SC NAV_LAYER BACKSPACE
   #define RTHUMB_S34 &lt S34_LAYER SPACE
 #endif
 

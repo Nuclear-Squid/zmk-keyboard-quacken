@@ -1,13 +1,14 @@
+# Normally we would also import ZMK, but since Aekeynox already depends on it,
+# we just let it deal with it (i.e. import it as one of its dependencies).
+
 manifest:
   remotes:
-    - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
+    - name: OneDeadKey
+      url-base: https://github.com/OneDeadKey
   projects:
-    - name: zmk
-      remote: zmkfirmware
-      # pin zmk commit, this is the tip of the `main` branch on 2026-03-30
-      # see https://github.com/Nuclear-Squid/zmk-keyboard-quacken/pull/49#issuecomment-4153385353
-      revision: c62da0e16646d10240ba29191bdbcb5611b3a1af
-      import: app/west.yml
+    - name: zmk-config-aekeynox
+      remote: OneDeadKey
+      revision: main
+      import: config/west.yml
   self:
     path: config

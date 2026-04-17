@@ -7,14 +7,10 @@ include:
     shield: quacken_zero
     artifact-name: quacken_zero
     snippet: studio-rpc-usb-uart
-    cmake-args: >
-      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DCONFIG_ZMK_STUDIO=y
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
 
   # Quacken Flex
   - board: quacken_flex
     artifact-name: quacken_flex
     snippet: studio-rpc-usb-uart
-    cmake-args: >
-      -DKEYMAP_FILE=/__w/zmk-keyboard-quacken/zmk-keyboard-quacken/keymaps/quacken.keymap
-      -DCONFIG_ZMK_STUDIO=y
+    cmake-args: -DCONFIG_ZMK_STUDIO=y

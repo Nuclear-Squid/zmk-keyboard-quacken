@@ -1,7 +1,12 @@
-description: >
+description: |
   Mod-hold Behavior
-  Wraps a behavior while holding a selection of behaviors during it.
-  Handy when combined with home row mods.
+
+  When pressed, this will invoke the wrapped behavior in the `binding` property
+  and hold any active modifiers matching those specified in the `mods-to-hold`
+  property for as long as the mod-hold behavior is held.
+
+  This allows the user to release the keys producing the original
+  modifiers, enabling one-handed shortcuts using home row mods.
 
 compatible: "zmk,behavior-mod-hold"
 

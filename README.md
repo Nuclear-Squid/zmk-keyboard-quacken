@@ -129,7 +129,15 @@ west update  # this installs Zephyr and other ZMK stuff (takes a while)
 cd zephyr
 uv pip install -r scripts/requirements-base.txt
 uv pip install protobuf grpcio-tools
-west sdk install  # (this takes a while)
+west sdk install -b .. # (this takes a while)
+```
+
+The last line will install the SDK directly in the ZMK directory.
+As this SDK takes about 10 GB of disk space, if you want to
+reuse it easily across projects, you might prefer to install it
+in your $HOME directory instead, like this:
+```
+west sdk install
 ```
 
 When done, symlink the ZMK folder in the local `zmk-keyboard-quacken` folder,

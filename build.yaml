@@ -18,3 +18,5 @@
 #
 include:
   - board: quacken_v0
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y

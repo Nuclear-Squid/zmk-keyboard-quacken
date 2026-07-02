@@ -10,7 +10,6 @@
         zephyr,sram = &sram0;
         zephyr,flash = &flash0;
         zephyr,code-partition = &code_partition;
-        zmk,kscan = &kscan_left;
     };
 
     default_transform: keymap_transform0 {
@@ -72,6 +71,32 @@
         display-name = "Default Layout";
         kscan = <&kscan_left>; // Label of the kscan node, optional if all layouts use the same
         transform = <&default_transform>; // Label of the matrix transform for this layout
+        keys  //                     w   h    x    y     rot    rx    ry
+            = <&key_physical_attrs 100 100    0  115      0      0     0>
+            , <&key_physical_attrs 100 100  100   95      0      0     0>
+            , <&key_physical_attrs 100 100  200   35    900    100   325>
+            , <&key_physical_attrs 100 100  300    0   1500    170   310>
+            , <&key_physical_attrs 100 100  400   25   1500    170   310>
+            , <&key_physical_attrs 100 100  500   45   1500    170   310>
+
+            , <&key_physical_attrs 100 100    0  215      0      0     0>
+            , <&key_physical_attrs 100 100  100  195      0      0     0>
+            , <&key_physical_attrs 100 100  200  135    900    100   325>
+            , <&key_physical_attrs 100 100  300  100   1500    170   310>
+            , <&key_physical_attrs 100 100  400  125   1500    170   310>
+            , <&key_physical_attrs 100 100  500  145   1500    170   310>
+
+            , <&key_physical_attrs 100 100    0  315      0      0     0>
+            , <&key_physical_attrs 100 100  100  295      0      0     0>
+            , <&key_physical_attrs 100 100  200  235    900    100   325>
+            , <&key_physical_attrs 100 100  300  200   1500    170   310>
+            , <&key_physical_attrs 100 100  400  225   1500    170   310>
+            , <&key_physical_attrs 100 100  500  245   1500    170   310>
+
+            , <&key_physical_attrs 100 100  400  355   1500    170   310>
+            , <&key_physical_attrs 100 100  500  355   3100    330   400>
+            , <&key_physical_attrs 100 100  600  355   4700    415   440>
+            ;
     };
 
     xtal_clk: xtal-clk {

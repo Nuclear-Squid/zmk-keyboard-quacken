@@ -2,6 +2,7 @@
 
 #include <rpi_pico/rp2040.dtsi>
 #include <dt-bindings/zmk/matrix_transform.h>
+#include <physical_layouts.dtsi>
 
 #define K(x) RC(0, x)
 

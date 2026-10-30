@@ -4,4 +4,10 @@ if BOARD_QUACKEN_FLEX
 
     config RP2_FLASH_W25Q080
         default y
+
+    # The DesignWare I2C driver derives SCL timings from this value (in MHz),
+    # and defaults to 32. The RP2040 clocks I2C from clk_sys (125 MHz):
+    # without this, the 100 kHz standard mode actually runs at ~400 kHz.
+    config I2C_DW_CLOCK_SPEED
+        default 125
 endif

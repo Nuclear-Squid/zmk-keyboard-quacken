@@ -1,0 +1,127 @@
+name: Release
+on:
+  workflow_dispatch:
+    inputs:
+      aekeynox_ref:
+        description: "Ækeynox version to embed: a tag (stable, beta), or main or a commit (pre-release)"
+        required: true
+      version:
+        description: "Quacken tag to create: vX.Y.Z or vX.Y.Z-beta.N"
+        required: true
+      targets:
+        description: 'Boards to build, JSON list: ["flex"], ["flex","zero"]'
+        default: '["flex"]'
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.commit.outputs.sha }}
+      prerelease: ${{ steps.check.outputs.prerelease }}
+      targets: ${{ steps.check.outputs.targets }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - id: check
+        env:
+          REF: ${{ inputs.aekeynox_ref }}
+          VERSION: ${{ inputs.version }}
+          TARGETS: ${{ inputs.targets }}
+        run: |
+          targets=$(jq -ce 'if type == "array" and length > 0 and all(.[]; . == "flex" or . == "zero") then unique else error end' <<< "$TARGETS") || { echo "invalid targets: $TARGETS"; exit 1; }
+          echo "targets=$targets" >> "$GITHUB_OUTPUT"
+          [[ $VERSION =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-beta\.[0-9]+)?$ ]] || { echo "invalid version: $VERSION"; exit 1; }
+          git fetch --tags -q
+          ! git rev-parse -q --verify "refs/tags/$VERSION" >/dev/null || { echo "tag exists: $VERSION"; exit 1; }
+          base=$(sed -n 's/^ *url-base: *//p' config/west.yml | head -1)
+          url="$base/zmk-config-aekeynox"
+          if git ls-remote --exit-code --tags "$url" "refs/tags/$REF" >/dev/null; then is_tag=true; else is_tag=false; fi
+          git ls-remote --exit-code "$url" "$REF" >/dev/null || [[ $REF =~ ^[0-9a-f]{7,40}$ ]] || { echo "unknown Ækeynox ref: $REF"; exit 1; }
+          if [[ $is_tag == true && $VERSION != *-* ]]; then echo "prerelease=false"; else echo "prerelease=true"; fi >> "$GITHUB_OUTPUT"
+
+      - id: commit
+        env:
+          REF: ${{ inputs.aekeynox_ref }}
+          VERSION: ${{ inputs.version }}
+        # Release commit on a detached HEAD: only the tag is pushed, the branch keeps its Ækeynox version
+        run: |
+          git switch -q --detach
+          sed -i "/name: zmk-config-aekeynox/,/revision:/ s|revision: .*|revision: $REF|" config/west.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git diff --quiet || git commit -qam "chore(release): $VERSION (Ækeynox $REF)"
+          git tag -a "$VERSION" -m "Quacken $VERSION (Ækeynox $REF)"
+          git push origin "refs/tags/$VERSION"
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: prepare
+    runs-on: ubuntu-latest
+    container:
+      image: zmkfirmware/zmk-build-arm:stable
+    strategy:
+      fail-fast: false
+      matrix:
+        target: ${{ fromJSON(needs.prepare.outputs.targets) }}
+        layout: [qwerty, qwerty_intl, qwerty_lafayette, dvorak, azerty, ergol, erglace, bepo, bepolar]
+        os: [pc, mac]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.prepare.outputs.sha }}
+          path: quacken
+
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        continue-on-error: true
+        with:
+          path: |
+            ws/modules/
+            ws/tools/
+            ws/zephyr/
+            ws/zmk/
+          key: west-${{ hashFiles('quacken/config/west.yml') }}
+
+      # west workspace ws/, separate from the Quacken module, with a copy of config/ as manifest
+      - run: |
+          mkdir -p ws && cp -R quacken/config ws/config
+          west init -l ws/config
+          cd ws
+          west update --fetch-opt=--filter=tree:0
+          west zephyr-export
+
+      - run: ../quacken/scripts/build_variants.sh ${{ matrix.target }} ${{ matrix.layout }} ${{ matrix.os }}
+        working-directory: ws
+        shell: bash
+
+      # manifest.lock.yml: the exact commit of every module of this release
+      - if: ${{ matrix.target == fromJSON(needs.prepare.outputs.targets)[0] && matrix.layout == 'qwerty' && matrix.os == 'pc' }}
+        run: west manifest --freeze --active-only > manifest.lock.yml
+        working-directory: ws
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ${{ matrix.target }}-${{ matrix.layout }}-${{ matrix.os }}
+          path: |
+            ws/*.zip
+            ws/manifest.lock.yml
+
+  publish:
+    needs: [prepare, build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          merge-multiple: true
+
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ inputs.version }}
+          REF: ${{ inputs.aekeynox_ref }}
+          PRERELEASE: ${{ needs.prepare.outputs.prerelease }}
+        run: |
+          flag=(); [[ $PRERELEASE == true ]] && flag=(--prerelease)
+          gh release create "$VERSION" -R "${{ github.repository }}" --verify-tag "${flag[@]}" \
+            --title "Quacken $VERSION" --notes "Ækeynox: \`$REF\`" ./*.zip manifest.lock.yml

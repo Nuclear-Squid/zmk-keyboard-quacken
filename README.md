@@ -195,3 +195,18 @@ To flash <img src="flash.svg"> your keyboard with a `.uf2` file:
 4. the keyboard restarts, the `RPI-UF2` drive is unmounted, done.
 
 More info: <https://zmk.dev/docs/user-setup#flash-uf2-files>.
+
+
+## Development
+
+### Publishing a release
+
+**Actions → Release → Run workflow**, with:
+
+- `aekeynox_ref`: the Ækeynox version to embed — a tag for a stable or beta release, `main` or a commit for a pre-release;
+- `version`: the Quacken tag to create, `vX.Y.Z` or `vX.Y.Z-beta.N`;
+- `targets`: the boards to build, `["flex"]` by default, `["flex","zero"]` for both.
+
+The workflow tags a release commit pinning that Ækeynox version, builds every variant and publishes the GitHub Release with `manifest.lock.yml`. On a transient failure (network, runner), once the run is over: **Re-run jobs → Re-run failed jobs**.
+
+The full release process is described in Ækeynox’s [`RELEASING.md`](https://github.com/OneDeadKey/zmk-config-aekeynox/blob/main/RELEASING.md).

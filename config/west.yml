@@ -9,6 +9,9 @@ manifest:
     - name: zmk-config-aekeynox
       remote: OneDeadKey
       revision: main
-      import: config/west.yml
+      import:
+        file: config/west.yml
+        # Ækeynox references its own copy of this repo: build with the boards of this commit
+        name-blocklist: [zmk-keyboard-quacken]
   self:
     path: config
